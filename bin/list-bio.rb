@@ -38,6 +38,9 @@ list.each do | name |
     info[:downloads] = biogems["downloads"]
     info[:version_downloads] = biogems["version_downloads"]
     info[:gem_uri] = biogems["gem_uri"]
+    info[:homepage_uri] = biogems["homepage_uri"]
+    info[:project_uri] = biogems["project_uri"]
+    info[:source_code_uri] = biogems["source_code_uri"]
     info[:dependencies] = biogems["dependencies"]
   else
     raise Exception.new("Response code for #{name} is "+response.code)
