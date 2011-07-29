@@ -6,6 +6,18 @@
 #plugins
   #list
     %table
+      %tr
+        %th
+          = "#"
+        %th
+          dl
+          %sup
+            %b
+              *)
+        %th
+          plugin
+        %th 
+          description
       - by_popularity do |i, name|
         %tr
           %td
@@ -14,3 +26,8 @@
           %td
             .name
             = name
+  .footnote
+    *) gem downloads from 
+    = link "rubygems.org", "http://rubygems.org"
+    as of
+    = Time.now.to_s
