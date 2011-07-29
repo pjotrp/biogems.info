@@ -1,4 +1,16 @@
 -# index.html for biogems.info
 
+-#= partial "requires_prerelease"
+-#= content_navigation("What is Compass?", "Using Compass with StaticMatic", "Using Compass's CSS Frameworks")
+
+%h1 biogems.info
+
 #plugins
   #list
+    .columns
+      .left_column
+        - (42...47).each do |i|
+          %p= i
+        %p See, I can count!
+
+

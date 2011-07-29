@@ -1,7 +1,24 @@
 !!!
 %html
   %head
-    %title StaticMatic
-    = stylesheets
+    %title biogems.info
+    %link{:rel => "stylesheet", :href => "./stylesheets/screen.css", :media => "screen"}
   %body
-    = yield
+    #page
+      #header
+        %h1 biogems.info: Ruby gems for Bioinformatics
+      #content= yield
+      #footer
+        Links:
+        #links
+          %ul
+            %li
+              Documentation for creating a new  
+              = link "Biogem plugin", "http://bioruby.open-bio.org/wiki/Plugins"
+            %li
+              Source code for this website
+              = link "biogems.info source", "http://github.org/pjotrp/biogems.info"
+            %li
+              The main 
+              = link "BioRuby.org", "http://bioruby.org/"
+              project website and mailing list
