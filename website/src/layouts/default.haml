@@ -10,16 +10,20 @@
       #content= yield
       #footer
         %hr
-        Links:
         #links
-          %ul
-            %li
-              Documentation for creating a new  
-              = link "Biogem plugin", "http://bioruby.open-bio.org/wiki/Plugins"
-            %li
-              Source code for this website
-              = link "biogems.info source", "http://github.org/pjotrp/biogems.info"
-            %li
-              The main 
-              = link "BioRuby.org", "http://bioruby.org/"
-              project website and mailing list
+          %div{ :align => "right", :style => "float: right" }
+            =link "biogems.info","http://biogems.info"
+            website generated using staticmatic, haml and sass
+          %div
+            %ul
+              %li
+                Documentation for creating a new  
+                = link "Biogem plugin", "http://bioruby.open-bio.org/wiki/Plugins"
+              %li
+                Source code for this website
+                = link "biogems.info source", "http://github.org/pjotrp/biogems.info"
+              %li
+                The main 
+                = link "BioRuby.org", "http://bioruby.org/"
+                project website and mailing list
+
