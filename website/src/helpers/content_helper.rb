@@ -1,10 +1,7 @@
 module ContentHelper
-  def content_navigation(*pages)
-    output = "<ul>"
-    pages.each do |page|
-      anchor = page.downcase.gsub(/\s+/, "_").gsub(/\W+/, "")
-      output << %Q{<li><a href="##{anchor}">#{page}</a></li>}
-    end
-    output << "</ul>"
+  def by_popularity
+    yield 1,"one"
+    yield 2,"two"
+    yield 3,"three"
   end
 end

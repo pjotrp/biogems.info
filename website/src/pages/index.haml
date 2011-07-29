@@ -3,11 +3,14 @@
 -#= partial "requires_prerelease"
 -#= content_navigation("What is Compass?", "Using Compass with StaticMatic", "Using Compass's CSS Frameworks")
 
-%h1 biogems.info
-
 #plugins
   #list
-    .columns
-      - (0..3).each do |i|
-        .column1
-          %p= i
+    %table
+      - by_popularity do |i, name|
+        %tr
+          %td
+            #index
+            = i
+          %td
+            .name
+            = name
