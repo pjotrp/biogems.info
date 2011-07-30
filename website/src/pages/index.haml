@@ -17,7 +17,7 @@
           %sup
             %b
               *)
-      - by_popularity do |i, dl, name, descr, author|
+      - by_popularity do |i, dl, name, descr, author, docs|
         - rowclass = "odd"
         - if i.even?
           - rowclass = "even"
@@ -31,6 +31,7 @@
           %td{ :class => "#{rowclass}" }
             .descr
               = descr
+              = link " ... ", docs
           %td{ :class => "#{rowclass}" }
             .author
               = author
