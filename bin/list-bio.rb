@@ -14,7 +14,7 @@ projects = Hash.new
 
 list = `gem list -r --no-versions bio-`.split(/\n/)
 list += ADD
-# list = ['bio-logger']
+list = ['bio-logger']
 list.each do | name |
   $stderr.print name,"\n"
   info = Hash.new
@@ -24,7 +24,15 @@ list.each do | name |
   ivars = spec.ivars
   info[:authors] = ivars["authors"]
   info[:summary] = ivars["summary"]
+  # set homepage
   info[:homepage] = ivars["homepage"]
+  uri = URI.parse(info[:homepage])
+  http = Net::HTTP.new(uri.host, uri.port)
+  request = Net::HTTP::Get.new(uri.request_uri)
+  response = http.request(request)
+  info[:homepage] = "broken" if response.code.to_i!=200 or response.body =~ /301 Moved/
+  # p response.code,response.body
+
   info[:licenses] = ivars["licenses"]
   info[:description] = ivars["description"]
   ver = ivars["version"].ivars['version']

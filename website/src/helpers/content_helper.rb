@@ -15,9 +15,11 @@ module ContentHelper
       descr = plugin[:description] if !descr
       # docs
       docs = plugin[:homepage]   # from the biogem descr
-      docs = plugin[:homepage_uri] if !docs
-      docs = plugin[:project_uri] if !docs
-      docs = plugin[:source_code_uri] if !docs
+      if docs != 'broken'
+        docs = plugin[:homepage_uri] if !docs
+        docs = plugin[:project_uri] if !docs
+        docs = plugin[:source_code_uri] if !docs
+      end
       yield i,plugin[:downloads].to_i,name,normalize(descr),plugin[:authors].join(', '),docs
     end
   end

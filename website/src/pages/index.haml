@@ -31,7 +31,8 @@
           %td{ :class => "#{rowclass}" }
             .descr
               = descr
-              = link " ... ", docs
+              - if docs != 'broken'
+                = link " ... ", docs
           %td{ :class => "#{rowclass}" }
             .author
               = author
