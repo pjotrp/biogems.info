@@ -14,7 +14,21 @@ projects = Hash.new
 
 list = `gem list -r --no-versions bio-`.split(/\n/)
 list += ADD
-list = ['bio-logger']
+# list = ['bio-logger']  # for testing
+
+def check_url url
+  if url =~ /^http:\/\//
+    uri = URI.parse(url)
+    http = Net::HTTP.new(uri.host, uri.port)
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(request)
+    if response.code.to_i == 200 and response.body !~ /301 Moved/
+      return url
+    end
+  end
+  nil
+end
+
 list.each do | name |
   $stderr.print name,"\n"
   info = Hash.new
@@ -25,13 +39,7 @@ list.each do | name |
   info[:authors] = ivars["authors"]
   info[:summary] = ivars["summary"]
   # set homepage
-  info[:homepage] = ivars["homepage"]
-  uri = URI.parse(info[:homepage])
-  http = Net::HTTP.new(uri.host, uri.port)
-  request = Net::HTTP::Get.new(uri.request_uri)
-  response = http.request(request)
-  info[:homepage] = "broken" if response.code.to_i!=200 or response.body =~ /301 Moved/
-  # p response.code,response.body
+  info[:homepage] = check_url(ivars["homepage"])
 
   info[:licenses] = ivars["licenses"]
   info[:description] = ivars["description"]
@@ -48,9 +56,9 @@ list.each do | name |
     info[:downloads] = biogems["downloads"]
     info[:version_downloads] = biogems["version_downloads"]
     info[:gem_uri] = biogems["gem_uri"]
-    info[:homepage_uri] = biogems["homepage_uri"]
-    info[:project_uri] = biogems["project_uri"]
-    info[:source_code_uri] = biogems["source_code_uri"]
+    info[:homepage_uri] = check_url(biogems["homepage_uri"])
+    info[:project_uri] = check_url(biogems["project_uri"])
+    info[:source_code_uri] = check_url(biogems["source_code_uri"])
     info[:dependencies] = biogems["dependencies"]
   else
     raise Exception.new("Response code for #{name} is "+response.code)
