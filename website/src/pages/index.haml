@@ -9,7 +9,7 @@
       %tr
         %th
           = "#"
-        %th{ :align => "left" } plugin
+        %th{ :align => "left" } biogem 
         %th{ :align => "left" } description
         %th{ :align => "left" } by
         %th{ :align => "left" }
@@ -18,22 +18,25 @@
             %b
               *)
       - by_popularity do |i, dl, name, descr, author|
+        - rowclass = "odd"
+        - if i.even?
+          - rowclass = "even"
         %tr
-          %td{ :align => "right" }
+          %td{ :align => "right", :class => "#{rowclass}" }
             .index
               = i
-          %td
+          %td{ :class => "#{rowclass}" }
             .name
-              = name
-          %td
+              = link name, "http://rubygems.org/gems/#{name}"
+          %td{ :class => "#{rowclass}" }
             .descr
               = descr
-          %td
+          %td{ :class => "#{rowclass}" }
             .author
               = author
-          %td{ :align => "right" }
+          %td{ :align => "right", :class => "#{rowclass}" }
             .dl
-              = dl
+              = link dl.to_s, "http://rubygems.org/gems/#{name}/stats"
   .footnote 
     *) gem downloads from 
     = link "rubygems.org", "http://rubygems.org"

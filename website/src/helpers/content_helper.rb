@@ -11,7 +11,16 @@ module ContentHelper
       plugin = spec[name]
       descr = plugin[:summary]
       descr = plugin[:description] if !descr
-      yield i,plugin[:downloads],name,descr.capitalize,plugin[:authors].join(', ')
+      yield i,plugin[:downloads],name,normalize(descr),plugin[:authors].join(', ')
     end
+  end
+
+  def normalize s
+    s = s.sub(/\.$/,'')
+    s = s.capitalize
+    s = s.gsub(/ruby/i,'Ruby')
+    s = s.gsub(/bioruby/i,'BioRuby')
+    s = s.gsub(/gem/i,'gem')
+    s
   end
 end
