@@ -11,7 +11,7 @@ module ContentHelper
       plugin = spec[name]
       descr = plugin[:summary]
       descr = plugin[:description] if !descr
-      yield i,plugin[:downloads],name,descr,plugin[:authors].join(', ')
+      yield i,plugin[:downloads],name,descr.capitalize,plugin[:authors].join(', ')
     end
   end
 end
