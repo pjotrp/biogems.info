@@ -15,7 +15,7 @@ module ContentHelper
       descr = plugin[:description] if !descr
       version = plugin[:version]
       # docs - just get the most likely one
-      docs = plugin[:homepage]   # from the biogem descr
+      docs = plugin[:docs_uri]   # from the biogem descr
       docs = plugin[:homepage_uri] if !docs or docs == ''
       docs = plugin[:project_uri] if !docs or docs == ''
       docs = plugin[:source_code_uri] if !docs or docs == ''

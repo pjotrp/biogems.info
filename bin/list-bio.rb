@@ -22,13 +22,16 @@ end
 
 def check_url url
   if url =~ /^http:\/\//
+    $stderr.print "Checking #{url}..."
     uri = URI.parse(url)
     http = Net::HTTP.new(uri.host, uri.port)
     request = Net::HTTP::Get.new(uri.request_uri)
     response = http.request(request)
     if response.code.to_i == 200 and response.body !~ /301 Moved/
+      $stderr.print "pass!\n"
       return url
     end
+    $stderr.print "failed!\n"
   end
   nil
 end
@@ -61,7 +64,10 @@ list.each do | name |
   info[:version] = ver
   # set homepage
   info[:homepage] = check_url(ivars["homepage"])
-  info[:homepage] = check_url("http://rubydoc.info/gems/#{name}/#{ver}/frames") if not info[:homepage]
+  if info[:homepage] !~ /rubygem/
+    info[:docs_uri] = info[:homepage]
+  end
+  info[:docs_uri] = check_url("http://rubydoc.info/gems/#{name}/#{ver}/frames") if not info[:docs_uri]
 
   info[:licenses] = ivars["licenses"]
   info[:description] = ivars["description"]
