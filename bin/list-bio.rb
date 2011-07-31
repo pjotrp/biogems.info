@@ -63,7 +63,7 @@ list.each do | name |
   ver = ivars["version"].ivars['version']
   info[:version] = ver
   # set homepage
-  info[:homepage] = check_url(ivars["homepage"])
+  info[:homepage] = ivars["homepage"]
   info[:licenses] = ivars["licenses"]
   info[:description] = ivars["description"]
   # Now query rubygems.org directly

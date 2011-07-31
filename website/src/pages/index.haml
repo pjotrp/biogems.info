@@ -12,11 +12,9 @@
         %th{ :align => "left" } biogem 
         %th{ :align => "left" } description
         %th{ :align => "left" } by
-        %th{ :align => "left" }
-          90d&nbsp;*)
-        %th{ :align => "left" }
-          total
+        %th{ :align => "left" } DL*)
         %th{ :align => "left" } version
+        %th{ :align => "left" } 90d&nbsp;*)
       - by_popularity do |i, dl90, dl, name, version, descr, author, home, docs, src|
         - rowclass = "odd"
         - if i.even?
@@ -38,15 +36,15 @@
               = author
           %td{ :align => "right", :class => "#{rowclass}" }
             .dl
-              = dl90.to_s
-          %td{ :align => "right", :class => "#{rowclass}" }
-            .dl
               = link dl.to_s, "http://rubygems.org/gems/#{name}/stats"
           %td{ :align => "right", :class => "#{rowclass}" }
             .version
               = link version, src
+          %td{ :align => "right", :class => "#{rowclass}" }
+            .dl
+              = dl90.to_s
   .footnote 
-    *) gem downloads (last 90 days/total) from 
+    *) gem downloads (total / this version in last 90 days) from 
     = link "rubygems.org", "http://rubygems.org"
     as of
     = Time.now.to_s

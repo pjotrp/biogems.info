@@ -3,7 +3,7 @@ require 'yaml'
 module ContentHelper
   def by_popularity
     spec = YAML::load(File.new("./var/bio-projects.yaml").read)
-    sorted = spec.sort { |a, b| b[1][:downloads90] <=> a[1][:downloads90] }
+    sorted = spec.sort { |a, b| b[1][:downloads] <=> a[1][:downloads] }
     i = 0
     dl = 0
     descr = 'unknown'
@@ -17,9 +17,9 @@ module ContentHelper
       # docs - just get the most likely one
       docs = plugin[:docs_uri]   # from the biogem descr
       home = plugin[:homepage]
-      home = plugin[:homepage_uri] if !home
-      home = plugin[:source_code_uri] if !home
-      home = plugin[:project_uri] if !home
+      home = plugin[:homepage_uri] if !home or home==''
+      home = plugin[:source_code_uri] if !home or home==''
+      home = plugin[:project_uri] if !home or home==''
       src = plugin[:source_code_uri]
       src = home if !src
       yield i,plugin[:downloads90],plugin[:downloads],name,version,normalize(descr),plugin[:authors].join(', '),home,docs,src
