@@ -3,7 +3,7 @@
 require 'yaml'
 DIR='pkg'
 
-fn = 'etc/bio-projects.yaml'
+fn = './var/bio-projects.yaml'
 
 list = YAML::load(File.read(fn))
 

@@ -2,7 +2,7 @@ require 'yaml'
 
 module ContentHelper
   def by_popularity
-    spec = YAML::load(File.new("./etc/bio-projects.yaml").read)
+    spec = YAML::load(File.new("./var/bio-projects.yaml").read)
     sorted = spec.sort { |a, b| b[1][:downloads] <=> a[1][:downloads] }
     i = 0
     dl = 0
