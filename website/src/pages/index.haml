@@ -17,7 +17,7 @@
         %th{ :align => "left" }
           total
         %th{ :align => "left" } version
-      - by_popularity do |i, dl90, dl, name, version, descr, author, docs|
+      - by_popularity do |i, dl90, dl, name, version, descr, author, home, docs|
         - rowclass = "odd"
         - if i.even?
           - rowclass = "even"
@@ -31,7 +31,7 @@
           %td{ :class => "#{rowclass}" }
             .descr
               = descr
-              - if docs != 'broken'
+              - if docs and docs != ''
                 = link " ... ", docs
           %td{ :class => "#{rowclass}" }
             .author

@@ -16,10 +16,11 @@ module ContentHelper
       version = plugin[:version]
       # docs - just get the most likely one
       docs = plugin[:docs_uri]   # from the biogem descr
-      docs = plugin[:homepage_uri] if !docs or docs == ''
-      docs = plugin[:project_uri] if !docs or docs == ''
-      docs = plugin[:source_code_uri] if !docs or docs == ''
-      yield i,plugin[:downloads90],plugin[:downloads],name,version,normalize(descr),plugin[:authors].join(', '),docs
+      home = plugin[:homepage]
+      home = plugin[:homepage_uri] if !home
+      home = plugin[:source_code_uri] if !home
+      home = plugin[:project_uri] if !home
+      yield i,plugin[:downloads90],plugin[:downloads],name,version,normalize(descr),plugin[:authors].join(', '),home,docs
     end
   end
 
