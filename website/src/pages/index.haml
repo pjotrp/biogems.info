@@ -17,7 +17,8 @@
           %sup
             %b
               *)
-      - by_popularity do |i, dl, name, descr, author, docs|
+        %th{ :align => "left" } version
+      - by_popularity do |i, dl, name, version, descr, author, docs|
         - rowclass = "odd"
         - if i.even?
           - rowclass = "even"
@@ -27,7 +28,7 @@
               = i
           %td{ :class => "#{rowclass}" }
             .name
-              = link name, "http://rubygems.org/gems/#{name}"
+              = link name.gsub(/[_-]/,' '), "http://rubygems.org/gems/#{name}"
           %td{ :class => "#{rowclass}" }
             .descr
               = descr
@@ -39,6 +40,9 @@
           %td{ :align => "right", :class => "#{rowclass}" }
             .dl
               = link dl.to_s, "http://rubygems.org/gems/#{name}/stats"
+          %td{ :align => "right", :class => "#{rowclass}" }
+            .version
+              = version
   .footnote 
     *) gem downloads from 
     = link "rubygems.org", "http://rubygems.org"

@@ -13,12 +13,13 @@ module ContentHelper
       plugin = spec[name]
       descr = plugin[:summary]
       descr = plugin[:description] if !descr
-      # docs
+      version = plugin[:version]
+      # docs - just get the most likely one
       docs = plugin[:homepage]   # from the biogem descr
       docs = plugin[:homepage_uri] if !docs or docs == ''
       docs = plugin[:project_uri] if !docs or docs == ''
       docs = plugin[:source_code_uri] if !docs or docs == ''
-      yield i,plugin[:downloads].to_i,name,normalize(descr),plugin[:authors].join(', '),docs
+      yield i,plugin[:downloads].to_i,name,version,normalize(descr),plugin[:authors].join(', '),docs
     end
   end
 
