@@ -17,7 +17,7 @@
         %th{ :align => "left" }
           total
         %th{ :align => "left" } version
-      - by_popularity do |i, dl90, dl, name, version, descr, author, home, docs|
+      - by_popularity do |i, dl90, dl, name, version, descr, author, home, docs, src|
         - rowclass = "odd"
         - if i.even?
           - rowclass = "even"
@@ -44,7 +44,7 @@
               = link dl.to_s, "http://rubygems.org/gems/#{name}/stats"
           %td{ :align => "right", :class => "#{rowclass}" }
             .version
-              = version
+              = link version, src
   .footnote 
     *) gem downloads (last 90 days/total) from 
     = link "rubygems.org", "http://rubygems.org"

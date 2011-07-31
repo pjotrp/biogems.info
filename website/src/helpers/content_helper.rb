@@ -20,7 +20,9 @@ module ContentHelper
       home = plugin[:homepage_uri] if !home
       home = plugin[:source_code_uri] if !home
       home = plugin[:project_uri] if !home
-      yield i,plugin[:downloads90],plugin[:downloads],name,version,normalize(descr),plugin[:authors].join(', '),home,docs
+      src = plugin[:source_code_uri]
+      src = home if !src
+      yield i,plugin[:downloads90],plugin[:downloads],name,version,normalize(descr),plugin[:authors].join(', '),home,docs,src
     end
   end
 

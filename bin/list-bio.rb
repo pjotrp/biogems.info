@@ -79,7 +79,7 @@ list.each do | name |
     info[:gem_uri] = biogems["gem_uri"]
     info[:homepage_uri] = check_url(biogems["homepage_uri"])
     info[:project_uri] = check_url(biogems["project_uri"])
-    info[:source_code_uri] = check_url(biogems["source_code_uri"])
+    info[:source_code_uri] = biogems["sourcecode_uri"]
     info[:docs_uri] = check_url(biogems["documentation_uri"])
     info[:dependencies] = biogems["dependencies"]
     # query for recent downloads
