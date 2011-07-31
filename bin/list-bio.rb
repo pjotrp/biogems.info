@@ -65,6 +65,7 @@ list.each do | name |
   # set homepage
   info[:homepage] = check_url(ivars["homepage"])
   info[:docs_uri] = check_url("http://rubydoc.info/gems/#{name}/#{ver}/frames")
+  info[:docs_uri] = info[:homepage] if not info[:docs_uri]
 
   info[:licenses] = ivars["licenses"]
   info[:description] = ivars["description"]
