@@ -29,6 +29,21 @@ def check_url url
   nil
 end
 
+def get_downloads90 name, version
+  url="http://rubygems.org/api/v1/versions/#{name}-#{version}/downloads.yaml"
+  uri = URI.parse(url)
+  http = Net::HTTP.new(uri.host, uri.port)
+  request = Net::HTTP::Get.new(uri.request_uri)
+  response = http.request(request)
+  if response.code.to_i != 200
+    raise Exception.new("page not found "+url)
+  end
+  dated_stats = YAML::load(response.body)
+  stats = dated_stats.map { | i | i[1] }
+  total = stats.inject {|sum, n| sum + n } 
+  total
+end
+
 list.each do | name |
   $stderr.print name,"\n"
   info = Hash.new
@@ -65,6 +80,7 @@ list.each do | name |
   else
     raise Exception.new("Response code for #{name} is "+response.code)
   end
+  info[:downloads90] = get_downloads90(name, ver)
   projects[name] = info
 end
 print projects.to_yaml
