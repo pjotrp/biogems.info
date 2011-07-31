@@ -3,7 +3,7 @@ require 'yaml'
 module ContentHelper
   def by_popularity
     spec = YAML::load(File.new("./var/bio-projects.yaml").read)
-    sorted = spec.sort { |a, b| b[1][:downloads] <=> a[1][:downloads] }
+    sorted = spec.sort { |a, b| b[1][:downloads90] <=> a[1][:downloads90] }
     i = 0
     dl = 0
     descr = 'unknown'
@@ -19,7 +19,7 @@ module ContentHelper
       docs = plugin[:homepage_uri] if !docs or docs == ''
       docs = plugin[:project_uri] if !docs or docs == ''
       docs = plugin[:source_code_uri] if !docs or docs == ''
-      yield i,plugin[:downloads].to_i,name,version,normalize(descr),plugin[:authors].join(', '),docs
+      yield i,plugin[:downloads90],plugin[:downloads],name,version,normalize(descr),plugin[:authors].join(', '),docs
     end
   end
 
