@@ -64,9 +64,6 @@ list.each do | name |
   info[:version] = ver
   # set homepage
   info[:homepage] = check_url(ivars["homepage"])
-  info[:docs_uri] = check_url("http://rubydoc.info/gems/#{name}/#{ver}/frames")
-  info[:docs_uri] = info[:homepage] if not info[:docs_uri]
-
   info[:licenses] = ivars["licenses"]
   info[:description] = ivars["description"]
   # Now query rubygems.org directly
@@ -83,11 +80,14 @@ list.each do | name |
     info[:homepage_uri] = check_url(biogems["homepage_uri"])
     info[:project_uri] = check_url(biogems["project_uri"])
     info[:source_code_uri] = check_url(biogems["source_code_uri"])
+    info[:docs_uri] = check_url(biogems["documentation_uri"])
     info[:dependencies] = biogems["dependencies"]
     # query for recent downloads
   else
     raise Exception.new("Response code for #{name} is "+response.code)
   end
+  info[:docs_uri] = "http://rubydoc.info/gems/#{name}/#{ver}/frames" if not info[:docs_uri]
+
   info[:downloads90] = get_downloads90(name, ver)
   projects[name] = info
 end
