@@ -4,6 +4,8 @@ require 'yaml'
 require "net/http"
 require "uri"
 
+is_testing = ARGV[0] == '--testing'
+
 # list of biogems not starting with bio- (bio dash)
 ADD = %w{ bio ruby-ensembl-api genfrag eutils dna_sequence_aligner }
 
@@ -14,7 +16,9 @@ projects = Hash.new
 
 list = `gem list -r --no-versions bio-`.split(/\n/)
 list += ADD
-list = ['bio-logger']  # for testing
+if is_testing
+  list = ['bio-logger']
+end
 
 def check_url url
   if url =~ /^http:\/\//

@@ -13,10 +13,9 @@
         %th{ :align => "left" } description
         %th{ :align => "left" } by
         %th{ :align => "left" }
-          dl
-          %sup
-            %b
-              *)
+          90d&nbsp;*)
+        %th{ :align => "left" }
+          total
         %th{ :align => "left" } version
       - by_popularity do |i, dl90, dl, name, version, descr, author, docs|
         - rowclass = "odd"
@@ -39,8 +38,10 @@
               = author
           %td{ :align => "right", :class => "#{rowclass}" }
             .dl
-              - display = "#{dl90} / #{dl}"
-              = link display, "http://rubygems.org/gems/#{name}/stats"
+              = dl90.to_s
+          %td{ :align => "right", :class => "#{rowclass}" }
+            .dl
+              = link dl.to_s, "http://rubygems.org/gems/#{name}/stats"
           %td{ :align => "right", :class => "#{rowclass}" }
             .version
               = version
