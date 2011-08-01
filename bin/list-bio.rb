@@ -18,7 +18,7 @@ projects = Hash.new
 list = `gem list -r --no-versions bio-`.split(/\n/)
 list += ADD
 if is_testing
-  list = ['bio-logger']
+  list = ['bio']
 end
 
 def check_url url
@@ -107,6 +107,9 @@ list.each do | name |
   info[:docs_uri] = "http://rubydoc.info/gems/#{name}/#{ver}/frames" if not info[:docs_uri]
 
   info[:downloads90] = get_downloads90(name, ver)
+  # Now parse etc/biogems/name.yaml
+  if File.exist?("./etc/biogems/#{name}.yaml")
+  end
   projects[name] = info
 end
 print projects.to_yaml
