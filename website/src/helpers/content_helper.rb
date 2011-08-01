@@ -26,7 +26,7 @@ module ContentHelper
       if cite
         cite = 'http://dx.doi.org/'+plugin[:doi] if cite != /^http:/
       end
-      yield i,plugin[:downloads90],plugin[:downloads],name,version,normalize(descr),cite,plugin[:authors].join(', '),home,docs,src
+      yield i,plugin[:downloads90],plugin[:downloads],name,plugin[:status],version,normalize(descr),cite,plugin[:authors].join(', '),home,docs,src
     end
   end
 

@@ -42,6 +42,10 @@ For example in ./etc/biogems/bio.yaml
     :status: core
     :source_code_uri: https://github.com/bioruby/bioruby
 
+It is also possible the overriding gemname.yaml is in your github 
+repository(!) Just tell us where it resides through
+https://github.com/pjotrp/biogems.info/issues
+
 = Website source
 
 This repository on github contains the source code for the
