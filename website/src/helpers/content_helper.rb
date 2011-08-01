@@ -22,7 +22,10 @@ module ContentHelper
       home = plugin[:project_uri] if !home or home==''
       src = plugin[:source_code_uri]
       src = home if !src
-      cite = 'http://dx.doi.org/'+plugin[:doi]
+      cite = plugin[:doi]
+      if cite
+        cite = 'http://dx.doi.org/'+plugin[:doi] if cite != /^http:/
+      end
       yield i,plugin[:downloads90],plugin[:downloads],name,version,normalize(descr),cite,plugin[:authors].join(', '),home,docs,src
     end
   end
