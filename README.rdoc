@@ -1,3 +1,17 @@
-This is the source code for the http://biogems.info/ website.
+= Biogems.info =
 
+http://biogems.info/ tracks interesting Ruby gems for bioinformatics.
+
+To get your gem listed, simply create a gem named 'bio-mygem', i.e.
+start the name with bio dash, and push it onto rubygems.org. You can
+use the biogem tool to create the plumbing, if you like. If you wish
+to name your gem differently, or host the gem elsewhere, it can still
+be listed. Either add a project description to /etc/biogems/name.yaml,
+or add an issue to the github tracker at
+https://github.com/pjotrp/biogems.info/issues
+
+This repository on github contains the source code for the
+http://biogems.info/ website.
+
+Biogems.info is an initiative by the BioRuby developers
 Copyright (C) 2011 Pjotr Prins <pjotr.prins@thebird.nl> 
