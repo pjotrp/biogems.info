@@ -108,7 +108,10 @@ list.each do | name |
 
   info[:downloads90] = get_downloads90(name, ver)
   # Now parse etc/biogems/name.yaml
-  if File.exist?("./etc/biogems/#{name}.yaml")
+  fn = "./etc/biogems/#{name}.yaml"
+  if File.exist?(fn)
+    added = YAML::load(File.new(fn).read)
+    info = info.merge(added)
   end
   projects[name] = info
 end
