@@ -1,5 +1,6 @@
 #! ruby
 
+require 'json'
 require 'yaml'
 require "net/http"
 require "uri"
@@ -36,18 +37,35 @@ def check_url url
   nil
 end
 
-def get_downloads90 name, version
-  url="http://rubygems.org/api/v1/versions/#{name}-#{version}/downloads.yaml"
+def get_http_body url
   uri = URI.parse(url)
+  $stderr.print "Fetching #{url}\n"
   http = Net::HTTP.new(uri.host, uri.port)
   request = Net::HTTP::Get.new(uri.request_uri)
   response = http.request(request)
   if response.code.to_i != 200
     raise Exception.new("page not found "+url)
   end
-  dated_stats = YAML::load(response.body)
-  stats = dated_stats.map { | i | i[1] }
-  total = stats.inject {|sum, n| sum + n } 
+  response.body
+end
+
+def get_versions name
+  url = "http://rubygems.org/api/v1/versions/#{name}.json"
+  versions = JSON.parse(get_http_body(url))
+  versions.map { | ver | ver['number'] }
+end
+
+def get_downloads90 name, version
+  versions = get_versions(name)
+  total = 0
+  versions.each do | ver |
+    url="http://rubygems.org/api/v1/versions/#{name}-#{ver}/downloads.yaml"
+    text = get_http_body(url)
+    dated_stats = YAML::load(text)
+    stats = dated_stats.map { | i | i[1] }
+    ver_total90 = stats.inject {|sum, n| sum + n } 
+    total += ver_total90
+  end
   total
 end
 
