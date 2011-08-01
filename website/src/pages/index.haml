@@ -12,8 +12,8 @@
         %th{ :align => "left" } biogem 
         %th{ :align => "left" } description
         %th{ :align => "left" } by
-        %th{ :align => "left" } status
         %th{ :align => "left" } cite 
+        %th{ :align => "left" } stat
         %th{ :align => "left" } dl*)
         %th{ :align => "left" } version
         %th{ :align => "left" } dl90*)
@@ -37,12 +37,12 @@
             .author
               = author
           %td{ :class => "#{rowclass}" }
-            .status
-              = status
-          %td{ :class => "#{rowclass}" }
             .cite
               - if cite and cite != ''
                 = link "doi", cite
+          %td{ :class => "#{rowclass}" }
+            .status
+              = status
           %td{ :align => "right", :class => "#{rowclass}" }
             .dl
               = link dl.to_s, "http://rubygems.org/gems/#{name}/stats"
