@@ -14,10 +14,11 @@
         %th{ :align => "left" } by
         %th{ :align => "left" } cite 
         %th{ :align => "left" } stat
+        %th{ :align => "left" } issues
         %th{ :align => "left" } dl*)
         %th{ :align => "left" } version
         %th{ :align => "left" } dl90*)
-      - by_popularity do |i, dl90, dl, name, status, version, descr, cite, author, home, docs, src|
+      - by_popularity do |i, dl90, dl, name, status, version, descr, cite, author, home, docs, src, issues|
         - rowclass = "odd"
         - if i.even?
           - rowclass = "even"
@@ -43,6 +44,9 @@
           %td{ :class => "#{rowclass}" }
             .status
               = status
+          %td{ :class => "#{rowclass}" }
+            .issues
+              = link "...", issues
           %td{ :align => "right", :class => "#{rowclass}" }
             .dl
               = link dl.to_s, "http://rubygems.org/gems/#{name}/stats"
