@@ -1,6 +1,6 @@
 = Biogems.info
 
-http://biogems.info/ tracks interesting Ruby gems for bioinformatics.
+http://biogems.info tracks interesting Ruby gems for bioinformatics.
 
 To get your gem listed, simply create a gem named 'bio-mygem', i.e.
 start the name with bio dash, and push it onto rubygems.org. You can
@@ -24,7 +24,7 @@ for a gem. In particular
     gem.email = "ilpuccio.febo@gmail.com"
     gem.authors = ["Raoul J.P. Bonnal"]
 
-This is the information pushed to http://rubygems.org/ when releasing a
+This is the information pushed to http://rubygems.org when releasing a
 gem. biogems.info harvests this information, with the download statistics.
 
 = Additional settings
@@ -45,7 +45,7 @@ For example in ./etc/biogems/bio.yaml
 = Website source
 
 This repository on github contains the source code for the
-http://biogems.info/ website.
+http://biogems.info website.
 
 Biogems.info is an initiative by the BioRuby developers
 Copyright (C) 2011 Pjotr Prins <pjotr.prins@thebird.nl> 
