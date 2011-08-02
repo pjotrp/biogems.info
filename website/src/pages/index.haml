@@ -34,6 +34,8 @@
                 %img#uparrow{:src => "./images/up1.png", :width=>"20", :title => "trend is up", :alt => "+"}
               - if trend_direction ==-1
                 %img#uparrow{:src => "./images/down1.png", :width=>"20", :title => "trend is down", :alt => "-"}
+              - if status == 'new' 
+                %img#uparrow{:src => "./images/bioruby-gem.png", :width=>"20", :title => "new biogem!", :alt => "!"}
           %td{ :class => "#{rowclass}" }
             .name
               = link name.gsub(/[_-]/,' '), "http://rubygems.org/gems/#{name}"
@@ -51,7 +53,10 @@
                 = link "doi", cite
           %td{ :class => "#{rowclass}" }
             .status
-              = status
+              - if status == 'core'
+                %img#uparrow{:src => "./images/bioruby-gem.png", :width=>"20", :title => "BioRuby core gem!", :alt => "!"}
+              - else
+                = status
           %td{ :align => "right", :class => "#{rowclass}" }
             .version
               = link version, src

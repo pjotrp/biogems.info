@@ -1,4 +1,4 @@
 # Additional BioRuby settings
 :doi: 10.1093/bioinformatics/btq475
-:status: stable
+:status: core
 :source_code_uri: https://github.com/bioruby/bioruby

@@ -737,7 +737,7 @@ bio:
 
   :downloads90: 1955
   :doi: 10.1093/bioinformatics/btq475
-  :status: stable
+  :status: core
 ruby-ensembl-api: 
   :authors: 
   - Jan Aerts
