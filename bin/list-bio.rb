@@ -15,6 +15,7 @@ print "# Using Ruby ",RUBY_VERSION,"\n"
 
 projects = Hash.new
 
+$stderr.print "Querying gem list\n"
 list = `gem list -r --no-versions bio-`.split(/\n/)
 list += ADD
 if is_testing
@@ -52,13 +53,13 @@ end
 def get_versions name
   url = "http://rubygems.org/api/v1/versions/#{name}.json"
   versions = JSON.parse(get_http_body(url))
-  versions.map { | ver | ver['number'] }
+  versions
 end
 
-def get_downloads90 name, version
-  versions = get_versions(name)
+def get_downloads90 name, versions
+  version_numbers = versions.map { | ver | ver['number'] }
   total = 0
-  versions.each do | ver |
+  version_numbers.each do | ver |
     url="http://rubygems.org/api/v1/versions/#{name}-#{ver}/downloads.yaml"
     text = get_http_body(url)
     dated_stats = YAML::load(text)
@@ -107,7 +108,22 @@ list.each do | name |
   end
   info[:docs_uri] = "http://rubydoc.info/gems/#{name}/#{ver}/frames" if not info[:docs_uri]
 
-  info[:downloads90] = get_downloads90(name, ver)
+  versions = get_versions(name)
+  info[:downloads90] = get_downloads90(name, versions)
+  # if a gem is less than one month old, mark it as new
+  if versions.size <= 5
+    is_new = true
+    versions.each do | ver |
+      date = ver['built_at']
+      date.to_s =~ /^(\d\d\d\d)\-(\d\d)\-(\d\d)/
+      t = Time.new($1.to_i,$2.to_i,$3.to_i)
+      if Time.now - t > 30*24*3600
+        is_new = false
+        break
+      end
+    end
+    info[:status] = 'new' if is_new
+  end
   # Now parse etc/biogems/name.yaml
   fn = "./etc/biogems/#{name}.yaml"
   if File.exist?(fn)
