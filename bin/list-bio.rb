@@ -80,6 +80,7 @@ list.each do | name |
   info[:summary] = ivars["summary"]
   ver = ivars["version"].ivars['version']
   info[:version] = ver
+  info[:release_date] = ivars["date"]
   # set homepage
   info[:homepage] = ivars["homepage"]
   info[:licenses] = ivars["licenses"]
