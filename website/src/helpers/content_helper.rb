@@ -4,12 +4,18 @@ module ContentHelper
   def by_popularity
     spec = YAML::load(File.new("./var/bio-projects.yaml").read)
     sorted = spec.sort { |a, b| b[1][:downloads] <=> a[1][:downloads] }
-    i = 0
+    # rank trend
+    sorted90 = spec.sort { |a, b| b[1][:downloads90] <=> a[1][:downloads90] }
+    rank90 = {}
+    sorted90.each_with_index do | rec, i |
+      name = rec[0]
+      rank90[name] = i
+    end
+    # now iterate for display
     dl = 0
     descr = 'unknown'
-    sorted.each do | rec |
+    sorted.each_with_index do | rec, i |
       name = rec[0]
-      i += 1
       plugin = spec[name]
       descr = plugin[:summary]
       descr = plugin[:description] if !descr
@@ -31,7 +37,16 @@ module ContentHelper
         issues = src
         issues += '/issues' if issues =~ /github/
       end
-      yield i,plugin[:downloads90],plugin[:downloads],name,plugin[:status],version,normalize(descr),cite,plugin[:authors].join(', '),home,docs,src,issues
+      # calc trend
+      trend_direction = 0
+      if rank90[name] < i - 2
+        trend_direction = +1
+      end
+      if rank90[name] > i + 2
+        trend_direction = -1
+      end
+
+      yield i,plugin[:downloads90],plugin[:downloads],name,plugin[:status],version,normalize(descr),cite,plugin[:authors].join(', '),home,docs,src,issues,trend_direction,rank90[name]
     end
   end
 
