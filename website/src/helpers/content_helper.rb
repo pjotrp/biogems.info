@@ -50,7 +50,7 @@ module ContentHelper
         trend_direction = -1
       end
 
-      yield i,plugin[:downloads90],plugin[:downloads],name,plugin[:status],version,released,normalize(descr),cite,plugin[:authors].join(', '),home,docs,src,issues,trend_direction,rank90[name]
+      yield i+1,plugin[:downloads90],plugin[:downloads],name,plugin[:status],version,released,normalize(descr),cite,plugin[:authors].join(', '),home,docs,src,issues,trend_direction,rank90[name]
     end
   end
 
