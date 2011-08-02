@@ -13,13 +13,13 @@
         %th{ :align => "left" } biogem 
         %th{ :align => "left" } description
         %th{ :align => "left" } by
-        %th{ :align => "left" } cite 
-        %th{ :align => "left" } stat
-        %th{ :align => "left" } version
-        %th{ :align => "left" } released
-        %th{ :align => "left" } issues
-        %th{ :align => "left" } dl*)
-        %th{ :align => "left" } 90d*)
+        %th.cite{ :align => "left" } cite 
+        %th.status{ :align => "left" } stat
+        %th.version{ :align => "left" } version
+        %th.released{ :align => "left" } released
+        %th.issues{ :align => "left" } issues
+        %th.dl{ :align => "left" } dl*)
+        %th.dl{ :align => "left" } 90d*)
       - by_popularity do |i, dl90, dl, name, status, version, released, descr, cite, author, home, docs, src, issues, trend_direction, rank90|
         - rowclass = "odd"
         - if i.even?

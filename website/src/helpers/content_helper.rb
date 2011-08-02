@@ -69,7 +69,7 @@ module ContentHelper
     days = ((Time.now-t)/3600/24).to_i
     case days
       when 0 then return 'today'
-      when 1 then return 'yesterday'
+      when 1 then return '1 day'
       when 2..6 then return days.to_s+' days'
       when 7..13 then return '1 week'
       when 14..84 then return (days/7).to_i.to_s+' weeks'
