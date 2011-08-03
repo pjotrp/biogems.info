@@ -11,6 +11,7 @@
         %h1 Biogems.info
         .subheader
           Ruby for bioinformatics
+          = link "[RSS]", "/rss.xml"
       #content= yield
       #footer
         %hr
@@ -28,6 +29,8 @@
           %div
             about
             = link "biogems.info", "http://github.org/pjotrp/biogems.info"
+            | 
+            = link "RSS", "/rss.xml"
             | documentation for creating a new  
             = link "Biogem plugin", "http://bioruby.open-bio.org/wiki/Plugins"
             |
