@@ -27,7 +27,7 @@ content = RSS::Maker.make(version) do |m|
     plugin = rec[1]
     rss = m.items.new_item
     rss.title = "#{name} #{plugin[:version]} released"
-    rss.link = "http://biogems.info/##{name}"
+    rss.link = "http://biogems.info/index.html##{name}"
     # p plugin[:time]
     rss.date = plugin[:time]
     break if i > 12
