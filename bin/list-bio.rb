@@ -25,13 +25,17 @@ end
 def check_url url
   if url =~ /^http:\/\//
     $stderr.print "Checking #{url}..."
-    uri = URI.parse(url)
-    http = Net::HTTP.new(uri.host, uri.port)
-    request = Net::HTTP::Get.new(uri.request_uri)
-    response = http.request(request)
-    if response.code.to_i == 200 and response.body !~ /301 Moved/
-      $stderr.print "pass!\n"
-      return url
+    begin
+      uri = URI.parse(url)
+      http = Net::HTTP.new(uri.host, uri.port)
+      request = Net::HTTP::Get.new(uri.request_uri)
+      response = http.request(request)
+      if response.code.to_i == 200 and response.body !~ /301 Moved/
+        $stderr.print "pass!\n"
+        return url
+      end
+    rescue
+      $stderr.print $!
     end
     $stderr.print "failed!\n"
   end
