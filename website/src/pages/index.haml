@@ -67,7 +67,7 @@
               = released
           %td{ :class => "#{rowclass}" }
             .issues
-              = link num_issues, issues
+              = link num_issues.to_s, issues
           %td{ :align => "right", :class => "#{rowclass}" }
             .dl
               = link dl.to_s, "http://rubygems.org/gems/#{name}/stats"

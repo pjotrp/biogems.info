@@ -81,6 +81,7 @@ def get_github_issues github_uri
   url = "http://github.com/api/v2/json/issues/list/#{user}/#{project}/open"
   $stderr.print url
   issues = JSON.parse(get_http_body(url))
+  $stderr.print issues['issues'].size, "\n"
   issues['issues']
 end
 
@@ -146,14 +147,14 @@ list.each do | name |
   # Replace http with https
   for uri in [:source_code_uri, :homepage, :homepage_uri, :project_uri] do
     if info[uri] =~ /^http:\/\/github/
-      info[uri] = info[uri].sub(/^http:\/\/github.com/,"https://github.com")
+      info[uri] = info[uri].sub(/^http:\/\/github\.com/,"https://github.com")
     end
   end
 
   # Check github issues
   # print info
   for uri in [:source_code_uri, :homepage, :homepage_uri, :project_uri] do
-    if info[uri] =~ /github/
+    if info[uri] =~ /^https:\/\/github\.com/
       info[:num_issues] = get_github_issues(info[uri]).size
       break if info[:num_issues] > 0
     end
