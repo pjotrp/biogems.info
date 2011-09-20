@@ -19,7 +19,7 @@ $stderr.print "Querying gem list\n"
 list = `gem list -r --no-versions bio-`.split(/\n/)
 list += ADD
 if is_testing
-  list = ['bio']
+  list = ['bio-assembly']
 end
 
 def check_url url
@@ -74,6 +74,17 @@ def get_downloads90 name, versions
   total
 end
 
+def get_github_issues github_uri
+  tokens = github_uri.split(/\//).reverse
+  project = tokens[0]
+  user = tokens[1]
+  url = "http://github.com/api/v2/json/issues/list/#{user}/#{project}/open"
+  $stderr.print url
+  issues = JSON.parse(get_http_body(url))
+  $stderr.print issues['issues'].size, "\n"
+  issues['issues']
+end
+
 list.each do | name |
   $stderr.print name,"\n"
   info = Hash.new
@@ -111,7 +122,6 @@ list.each do | name |
     raise Exception.new("Response code for #{name} is "+response.code)
   end
   info[:docs_uri] = "http://rubydoc.info/gems/#{name}/#{ver}/frames" if not info[:docs_uri]
-
   versions = get_versions(name)
   info[:downloads90] = get_downloads90(name, versions)
   # if a gem is less than one month old, mark it as new
@@ -134,6 +144,22 @@ list.each do | name |
     added = YAML::load(File.new(fn).read)
     info = info.merge(added)
   end
+  # Replace http with https
+  for uri in [:source_code_uri, :homepage, :homepage_uri, :project_uri] do
+    if info[uri] =~ /^http:\/\/github/
+      info[uri] = info[uri].sub(/^http:\/\/github\.com/,"https://github.com")
+    end
+  end
+
+  # Check github issues
+  # print info
+  for uri in [:source_code_uri, :homepage, :homepage_uri, :project_uri] do
+    if info[uri] =~ /^https:\/\/github\.com/
+      info[:num_issues] = get_github_issues(info[uri]).size
+      break if info[:num_issues] > 0
+    end
+  end
+
   projects[name] = info
 end
 print projects.to_yaml
