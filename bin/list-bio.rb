@@ -19,7 +19,7 @@ $stderr.print "Querying gem list\n"
 list = `gem list -r --no-versions bio-`.split(/\n/)
 list += ADD
 if is_testing
-  list = ['bio']
+  list = ['bio-assembly']
 end
 
 def check_url url
@@ -75,11 +75,11 @@ def get_downloads90 name, versions
 end
 
 def get_github_issues github_uri
-  # p github_uri
   tokens = github_uri.split(/\//).reverse
   project = tokens[0]
   user = tokens[1]
   url = "http://github.com/api/v2/json/issues/list/#{user}/#{project}/open"
+  $stderr.print url
   issues = JSON.parse(get_http_body(url))
   issues['issues']
 end
@@ -143,9 +143,21 @@ list.each do | name |
     added = YAML::load(File.new(fn).read)
     info = info.merge(added)
   end
+  # Replace http with https
+  for uri in [:source_code_uri, :homepage, :homepage_uri, :project_uri] do
+    if info[uri] =~ /^http:\/\/github/
+      info[uri] = info[uri].sub(/^http:\/\/github.com/,"https://github.com")
+    end
+  end
+
   # Check github issues
   # print info
-  info[:num_issues] = get_github_issues(info[:source_code_uri]).size
+  for uri in [:source_code_uri, :homepage, :homepage_uri, :project_uri] do
+    if info[uri] =~ /github/
+      info[:num_issues] = get_github_issues(info[uri]).size
+      break if info[:num_issues] > 0
+    end
+  end
 
   projects[name] = info
 end
