@@ -74,6 +74,16 @@ def get_downloads90 name, versions
   total
 end
 
+def get_github_issues github_uri
+  # p github_uri
+  tokens = github_uri.split(/\//).reverse
+  project = tokens[0]
+  user = tokens[1]
+  url = "http://github.com/api/v2/json/issues/list/#{user}/#{project}/open"
+  issues = JSON.parse(get_http_body(url))
+  issues['issues']
+end
+
 list.each do | name |
   $stderr.print name,"\n"
   info = Hash.new
@@ -111,7 +121,6 @@ list.each do | name |
     raise Exception.new("Response code for #{name} is "+response.code)
   end
   info[:docs_uri] = "http://rubydoc.info/gems/#{name}/#{ver}/frames" if not info[:docs_uri]
-
   versions = get_versions(name)
   info[:downloads90] = get_downloads90(name, versions)
   # if a gem is less than one month old, mark it as new
@@ -134,6 +143,10 @@ list.each do | name |
     added = YAML::load(File.new(fn).read)
     info = info.merge(added)
   end
+  # Check github issues
+  # print info
+  info[:num_issues] = get_github_issues(info[:source_code_uri]).size
+
   projects[name] = info
 end
 print projects.to_yaml
