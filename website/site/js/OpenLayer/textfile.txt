@@ -1,0 +1,4 @@
+point	title	description	icon
+5.73788,50.92818	Pjotr	Pjotr Prins
+2,4	my aqua title	my aqua description	
+42,-71	my purple title	my purple description<br/>is great.	http://www.openlayers.org/api/img/zoom-world-mini.png
