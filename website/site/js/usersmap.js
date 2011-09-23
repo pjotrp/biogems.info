@@ -20,8 +20,8 @@ map = new OpenLayers.Map({
     var newl = new OpenLayers.Layer.Text( "text", { location:"./js/OpenLayer/textfile.txt"} );
     map.addLayer(newl);
 
-    var markers = new OpenLayers.Layer.Markers( "Markers" );
-    map.addLayer(markers);
+//    var markers = new OpenLayers.Layer.Markers( "Markers" );
+//    map.addLayer(markers);
 
     var size = new OpenLayers.Size(21,25);
     var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
@@ -38,7 +38,7 @@ map = new OpenLayers.Map({
     marker.events.register('mousedown', marker, function(evt) { alert(this.icon.url); OpenLayers.Event.stop(evt); });
     markers.addMarker(marker); 
 */
-    map.addControl(new OpenLayers.Control.LayerSwitcher());
+ //   map.addControl(new OpenLayers.Control.LayerSwitcher());
     map.zoomToMaxExtent();
 
 //    halfIcon.setOpacity(0.5);
