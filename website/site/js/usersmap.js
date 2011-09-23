@@ -10,10 +10,10 @@ map = new OpenLayers.Map({
 
     layer = new OpenLayers.Layer.WMS( "OpenLayers WMS", 
         "http://vmap0.tiles.osgeo.org/wms/vmap0", {layers: 'basic'} );
-    osm = new OpenLayers.Layer.OSM();
-    gmap = new OpenLayers.Layer.Google("Google Streets", {visibility: true});
+    osm = new OpenLayers.Layer.OSM("Open Sreeet Map");
+    gmap = new OpenLayers.Layer.Google("Google Streets", {visibility: false});
         
-    map.addLayers([gmap]);
+    map.addLayers([osm]);
 
     map.setCenter(new OpenLayers.LonLat(0, 0), 0);
 
