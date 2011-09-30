@@ -12,7 +12,7 @@ point	title	description	icon	URL
 52.6286,1.292	Ricardo Ramirez-Gonzalez	UK
 44.9773,-93.26547	Trevor Wennblom	Restriction enzymes
 45.50,9.25	Francesco Strozzi	Italia
-42.3584,-71.0598	Chase Miller	Boston
+42.33,-71.2	Chase Miller	Boston
 42.3586,-71.0598	Joon Lee	Boston
 41.0844,-81.513	Michael Barton	Akron
 -3.6333,39.84999	George Githinji	KEMRI Wellcome Trust Research

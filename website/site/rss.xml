@@ -9,20 +9,38 @@
     <link>http://biogems.info/rss.html</link>
     <description>Ruby for bioinformatics</description>
     <item>
+      <title>bio-dbla-classifier 0.2.1</title>
+      <link>http://biogems.info/index.html#bio-dbla-classifier</link>
+      <pubDate>Fri, 30 Sep 2011 00:00:00 +0200</pubDate>
+      <dc:date>2011-09-30T00:00:00+02:00</dc:date>
+    </item>
+    <item>
+      <title>bio-gem 1.0.0</title>
+      <link>http://biogems.info/index.html#bio-gem</link>
+      <pubDate>Mon, 26 Sep 2011 00:00:00 +0200</pubDate>
+      <dc:date>2011-09-26T00:00:00+02:00</dc:date>
+    </item>
+    <item>
+      <title>bio-biolinux 0.1.0</title>
+      <link>http://biogems.info/index.html#bio-biolinux</link>
+      <pubDate>Sat, 24 Sep 2011 00:00:00 +0200</pubDate>
+      <dc:date>2011-09-24T00:00:00+02:00</dc:date>
+    </item>
+    <item>
       <title>bio-nexml 1.0.0</title>
       <link>http://biogems.info/index.html#bio-nexml</link>
       <pubDate>Wed, 21 Sep 2011 00:00:00 +0200</pubDate>
       <dc:date>2011-09-21T00:00:00+02:00</dc:date>
     </item>
     <item>
-      <title>bio-restriction_enzyme 1.0.0</title>
-      <link>http://biogems.info/index.html#bio-restriction_enzyme</link>
+      <title>bio-data-restriction_enzyme 1.109.0</title>
+      <link>http://biogems.info/index.html#bio-data-restriction_enzyme</link>
       <pubDate>Sat, 10 Sep 2011 00:00:00 +0200</pubDate>
       <dc:date>2011-09-10T00:00:00+02:00</dc:date>
     </item>
     <item>
-      <title>bio-data-restriction_enzyme 1.109.0</title>
-      <link>http://biogems.info/index.html#bio-data-restriction_enzyme</link>
+      <title>bio-restriction_enzyme 1.0.0</title>
+      <link>http://biogems.info/index.html#bio-restriction_enzyme</link>
       <pubDate>Sat, 10 Sep 2011 00:00:00 +0200</pubDate>
       <dc:date>2011-09-10T00:00:00+02:00</dc:date>
     </item>
@@ -51,12 +69,6 @@
       <dc:date>2011-08-26T00:00:00+02:00</dc:date>
     </item>
     <item>
-      <title>bio-gem 0.3.1</title>
-      <link>http://biogems.info/index.html#bio-gem</link>
-      <pubDate>Tue, 16 Aug 2011 00:00:00 +0200</pubDate>
-      <dc:date>2011-08-16T00:00:00+02:00</dc:date>
-    </item>
-    <item>
       <title>scaffolder 0.4.4</title>
       <link>http://biogems.info/index.html#scaffolder</link>
       <pubDate>Thu, 11 Aug 2011 00:00:00 +0200</pubDate>
@@ -77,18 +89,6 @@
     <item>
       <title>bio-gff3 0.8.7</title>
       <link>http://biogems.info/index.html#bio-gff3</link>
-      <pubDate>Sun, 31 Jul 2011 00:00:00 +0200</pubDate>
-      <dc:date>2011-07-31T00:00:00+02:00</dc:date>
-    </item>
-    <item>
-      <title>bio-blastxmlparser 1.0.1</title>
-      <link>http://biogems.info/index.html#bio-blastxmlparser</link>
-      <pubDate>Sun, 31 Jul 2011 00:00:00 +0200</pubDate>
-      <dc:date>2011-07-31T00:00:00+02:00</dc:date>
-    </item>
-    <item>
-      <title>bio-logger 1.0.0</title>
-      <link>http://biogems.info/index.html#bio-logger</link>
       <pubDate>Sun, 31 Jul 2011 00:00:00 +0200</pubDate>
       <dc:date>2011-07-31T00:00:00+02:00</dc:date>
     </item>
