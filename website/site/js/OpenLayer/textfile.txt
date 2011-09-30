@@ -1,0 +1,20 @@
+point	title	description	icon	URL
+50.90,5.73	Pjotr Prins	Who?
+45.46,9.19	Raoul Bonnal	Il puccio
+35.68007,139.76	Toshiaki Katayama	BioRuby Guru
+32.78334,129.86666	Hiroyuki Mishima	Japan
+34.68529,135.5147	Naohisa Goto	BioRuby maintainer, Osaka
+50.879,4.701	Jan Aerts	Leuven
+51.4563,-0.9711	Rutger Vos	Reading
+22.5622,88.3391	Anurag Priyam	India
+-37.814,144.9633	Ben Woodcroft	Melbourne
+-31.9333,115.8333	Rob Syme	Perth
+52.6286,1.292	Ricardo Ramirez-Gonzalez	UK
+44.9773,-93.26547	Trevor Wennblom	Restriction enzymes
+45.50,9.25	Francesco Strozzi	Italia
+42.3584,-71.0598	Chase Miller	Boston
+42.3586,-71.0598	Joon Lee	Boston
+41.0844,-81.513	Michael Barton	Akron
+-3.6333,39.84999	George Githinji	KEMRI Wellcome Trust Research
+47.428,8.671	Pascal Betz	Zurich
+52.2033,0.1249	Alex Kalderimis	UK
