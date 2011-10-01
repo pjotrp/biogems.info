@@ -5,21 +5,7 @@
     %link{:rel => "stylesheet", :href => "./stylesheets/screen.css", :media => "screen"}
   %body
     #page
-      #header
-        .imgtitle
-          %img#logo{:src => "./images/bioruby-gem.png", :alt => "biogems.info"}
-        %div
-          .maintitle
-            = link "Biogems.info", "http://biogems.info/"
-        .subheader
-          Ruby for bioinformatics
-          = link "| RSS", "/rss.xml"
-        .tabs
-          |
-          = link "Biogems", "/"
-          |
-          = link "World", "/usersmap.html"
-          |
+      = partial('header')
       #content= yield
       = partial('footer')
 
