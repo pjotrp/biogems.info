@@ -1,95 +1,125 @@
-/* line 9 */
+/* line 10 */
 body {
   background: #f8f8f8;
 }
-/* line 11 */
+/* line 12 */
 body a {
   text-decoration: none;
 }
 
-/* line 15 */
+/* line 16 */
 #header {
   background: #990000;
   color: white;
 }
-/* line 18 */
-#header .supheader {
+/* line 19 */
+#header .maintitle {
+  position: relative;
+  top: -25px;
+  left: 60px;
   font-style: bold;
-  text-align: right;
-}
-/* line 23 */
-#header .subheader {
-  font-style: bold;
-  text-align: right;
+  font-size: xx-large;
   color: white;
 }
-/* line 29 */
+/* line 27 */
+#header .maintitle a {
+  text-decoration: none;
+  color: white;
+}
+/* line 31 */
+#header .imgtitle {
+  font-style: bold;
+  text-align: right;
+  position: relative;
+  top: 25px;
+  left: -30px;
+}
+/* line 39 */
+#header .subheader {
+  font-style: bold;
+  color: white;
+}
+/* line 43 */
 #header .subheader a {
   text-decoration: none;
   color: white;
 }
+/* line 47 */
+#header .tabs {
+  font-style: bold;
+  font-background-color: #880000;
+  position: relative;
+  top: -5px;
+  left: 160px;
+}
+/* line 54 */
+#header .tabs a {
+  text-decoration: none;
+  color: white;
+  background: #880000;
+}
 
-/* line 35 */
+/* line 61 */
 #plugins #list {
   background: #e8e8e8;
   color: #7d2252;
 }
-/* line 38 */
+/* line 64 */
 #plugins #list .even {
   background: #e8e8e8;
 }
-/* line 40 */
+/* line 66 */
 #plugins #list .odd {
   background: #f8f8f8;
 }
-/* line 42 */
+/* line 68 */
 #plugins #list .status {
   font-size: small;
   color: #9900cc;
   text-align: center;
 }
-/* line 48 */
+/* line 74 */
 #plugins #list .cite {
   color: #9900cc;
   font-size: small;
 }
-/* line 52 */
+/* line 78 */
 #plugins #list .author {
   font-size: small;
 }
-/* line 55 */
+/* line 81 */
 #plugins #list .issues {
   font-size: small;
   text-align: right;
 }
-/* line 60 */
+/* line 86 */
 #plugins #list .released {
   font-size: small;
   white-space: nowrap;
   text-align: center;
 }
-/* line 66 */
+/* line 92 */
 #plugins #list .version {
   font-size: small;
 }
-/* line 69 */
+/* line 95 */
 #plugins #list .dl {
   font-size: small;
 }
 
-/* line 74 */
+/* line 100 */
 .footnote {
   font-family: Verdana;
   font-size: 8pt;
 }
 
-/* line 79 */
+/* line 105 */
 #footer {
   font-family: Verdana;
   font-size: 8pt;
 }
 
-/* line 84 */
+/* line 110 */
 .smallmap {
   width: 512px;
   height: 512px;

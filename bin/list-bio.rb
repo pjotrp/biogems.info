@@ -18,10 +18,9 @@ projects = Hash.new
 $stderr.print "Querying gem list\n"
 list = `gem list -r --no-versions bio-`.split(/\n/)
 prerelease = `gem search -r --prerelease --no-versions bio-`.split(/\n/)
-list += prerelease
 list += ADD
 if is_testing
-  list = ['bio-assembly']
+  list = ['bio-assembly', 'bio-ngs']
 end
 
 def check_url url
@@ -91,18 +90,23 @@ list.each do | name |
   $stderr.print name,"\n"
   info = Hash.new
   fetch = `gem specification -r #{name.strip}`
-  spec = YAML::load(fetch)
-  # print fetch
-  ivars = spec.ivars
-  info[:authors] = ivars["authors"]
-  info[:summary] = ivars["summary"]
-  ver = ivars["version"].ivars['version']
-  info[:version] = ver
-  info[:release_date] = ivars["date"]
-  # set homepage
-  info[:homepage] = ivars["homepage"]
-  info[:licenses] = ivars["licenses"]
-  info[:description] = ivars["description"]
+  if fetch != ''
+    spec = YAML::load(fetch)
+    # print fetch
+    ivars = spec.ivars
+    info[:authors] = ivars["authors"]
+    info[:summary] = ivars["summary"]
+    ver = ivars["version"].ivars['version']
+    info[:version] = ver
+    info[:release_date] = ivars["date"]
+    # set homepage
+    info[:homepage] = ivars["homepage"]
+    info[:licenses] = ivars["licenses"]
+    info[:description] = ivars["description"]
+  else
+    info[:version] = 'pre'
+    info[:status]  = 'pre'
+  end
   # Now query rubygems.org directly
   uri = URI.parse("http://rubygems.org/api/v1/gems/#{name}.yaml")
   http = Net::HTTP.new(uri.host, uri.port)
