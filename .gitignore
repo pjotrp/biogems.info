@@ -2,7 +2,5 @@ website/site/images/
 pkg/
 contrib/
 var/
-website/site/usersmap.html 
-website/site/stylesheets/screen.css 
-website/site/index.html 
-
+website/site/*.html
+website/site/stylesheets/
