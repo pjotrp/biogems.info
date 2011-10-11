@@ -20,8 +20,6 @@ list = `gem list -r --no-versions bio-`.split(/\n/)
 prerelease = `gem search -r --prerelease --no-versions bio-`.split(/\n/)
 list += prerelease
 list += ADD
-p list 
-exit
 if is_testing
   list = ['bio-assembly']
 end

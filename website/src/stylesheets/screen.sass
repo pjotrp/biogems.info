@@ -2,6 +2,7 @@ $lightgrey: #E8E8E8
 $lightgrey2: #F8F8F8 
 $plugin: #7D2252
 $ruby: #990000
+$tab:  #880000
 $status: #9900CC
 $url: blue
 $url_visited: $ruby
@@ -35,9 +36,18 @@ body
     position: relative
     top:  25px
     left: -30px
+  .subheader
+    font:
+      style: bold
+    color: white
+    a
+      text:
+        decoration: none
+      color: white
   .tabs
     font:
       style: bold
+      background-color: $tab
     position: relative
     top:  -5px
     left: 160px
@@ -45,16 +55,7 @@ body
       text:
         decoration: none
       color: white
-  .subheader
-    font:
-      style: bold
-    text:
-      align: right
-    color: white
-    a
-      text:
-        decoration: none
-      color: white
+      background: $tab
 
 #plugins
   #list
