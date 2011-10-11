@@ -45,14 +45,14 @@
             .descr
               = descr
               - if docs and docs != ''
-                = link " ... ", docs
+                = link " (...)", docs
           %td{ :class => "#{rowclass}" }
             .author
               = author
           %td{ :class => "#{rowclass}" }
             .cite
               - if cite and cite != ''
-                = link "doi", cite
+                = link "cite", cite
           %td{ :class => "#{rowclass}" }
             .status
               - if status == 'core'

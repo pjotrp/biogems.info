@@ -51,12 +51,14 @@ module ContentHelper
       if rank90[name] > i + 4
         trend_direction = -1
       end
+      plugin[:authors] = [] if not plugin[:authors]
 
       yield i+1,plugin[:downloads90],plugin[:downloads],name,plugin[:status],version,released,normalize(descr),cite,plugin[:authors].join(', '),home,docs,src,issues,num_issues,trend_direction,rank90[name]
     end
   end
 
   def normalize s
+    return '' if s == nil
     s = s.sub(/\.$/,'')
     s = s.capitalize
     s = s.gsub(/ruby/i,'Ruby')

@@ -14,6 +14,8 @@ content = RSS::Maker.make(version) do |m|
   m.items.do_sort = true # sort items by date
 
   spec = YAML::load(File.new("./var/bio-projects.yaml").read)
+  # remove empty dates
+  spec = spec.find_all { |rec| rec[1][:release_date] }
   spec.each do | rec |
     rec[1][:release_date].to_s =~ /^(\d\d\d\d)\-(\d\d)\-(\d\d)/
     t = Time.new($1.to_i,$2.to_i,$3.to_i)
