@@ -4,6 +4,8 @@
   %div
     .maintitle
       = link "Biogems.info", "/"
+  %div{ :style => "background-color: #" + "%06x" % (rand * 0xffffff) }
+    &nbsp;
   .subheader
     %div{ :align => "right", :style => "float: right" }
       Ruby for bioinformatics
