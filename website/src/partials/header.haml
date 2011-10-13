@@ -11,9 +11,18 @@
       Ruby for bioinformatics
       = link "| RSS", "/rss.xml"
   .tabs
-    |
-    = link "Biogems", "/"
-    |
-    = link "People", "/usersmap.html"
-    |
+    %span{ :style => "background-color: #880000" }
+      |
+      - if current_page == '/index.html'
+        %span{ :style => "background-color: #550009" }
+          = link "&nbsp;Biogems&nbsp;", "/"
+      - else
+        = link "Biogems", "/"
+      |
+      - if current_page == '/usersmap.html'
+        %span{ :style => "background-color: #550009" }
+          = link "&nbsp;People&nbsp;", "/usersmap.html"
+      - else
+        = link "People", "/usersmap.html"
+      |
 
