@@ -14,13 +14,15 @@
         %th{ :align => "left" } description
         %th{ :align => "left" } by
         %th.cite{ :align => "left" } cite 
-        %th.status{ :align => "left" } stat
+        %th.status{ :align => "left" } status
         %th.version{ :align => "left" } version
         %th.released{ :align => "left" } released
         %th.issues{ :align => "left" } issues
+        %th.commit{ :align => "left" } commit
+        %th.github{ :align => "left" } git
         %th.dl{ :align => "left" } dl*)
         %th.dl{ :align => "left" } 90d*)
-      - by_popularity do |i, dl90, dl, name, status, version, released, descr, cite, author, home, docs, src, issues, num_issues, trend_direction, rank90|
+      - by_popularity do |i, dl90, dl, name, status, version, released, descr, cite, author, home, docs, src, issues, num_issues, commit, trend_direction, rank90|
         - rowclass = "odd"
         - if i.even?
           - rowclass = "even"
@@ -61,13 +63,19 @@
                 = status
           %td{ :align => "right", :class => "#{rowclass}" }
             .version
-              = link version, src
+              = link version, "http://rubygems.org/gems/#{name}"
           %td{ :align => "right", :class => "#{rowclass}" }
             .released
               = released
           %td{ :class => "#{rowclass}" }
             .issues
               = link num_issues.to_s, issues
+          %td{ :class => "#{rowclass}" }
+            .commit
+              = link 'commit', commit
+          %td{ :align => "right", :class => "#{rowclass}" }
+            .github
+              = link 'code', src
           %td{ :align => "right", :class => "#{rowclass}" }
             .dl
               = link dl.to_s, "http://rubygems.org/gems/#{name}/stats"

@@ -32,6 +32,7 @@ module ContentHelper
       home = plugin[:project_uri] if !home or home==''
       src = plugin[:source_code_uri]
       src = home if !src
+      commit = src
       cite = plugin[:doi]
       if cite
         cite = 'http://dx.doi.org/'+plugin[:doi] if cite != /^http:/
@@ -53,7 +54,7 @@ module ContentHelper
       end
       plugin[:authors] = [] if not plugin[:authors]
 
-      yield i+1,plugin[:downloads90],plugin[:downloads],name,plugin[:status],version,released,normalize(descr),cite,plugin[:authors].join(', '),home,docs,src,issues,num_issues,trend_direction,rank90[name]
+      yield i+1,plugin[:downloads90],plugin[:downloads],name,plugin[:status],version,released,normalize(descr),cite,plugin[:authors].join(', '),home,docs,src,issues,num_issues,commit,trend_direction,rank90[name]
     end
   end
 
