@@ -46,7 +46,7 @@ module ContentHelper
       commit = plugin[:commit]
       if not commit
         commit = src
-        commit += '/issues' if commit =~ /github/
+        commit += '/commits/master' if commit =~ /github/
       end
       # calc trend
       trend_direction = 0

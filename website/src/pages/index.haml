@@ -19,7 +19,7 @@
         %th.released{ :align => "left" } released
         %th.issues{ :align => "left" } issues
         %th.commit{ :align => "left" } commit
-        %th.github{ :align => "left" } git
+        %th.github{ :align => "left" } code 
         %th.dl{ :align => "left" } dl*)
         %th.dl{ :align => "left" } 90d*)
       - by_popularity do |i, dl90, dl, name, status, version, released, descr, cite, author, home, docs, src, issues, num_issues, commit, trend_direction, rank90|
@@ -70,12 +70,16 @@
           %td{ :class => "#{rowclass}" }
             .issues
               = link num_issues.to_s, issues
-          %td{ :class => "#{rowclass}" }
+          %td{ :align => "center", :class => "#{rowclass}" }
             .commit
-              = link 'commit', commit
-          %td{ :align => "right", :class => "#{rowclass}" }
+              - if src =~ /git/
+                %a{:href => commit}
+                  %img#git{:src => "/images/commit.png", :width => "30", :alt => "github"}
+          %td{ :align => "center", :class => "#{rowclass}" }
             .github
-              = link 'code', src
+              - if src =~ /git/
+                %a{:href => src}
+                  %img#git{:src => "/images/git-logo.png", :width=>"80", :alt => "github"}
           %td{ :align => "right", :class => "#{rowclass}" }
             .dl
               = link dl.to_s, "http://rubygems.org/gems/#{name}/stats"
