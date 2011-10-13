@@ -32,7 +32,6 @@ module ContentHelper
       home = plugin[:project_uri] if !home or home==''
       src = plugin[:source_code_uri]
       src = home if !src
-      commit = src
       cite = plugin[:doi]
       if cite
         cite = 'http://dx.doi.org/'+plugin[:doi] if cite != /^http:/
@@ -44,6 +43,11 @@ module ContentHelper
       end
       num_issues = plugin[:num_issues]
       num_issues = '...' if num_issues == nil
+      commit = plugin[:commit]
+      if not commit
+        commit = src
+        commit += '/issues' if commit =~ /github/
+      end
       # calc trend
       trend_direction = 0
       if rank90[name] < i - 4
