@@ -57,12 +57,14 @@
                 = link "cite", cite
           %td{ :class => "#{rowclass}" }
             .status
-              - if status == 'core'
+              - if name == 'bio' or name == 'bio-core' or name == 'bio-core-ext' or name == 'bio-biolinux' or status == 'core' or status == 'bio'
                 %img#uparrow{:src => "./images/bioruby-gem.png", :width=>"20", :title => "BioRuby core gem!", :alt => "!"}
               - elsif status == 'bio-core'
                 %img#pickaxe{:src => "./images/pickaxe.png", :width=>"30", :title => "bio-core gem!", :alt => "!"}
               - elsif status == 'bio-core-ext'
                 %img#pickaxe{:src => "./images/pickaxe.png", :width=>"30", :title => "bio-core-ext gem!", :alt => "!"}
+              - elsif status == 'bio-biolinux'
+                %img#anvil{:src => "./images/biolinux.png", :width=>"30", :title => "bio-biolinux gem!", :alt => "!"}
               - elsif status == 'stable'
                 %img#anvil{:src => "./images/anvil.png", :width=>"30", :title => "Stable biogem!", :alt => "!"}
               - else

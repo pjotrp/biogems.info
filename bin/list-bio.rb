@@ -16,12 +16,14 @@ print "# Using Ruby ",RUBY_VERSION,"\n"
 projects = Hash.new
 
 $stderr.print "Querying gem list\n"
-list = `gem list -r --no-versions bio-`.split(/\n/)
-prerelease = `gem search -r --prerelease --no-versions bio-`.split(/\n/)
-list += prerelease
-list += ADD
+list = []
 if is_testing
-  list = ['bio-assembly', 'bio-ngs']
+  list = ['bio-gff3']
+else
+  list = `gem list -r --no-versions bio-`.split(/\n/)
+  prerelease = `gem search -r --prerelease --no-versions bio-`.split(/\n/)
+  list += prerelease
+  list += ADD
 end
 
 def check_url url
@@ -85,6 +87,30 @@ def get_github_issues github_uri
   issues = JSON.parse(get_http_body(url))
   $stderr.print issues['issues'].size, "\n"
   issues['issues']
+end
+
+def update_status(projects)
+  for biogem in ['bio-biolinux','bio-core-ext','bio-core','bio'] do 
+    $stderr.print "Getting status of #{biogem}\n"
+    uri = URI.parse("http://rubygems.org/api/v1/gems/#{biogem}.yaml")
+    http = Net::HTTP.new(uri.host, uri.port)
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(request)
+    if response.code.to_i==200
+      # print response.body       
+      biogems = YAML::load(response.body)
+      biogems["dependencies"]["runtime"].each do | runtime |
+        n = runtime["name"]
+        if projects[n]
+          projects[n][:status] = biogem
+        else
+          $stderr.print "Warning: can not find #{n} for #{biogem}\n"
+        end
+      end
+    else
+      raise Exception.new("Response code for #{name} is "+response.code)
+    end
+  end
 end
 
 list.each do | name |
@@ -169,4 +195,7 @@ list.each do | name |
 
   projects[name] = info
 end
+# Read the status of bio-core, bio-core-ext and bio-biolinux
+# packages
+update_status(projects)
 print projects.to_yaml
