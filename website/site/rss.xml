@@ -9,10 +9,10 @@
     <link>http://biogems.info/rss.html</link>
     <description>Ruby for bioinformatics</description>
     <item>
-      <title>bio-dbla-classifier 0.3.0</title>
+      <title>bio-dbla-classifier 0.4.0</title>
       <link>http://biogems.info/index.html#bio-dbla-classifier</link>
-      <pubDate>Mon, 10 Oct 2011 00:00:00 +0200</pubDate>
-      <dc:date>2011-10-10T00:00:00+02:00</dc:date>
+      <pubDate>Thu, 13 Oct 2011 00:00:00 +0200</pubDate>
+      <dc:date>2011-10-13T00:00:00+02:00</dc:date>
     </item>
     <item>
       <title>bio-gem 1.0.0</title>
