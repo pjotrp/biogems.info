@@ -18,7 +18,7 @@ projects = Hash.new
 $stderr.print "Querying gem list\n"
 list = []
 if is_testing
-  list = ['bio-gff3']
+  list = ['bio-logger', 'bio-hello']
 else
   list = `gem list -r --no-versions bio-`.split(/\n/)
   prerelease = `gem search -r --prerelease --no-versions bio-`.split(/\n/)
@@ -26,7 +26,11 @@ else
   list += ADD
 end
 
+# Return the working URL, otherwise nil
 def check_url url
+  if url =~ /^http:\/\/github/
+    url = url.sub(/^http:\/\/github\.com/,"https://github.com")
+  end
   if url =~ /^http:\/\//
     $stderr.print "Checking #{url}..."
     begin
@@ -116,6 +120,7 @@ end
 list.each do | name |
   $stderr.print name,"\n"
   info = Hash.new
+  # Fetch the gem YAML definition of the project
   fetch = `gem specification -r #{name.strip}`
   if fetch != ''
     spec = YAML::load(fetch)
@@ -134,7 +139,7 @@ list.each do | name |
     info[:version] = 'pre'
     info[:status]  = 'pre'
   end
-  # Now query rubygems.org directly
+  # Query rubygems.org directly
   uri = URI.parse("http://rubygems.org/api/v1/gems/#{name}.yaml")
   http = Net::HTTP.new(uri.host, uri.port)
   request = Net::HTTP::Get.new(uri.request_uri)
