@@ -18,3 +18,4 @@ point	title	description	icon	URL
 -3.6333,39.84999	George Githinji	KEMRI Wellcome Trust Research
 47.428,8.671	Pascal Betz	Zurich
 52.2033,0.1249	Alex Kalderimis	UK
+48.1374,11.5755	Philipp Comans	Munich, Germany
