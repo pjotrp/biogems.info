@@ -4,3 +4,4 @@ contrib/
 var/
 website/site/*.html
 website/site/stylesheets/
+bio-projects.yaml
