@@ -25,4 +25,15 @@
       - else
         = link "People", "/usersmap.html"
       |
-
+      - if current_page == '/doc/README_rdoc.html'
+        %span{ :style => "background-color: #550009" }
+          = link "&nbsp;Info&nbsp;", "/doc/README_rdoc.html"
+      - else
+        = link "Info", "/doc/README_rdoc.html"
+      |
+      - if current_page == '/doc/Tutoril_rdoc.html'
+        %span{ :style => "background-color: #550009" }
+          = link "&nbsp;Create&nbsp;", "/doc/Tutorial_rdoc.html"
+      - else
+        = link "Create", "/doc/Tutorial_rdoc.html"
+      |
