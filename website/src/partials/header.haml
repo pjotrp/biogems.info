@@ -6,34 +6,31 @@
       = link "Biogems.info", "/"
   %div{ :style => "background-color: #" + "%06x" % (rand * 0xffffff) }
     &nbsp;
-  .subheader
-    %div{ :align => "right", :style => "float: right" }
-      Ruby for bioinformatics
-      = link "| RSS", "/rss.xml"
-  .tabs
-    %span{ :style => "background-color: #880000" }
-      |
-      - if current_page == '/index.html'
-        %span{ :style => "background-color: #550009" }
-          = link "&nbsp;Biogems&nbsp;", "/"
-      - else
-        = link "Biogems", "/"
-      |
-      - if current_page == '/usersmap.html'
-        %span{ :style => "background-color: #550009" }
-          = link "&nbsp;People&nbsp;", "/usersmap.html"
-      - else
-        = link "People", "/usersmap.html"
-      |
-      - if current_page == '/doc/README_rdoc.html'
-        %span{ :style => "background-color: #550009" }
-          = link "&nbsp;Info&nbsp;", "/doc/README_rdoc.html"
-      - else
-        = link "Info", "/doc/README_rdoc.html"
-      |
-      - if current_page == '/doc/Tutoril_rdoc.html'
-        %span{ :style => "background-color: #550009" }
-          = link "&nbsp;Create&nbsp;", "/doc/Tutorial_rdoc.html"
-      - else
-        = link "Create", "/doc/Tutorial_rdoc.html"
-      |
+  %div
+    .subheader
+      .tabs
+        %span{ :style => "background-color: #880000" }
+          |
+          - if current_page == '/index.html'
+            %span{ :style => "background-color: #550009" }
+              = link "&nbsp;Biogems&nbsp;", "/"
+          - else
+            = link "Biogems", "/"
+          |
+          - if current_page == '/usersmap.html'
+            %span{ :style => "background-color: #550009" }
+              = link "&nbsp;People&nbsp;", "/usersmap.html"
+          - else
+            = link "People", "/usersmap.html"
+          |
+      .rightheader
+        %span{ :align => "right", :style => "float: right" }
+          Ruby for bioinformatics: 
+          = link "BioRuby", "http://bioruby.org/"
+          |
+          = link "Biogem", "/doc/README_rdoc.html"
+          |
+          = link "Create!", "/doc/Tutorial_rdoc.html"
+          |
+          %a{:href => "/rss.xml"}
+            %img#git{:src => "/images/rss-small.png", :height => 16 , :alt => "RSS"}
