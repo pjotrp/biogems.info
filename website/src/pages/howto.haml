@@ -1,6 +1,8 @@
 %h1 Create a Biogem!
 
 %p
+  %i Creating a Biogem is easy. New biogems get added monthly!
+%p
   Biogem provides a set of tools for those Bioinformaticans who
   want to start coding an application, or a library for
   using/extending BioRuby's core library and sharing the code as a
@@ -19,9 +21,15 @@
     %li With enough users, almost every problem is quickly known, and a fix obvious
     %li Many heads are inevitably better than one
     %li Good programmers know what to write. Great ones know what to rewrite (and reuse)
+%p
+  We suggest for bioinformatics
+  %ul
+    %li Use Ruby and Biogem software generation, or do not repeat yourself (DRY)!
+    %li Use the foreign function interface (FFI) for performance
+    %li Use unit tests and specifications (RSpec) for both agility and robustness
 
 %p
-  // When you use this tool, please cite R. Bonnal et al., Bioinformatics 2012 (submitted).
+  // When you use Biogem, please cite R. Bonnal et al., Bioinformatics 2012 (submitted).
 %p
   Further reading:
 %p
@@ -30,6 +38,8 @@
       = link "Biogem README", "/doc/README_rdoc.html"
     %li
       = link "Create a Biogem!", "/doc/Tutorial_rdoc.html"
+    %li
+      = link "Hacking the Biogem tool (DRY)!", "https://github.com/pjotrp/bioruby-gem/blob/master/doc/biogem-hacking.md"
     %li
       = link "Source code for Biogem", "https://github.com/helios/bioruby-gem"
     %li
