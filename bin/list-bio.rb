@@ -5,6 +5,8 @@ require 'yaml'
 require "net/http"
 require "uri"
 
+IS_NEW_IN_DAYS = 7*6   # 6 weeks
+
 is_testing = ARGV[0] == '--testing'
 
 # list of biogems not starting with bio- (bio dash)
@@ -169,7 +171,7 @@ list.each do | name |
       date = ver['built_at']
       date.to_s =~ /^(\d\d\d\d)\-(\d\d)\-(\d\d)/
       t = Time.new($1.to_i,$2.to_i,$3.to_i)
-      if Time.now - t > 30*24*3600
+      if Time.now - t > IS_NEW_IN_DAYS*24*3600
         is_new = false
         break
       end
