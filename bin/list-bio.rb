@@ -123,10 +123,11 @@ list.each do | name |
   $stderr.print name,"\n"
   info = Hash.new
   # Fetch the gem YAML definition of the project
-  fetch = `gem specification -r #{name.strip}`
+  fetch = `bundle exec gem specification -r #{name.strip}`
   if fetch != ''
     spec = YAML::load(fetch)
     # print fetch
+    p spec
     ivars = spec.ivars
     info[:authors] = ivars["authors"]
     info[:summary] = ivars["summary"]

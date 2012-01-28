@@ -29,12 +29,15 @@ GEM
       compass (>= 0.10.0)
       haml (>= 2.0.0)
       rack (>= 1.0)
+    yard (0.7.4)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   bundler (~> 1.0.0)
+  haml
   jeweler (~> 1.5.2)
   rspec (~> 2.5.0)
   staticmatic
+  yard (~> 0.7.4)
