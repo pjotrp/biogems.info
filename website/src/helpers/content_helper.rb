@@ -34,7 +34,7 @@ module ContentHelper
       src = home if !src
       cite = plugin[:doi]
       if cite
-        cite = 'http://dx.doi.org/'+plugin[:doi] if cite != /^http:/
+        cite = 'http://dx.doi.org/'+plugin[:doi] if cite !~ /^http:/
       end
       issues = plugin[:issues]
       if not issues 
