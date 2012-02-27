@@ -19,10 +19,11 @@
         %th.released{ :align => "left" } released
         %th.issues{ :align => "left" } issues
         %th.github source 
+        %th.citest build status
         %th.commit{ :align => "left" } commit
         %th.dl{ :align => "left" } dl*)
         %th.dl{ :align => "left" } 90d*)
-      - by_popularity do |i, dl90, dl, name, status, version, released, descr, cite, author, home, docs, src, issues, num_issues, commit, trend_direction, rank90|
+      - by_popularity do |i, dl90, dl, name, status, version, released, descr, cite, author, home, docs, src, issues, num_issues, test_info, commit, trend_direction, rank90|
         - rowclass = "odd"
         - if i.even?
           - rowclass = "even"
@@ -84,6 +85,11 @@
               - if src =~ /git/
                 %a{:href => src}
                   %img#git{:src => "/images/commit.png", :width => "30", :alt => "github"}
+          %td{ :align => "center", :class => "#{rowclass}" }
+            .citest
+              - if test_info
+                %a{:href => test_info[:url]}
+                  %img#git{:src => test_info[:image]}
           %td{ :align => "center", :class => "#{rowclass}" }
             .github
               - if src =~ /git/

@@ -84,10 +84,15 @@ def get_downloads90 name, versions
   total
 end
 
-def get_github_issues github_uri
+def get_github_user_project github_uri
   tokens = github_uri.split(/\//).reverse
   project = tokens[0]
   user = tokens[1]
+  return user, project
+end
+
+def get_github_issues github_uri
+  user,project = get_github_user_project(github_uri)
   url = "http://github.com/api/v2/json/issues/list/#{user}/#{project}/open"
   $stderr.print url
   issues = JSON.parse(get_http_body(url))
@@ -127,7 +132,7 @@ list.each do | name |
   if fetch != ''
     spec = YAML::load(fetch)
     # print fetch
-    p spec
+    # p spec
     ivars = spec.ivars
     info[:authors] = ivars["authors"]
     info[:summary] = ivars["summary"]
@@ -197,6 +202,9 @@ list.each do | name |
   for uri in [:source_code_uri, :homepage, :homepage_uri, :project_uri] do
     if info[uri] =~ /^https:\/\/github\.com/
       info[:num_issues] = get_github_issues(info[uri]).size
+      user,project = get_github_user_project(info[uri])
+      info[:github_user] = user
+      info[:github_project] = project
       break if info[:num_issues] > 0
     end
   end
