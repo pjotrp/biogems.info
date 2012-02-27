@@ -62,7 +62,7 @@ module ContentHelper
       user = plugin[:github_user]
       project = plugin[:github_project]
       test_info[:url]   = "http://travis-ci.org/#!/#{user}/#{project}"
-      test_info[:image] = "https://secure.travis-ci.org/#{user}/#{project}.png"
+      test_info[:image] = "https://secure.travis-ci.org/#{user}/#{project}.png?branch=master"
 
       yield i+1,plugin[:downloads90],plugin[:downloads],name,plugin[:status],version,released,normalize(descr),cite,plugin[:authors].join(', '),home,docs,src,issues,num_issues,test_info,commit,trend_direction,rank90[name]
     end
