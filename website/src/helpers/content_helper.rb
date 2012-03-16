@@ -61,7 +61,11 @@ module ContentHelper
       test_info = {}
       user = plugin[:github_user]
       project = plugin[:github_project]
-      test_info[:url]   = "http://travis-ci.org/#!/#{user}/#{project}"
+      if plugin[:travis_url]
+        test_info[:url] = plugin[:travis_url]
+      else
+        test_info[:url] = "http://travis-ci.org/#!/#{user}/#{project}"
+      end
       if plugin[:travis_img]
         test_info[:image] = plugin[:travis_img]
       else
