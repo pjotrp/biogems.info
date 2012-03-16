@@ -1,3 +1,4 @@
 # Additional BioRuby settings
 :status: stable
-:source_code_uri: https://github.com/rvosa/bio-nexml
+:source_code_uri: https://github.com/nexml/bio-nexml
+:travis_img: https://secure.travis-ci.org/pjotrp/bio-nexml.png
