@@ -20,7 +20,7 @@ projects = Hash.new
 $stderr.print "Querying gem list\n"
 list = []
 if is_testing
-  list = ['bio-logger', 'bio-hello']
+  list = ['bio-logger', 'bio-nexml']
 else
   list = `gem list -r --no-versions bio-`.split(/\n/)
   prerelease = `gem search -r --prerelease --no-versions bio-`.split(/\n/)
@@ -47,7 +47,7 @@ def check_url url
     rescue
       $stderr.print $!
     end
-    $stderr.print "failed!\n"
+    $stderr.print "check_url failed!\n"
   end
   nil
 end
@@ -59,7 +59,8 @@ def get_http_body url
   request = Net::HTTP::Get.new(uri.request_uri)
   response = http.request(request)
   if response.code.to_i != 200
-    raise Exception.new("page not found "+url)
+    $stderr.print "get_http_body not found for "+url
+    return "{}"
   end
   response.body
 end
@@ -96,6 +97,7 @@ def get_github_issues github_uri
   url = "http://github.com/api/v2/json/issues/list/#{user}/#{project}/open"
   $stderr.print url
   issues = JSON.parse(get_http_body(url))
+  issues = {"issues"=>[]}
   $stderr.print issues['issues'].size, "\n"
   issues['issues']
 end
