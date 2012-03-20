@@ -19,3 +19,4 @@ point	title	description	icon	URL
 47.428,8.671	Pascal Betz	Zurich
 52.2033,0.1249	Alex Kalderimis	UK
 48.1374,11.5755	Philipp Comans	Munich, Germany
+52.62222,1.22313	Dan MacLean	Sainsbury Lab. Norwich, UK	http://www.tsl.ac.uk/profile/dan-maclean.asp
