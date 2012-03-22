@@ -97,7 +97,7 @@ def get_github_issues github_uri
   url = "http://github.com/api/v2/json/issues/list/#{user}/#{project}/open"
   $stderr.print url
   issues = JSON.parse(get_http_body(url))
-  issues = {"issues"=>[]}
+  issues = {"issues"=>[]} if issues == nil
   $stderr.print issues['issues'].size, "\n"
   issues['issues']
 end
