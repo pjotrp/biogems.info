@@ -65,6 +65,20 @@ def get_http_body url
   response.body
 end
 
+def get_https_body url
+  uri = URI.parse(url)
+  $stderr.print "Fetching #{url}\n"
+  http = Net::HTTP.new(uri.host, 443)
+  http.use_ssl = true
+  request = Net::HTTP::Get.new(uri.request_uri)
+  response = http.request(request)
+  if response.code.to_i != 200
+    $stderr.print "get_http_body not found for "+url
+    return "{}"
+  end
+  response.body
+end
+
 def get_versions name
   url = "http://rubygems.org/api/v1/versions/#{name}.json"
   versions = JSON.parse(get_http_body(url))
@@ -100,6 +114,20 @@ def get_github_issues github_uri
   issues = {"issues"=>[]} if issues == nil
   $stderr.print issues['issues'].size, "\n"
   issues['issues']
+end
+
+def get_github_commit_stats github_uri
+  user,project = get_github_user_project(github_uri)
+  url = "https://github.com/#{user}/#{project}/graphs/participation"
+  $stderr.print url
+  body = get_https_body(url)
+  if body.strip == ""
+    body = get_https_body(url)
+  end
+  stats = JSON.parse(body)
+  stats = {"all"=>[]} if stats == nil
+  $stderr.print stats['all'].size, "\n"
+  stats['all']
 end
 
 def update_status(projects)
@@ -207,6 +235,7 @@ list.each do | name |
       user,project = get_github_user_project(info[uri])
       info[:github_user] = user
       info[:github_project] = project
+      info[:commit_stats] = get_github_commit_stats(info[uri])
       break if info[:num_issues] > 0
     end
   end
