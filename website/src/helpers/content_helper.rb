@@ -73,10 +73,11 @@ module ContentHelper
       end
 
       if plugin[:commit_stats]
-        stats = generate_52week_graph(plugin[:commit_stats])
+        c7 = count_7day_commits(plugin[:commit_stats])
+        c90 = count_90day_commits(plugin[:commit_stats])
       end
 
-      yield i+1,plugin[:downloads90],plugin[:downloads],name,plugin[:status],version,released,normalize(descr),cite,plugin[:authors].join(', '),home,docs,src,issues,num_issues,test_info,commit,trend_direction,rank90[name],stats
+      yield i+1,plugin[:downloads90],plugin[:downloads],name,plugin[:status],version,released,normalize(descr),cite,plugin[:authors].join(', '),home,docs,src,issues,num_issues,test_info,commit,trend_direction,rank90[name],c7,c90
     end
   end
 
@@ -106,12 +107,12 @@ module ContentHelper
 
   end
 
-  def generate_52week_graph stats
-    boxes = ["\u2581", "\u2582", "\u2583", "\u2584", "\u2585", "\u2586", "\u2587", "\u2588"]
-    graph_array = stats.map do |commits|
-      boxes[commits > 7 ? 7 : commits]
-    end
-    graph_array.join
+  def count_7day_commits stats
+    stats[-1].to_i
+  end
+
+  def count_90day_commits stats
+    stats.map { |x| x.to_i }[-13..52].inject(:+)
   end
 
 end
