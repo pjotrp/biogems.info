@@ -23,8 +23,9 @@
         %th.commit{ :align => "left" } commit
         %th.dl{ :align => "left" } dl*)
         %th.dl{ :align => "left" } 90d*)
-        %th.stats 52 week commit stats
-      - by_popularity do |i, dl90, dl, name, status, version, released, descr, cite, author, home, docs, src, issues, num_issues, test_info, commit, trend_direction, rank90, stats|
+        %th.commits{ :align => "left" } 7c**)
+        %th.commits{ :align => "left" } 90c**)
+      - by_popularity do |i, dl90, dl, name, status, version, released, descr, cite, author, home, docs, src, issues, num_issues, test_info, commit, trend_direction, rank90, c7, c90|
         - rowclass = "odd"
         - if i.even?
           - rowclass = "even"
@@ -102,11 +103,17 @@
           %td{ :align => "right", :class => "#{rowclass}" }
             .dl
               = dl90.to_s
-          %td{ :class => "#{rowclass}" }
-            .stats
-              = stats
+          %td{ :align => "right", :class => "#{rowclass}" }
+            .commits
+              = c7.to_s
+          %td{ :align => "right", :class => "#{rowclass}" }
+            .commits
+              = c90.to_s
   .footnote 
     <b>*)</b> gem downloads (dl total &amp; dl last 90 days) from 
     = link "rubygems.org", "http://rubygems.org"
     as of
     = Time.now.to_s.split[0]
+    %br
+      %strong **)
+      number of commits on GitHub (last 7 days &amp; last 90 days)
