@@ -77,7 +77,9 @@ module ContentHelper
         c90 = count_90day_commits(plugin[:commit_stats])
       end
 
-      yield i+1,plugin[:downloads90],plugin[:downloads],name,plugin[:status],version,released,normalize(descr),cite,plugin[:authors].join(', '),home,docs,src,issues,num_issues,test_info,commit,trend_direction,rank90[name],c7,c90
+      activity = calculate_activity_level c7, c90 if not c7.nil?
+
+      yield i+1,plugin[:downloads90],plugin[:downloads],name,plugin[:status],version,released,normalize(descr),cite,plugin[:authors].join(', '),home,docs,src,issues,num_issues,test_info,commit,trend_direction,rank90[name],c7,c90,activity
     end
   end
 
@@ -113,6 +115,16 @@ module ContentHelper
 
   def count_90day_commits stats
     stats.map { |x| x.to_i }[-13..52].inject(:+)
+  end
+
+  def calculate_activity_level commits_7_days, commits_90_days
+    if commits_7_days > 0
+      "green"
+    elsif commits_90_days > 0
+      "yellow"
+    else
+      "red"
+    end
   end
 
 end
