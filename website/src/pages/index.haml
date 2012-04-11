@@ -25,7 +25,8 @@
         %th.dl{ :align => "left" } 90d*)
         %th.commits{ :align => "left" } 7c**)
         %th.commits{ :align => "left" } 90c**)
-      - by_popularity do |i, dl90, dl, name, status, version, released, descr, cite, author, home, docs, src, issues, num_issues, test_info, commit, trend_direction, rank90, c7, c90|
+        %th.activity activity
+      - by_popularity do |i, dl90, dl, name, status, version, released, descr, cite, author, home, docs, src, issues, num_issues, test_info, commit, trend_direction, rank90, c7, c90, activity|
         - rowclass = "odd"
         - if i.even?
           - rowclass = "even"
@@ -109,6 +110,8 @@
           %td{ :align => "right", :class => "#{rowclass}" }
             .commits
               = c90.to_s
+          %td{ :align => "center", :class => "#{rowclass} #{activity}" }
+            .activity
   .footnote 
     <b>*)</b> gem downloads (dl total &amp; dl last 90 days) from 
     = link "rubygems.org", "http://rubygems.org"
