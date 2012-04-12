@@ -25,7 +25,7 @@
         %th.dl{ :align => "left" } 90d*)
         %th.commits{ :align => "left" } 7c**)
         %th.commits{ :align => "left" } 90c**)
-      - by_popularity do |i, dl90, dl, name, status, version, released, descr, cite, author, home, docs, src, issues, num_issues, test_info, commit, trend_direction, rank90, c7, c90|
+      - by_popularity do |i, dl90, dl, name, status, version, released, descr, cite, author, home, docs, src, issues, num_issues, test_info, commit, trend_direction, rank90, c7, c90, c7_color, c90_color|
         - rowclass = "odd"
         - if i.even?
           - rowclass = "even"
@@ -103,10 +103,10 @@
           %td{ :align => "right", :class => "#{rowclass}" }
             .dl
               = dl90.to_s
-          %td{ :align => "right", :class => "#{rowclass}" }
+          %td{ :align => "right", :class => "#{rowclass}", :style => "background: #{c7_color}" }
             .commits
               = c7.to_s
-          %td{ :align => "right", :class => "#{rowclass}" }
+          %td{ :align => "right", :class => "#{rowclass}", :style => "background: #{c90_color}" }
             .commits
               = c90.to_s
   .footnote 
