@@ -6,3 +6,4 @@ website/site/*.html
 website/site/*.xml
 website/site/stylesheets/
 bio-projects.yaml
+*.swp

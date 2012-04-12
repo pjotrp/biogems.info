@@ -14,6 +14,7 @@ module ContentHelper
     # now iterate for display
     dl = 0
     descr = 'unknown'
+    c7_max, c90_max = calculate_max_heuristics(spec)
     sorted.each_with_index do | rec, i |
       name = rec[0]
       plugin = spec[name]
@@ -77,7 +78,10 @@ module ContentHelper
         c90 = count_90day_commits(plugin[:commit_stats])
       end
 
-      yield i+1,plugin[:downloads90],plugin[:downloads],name,plugin[:status],version,released,normalize(descr),cite,plugin[:authors].join(', '),home,docs,src,issues,num_issues,test_info,commit,trend_direction,rank90[name],c7,c90
+      c7_color = calculate_c7_color c7, c7_max
+      c90_color = calculate_c90_color c90, c90_max
+
+      yield i+1,plugin[:downloads90],plugin[:downloads],name,plugin[:status],version,released,normalize(descr),cite,plugin[:authors].join(', '),home,docs,src,issues,num_issues,test_info,commit,trend_direction,rank90[name],c7,c90,c7_color,c90_color
     end
   end
 
@@ -113,6 +117,27 @@ module ContentHelper
 
   def count_90day_commits stats
     stats.map { |x| x.to_i }[-13..52].inject(:+)
+  end
+
+  def calculate_max_heuristics spec
+    clean_stats = spec.values.map { |rec| rec[:commit_stats] }.reject { |rec| rec.nil? }
+
+    c7_max = clean_stats.map { |rec| count_7day_commits(rec) }.max
+    c90_max = clean_stats.map { |rec| count_90day_commits(rec) }.max
+
+    return c7_max, c90_max
+  end
+
+  def calculate_c7_color c7, c7_max
+    return "#FFFFFF" if c7.nil?
+    color_component = sprintf("%02X", 255 - (c7*255/c7_max/2))
+    return "#" + color_component + "FF" + color_component
+  end
+
+  def calculate_c90_color c90, c90_max
+    return "#FFFFFF" if c90.nil?
+    color_component = sprintf("%02X", 255 - (c90*255/c90_max/2))
+    return "#" + color_component + "FF" + color_component
   end
 
 end
