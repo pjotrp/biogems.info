@@ -76,7 +76,7 @@ def get_https_body url
   request = Net::HTTP::Get.new(uri.request_uri)
   response = https.request(request)
   if response.code.to_i != 200
-    $stderr.print "get_http_body not found for "+url
+    $stderr.print "get_https_body not found for "+url
     return "{}"
   end
   response.body
@@ -124,11 +124,16 @@ def get_github_commit_stats github_uri
   url = "https://github.com/#{user}/#{project}/graphs/participation"
   $stderr.print url
   body = get_https_body(url)
-  if body.strip == ""
+  if body.strip == "" || body.nil? || body == "{}"
+    # try once more
     body = get_https_body(url)
   end
+  if body.strip == "" || body.nil?
+    # data not retrieved, set safe default for JSON parsing
+    body = "{}"
+  end
   stats = JSON.parse(body)
-  stats = {"all"=>[]} if stats == nil
+  stats = {"all"=>[]} if stats == {}
   $stderr.print stats['all'].size, "\n"
   stats['all']
 end
