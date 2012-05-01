@@ -20,3 +20,4 @@ point	title	description	icon	URL
 48.1374,11.5755	Philipp Comans	Munich, Germany
 52.6222,1.2231	Dan MacLean	Sainsbury Laboratory Norwich, UK
 52.6286,1.292	Ricardo Ramirez-Gonzalez	Norwich, UK
+45.2551,19.8451	Marjan Povolni	Novi Sad, Serbia
