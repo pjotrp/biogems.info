@@ -133,9 +133,11 @@ def get_github_commit_stats github_uri
     body = "{}"
   end
   stats = JSON.parse(body)
-  stats = {"all"=>[]} if stats == {}
-  $stderr.print stats['all'].size, "\n"
-  stats['all']
+  if stats.empty?
+    return nil
+  else
+    return stats['all']
+  end
 end
 
 def update_status(projects)
