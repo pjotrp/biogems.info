@@ -1,0 +1,7 @@
+blogs:
+ - rss_feed: http://blog.mpthecoder.com/rss
+   gsoc_tag: gsoc
+
+ - rss_feed: http://lomereiter.wordpress.com/feed/
+   gsoc_tag: gsoc
+
