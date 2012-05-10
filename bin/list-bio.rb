@@ -7,7 +7,7 @@ require "uri"
 
 IS_NEW_IN_DAYS = 7*6   # 6 weeks
 
-is_testing = ARGV[0] == '--testing'
+is_testing = ARGV[0] == '--test'
 
 # list of biogems not starting with bio- (bio dash)
 ADD = %w{ bio ruby-ensembl-api genfrag eutils dna_sequence_aligner intermine intermine-bio scaffolder }
@@ -178,7 +178,7 @@ list.each do | name |
     info[:summary] = ivars["summary"]
     ver = ivars["version"].ivars['version']
     info[:version] = ver
-    info[:release_date] = ivars["date"]
+    info[:release_date] = ivars["date"] # can not fix the time, it comes from rubygems
     # set homepage
     info[:homepage] = ivars["homepage"]
     info[:licenses] = ivars["licenses"]

@@ -74,8 +74,9 @@ content = RSS::Maker.make(version) do |m|
   # remove empty dates
   spec = spec.find_all { |rec| rec[1][:release_date] }
   spec.each do | rec |
-    rec[1][:release_date].to_s =~ /^(\d\d\d\d)\-(\d\d)\-(\d\d)/
-    t = Time.new($1.to_i,$2.to_i,$3.to_i)
+    $stderr.print rec[1][:release_date]
+    rec[1][:release_date].to_s =~ /^(\d\d\d\d)\-(\d+)\-(\d+) (\d+):(\d+)/
+    t = Time.new($1.to_i,$2.to_i,$3.to_i,$4.to_i,$5.to_i)
     rec[1][:time] = t
   end
 
