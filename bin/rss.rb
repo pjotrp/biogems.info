@@ -104,7 +104,7 @@ content = RSS::Maker.make(version) do |m|
         rss.description = item[:description]
       end
     end
-    break if i > 12
+    break if i > 25
   end
 end
 
