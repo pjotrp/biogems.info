@@ -21,10 +21,10 @@
         %th.github source 
         %th.citest build status
         %th.commit{ :align => "left" } commit
-        %th.dl{ :align => "left" } dl*)
+        %th.dl{ :align => "left" } dl 7d*)
         %th.dl{ :align => "left" } 90d*)
-        %th.commits{ :align => "left" } 7c**)
-        %th.commits{ :align => "left" } 90c**)
+        %th.commits{ :align => "left" } comm. 7d**)
+        %th.commits{ :align => "left" } 90d**)
       - by_popularity do |i, dl90, dl, name, status, version, released, descr, cite, author, home, docs, src, issues, num_issues, test_info, commit, trend_direction, rank90, c7, c90, c7_color, c90_color|
         - rowclass = "odd"
         - if i.even?
@@ -117,3 +117,5 @@
     %br
       %strong **)
       number of commits on GitHub (last 7 days &amp; last 90 days)
+#news
+  = partial('news')

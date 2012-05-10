@@ -1,0 +1,7 @@
+#newsitems
+  #newsitem
+    - news_items do |news|
+      #newsdate
+        = news[:short_date]
+      #newsdescription
+        = link_to news[:title], news[:link]

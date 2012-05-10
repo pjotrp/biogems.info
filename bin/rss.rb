@@ -74,7 +74,7 @@ content = RSS::Maker.make(version) do |m|
   # remove empty dates
   spec = spec.find_all { |rec| rec[1][:release_date] }
   spec.each do | rec |
-    $stderr.print rec[1][:release_date]
+    # $stderr.print rec[1][:release_date]
     rec[1][:release_date].to_s =~ /^(\d\d\d\d)\-(\d+)\-(\d+) (\d+):(\d+)/
     t = Time.new($1.to_i,$2.to_i,$3.to_i,$4.to_i,$5.to_i)
     rec[1][:time] = t
@@ -108,4 +108,14 @@ content = RSS::Maker.make(version) do |m|
   end
 end
 
-print content
+site_news = []
+content.items.each do | item |
+  site_news << { :title => item.title, :date => item.date, :link => item.link }
+end
+
+# write a YAML file for the site
+File.open('./var/news.yaml','w') do | f |
+  YAML.dump(site_news,f)
+end
+
+print content # output RSS to stdout

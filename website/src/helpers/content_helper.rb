@@ -1,6 +1,15 @@
 require 'yaml'
 
 module ContentHelper
+  def news_items
+    news = YAML::load(File.new("./var/news.yaml").read)
+    news.each do | item |
+      item[:date].to_s =~ /(\d+-\d+-\d+)/
+      item[:short_date] = $1
+      yield item
+    end
+  end
+
   def by_popularity
     spec = YAML::load(File.new("./var/bio-projects.yaml").read)
     sorted = spec.sort { |a, b| b[1][:downloads] <=> a[1][:downloads] }
