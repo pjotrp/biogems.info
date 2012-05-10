@@ -27,11 +27,13 @@ def get_rss_data rss_feed, tag
   doc = Nokogiri::XML(body)
   items = doc.xpath("//item")
   items = items.map do |item|
+    # print item.to_s
     new_item = {}
     new_item[:title] = item.xpath(".//title").first.content
     new_item[:time] = DateTime.parse(item.xpath(".//pubDate").first.content).to_time
     new_item[:tags] = item.xpath(".//category").map { |category| category.content.downcase }
     new_item[:link] = item.xpath(".//link").first.content
+    new_item[:description] = item.xpath(".//description").first.content
     new_item
   end
   items.select { |item| item[:tags].join(" ").include?(tag) }
@@ -89,6 +91,7 @@ content = RSS::Maker.make(version) do |m|
       rss.title = "New release: #{name} #{plugin[:version]}"
       rss.link = "http://biogems.info/index.html##{name}"
       rss.date = plugin[:time]
+      rss.description = plugin[:summary]
     else
       # fetch blog entry
       item = rec[1]
@@ -97,6 +100,7 @@ content = RSS::Maker.make(version) do |m|
         rss.title = 'Blog: '+item[:title]
         rss.link = item[:link]
         rss.date = item[:time]
+        rss.description = item[:description]
       end
     end
     break if i > 12
