@@ -5,6 +5,10 @@ staticmatic.
 
 ## Installation
 
+You will need libxml support, e.g.
+
+  apt-get install libxslt-dev libxml2-dev
+
 Install Ruby with openssl support
 
   rvm pkg install openssl
