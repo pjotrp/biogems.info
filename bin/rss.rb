@@ -43,6 +43,7 @@ def get_xml_with_retry url
   # will try 5 times to get a complete xml document
   5.times do
     begin 
+      $stderr.print "Fetching "+url+"\n"
       body = Net::HTTP.get(URI(url)) if body.nil?
       if !body.nil?
         # protection from incomplete xml file
@@ -64,6 +65,7 @@ content = RSS::Maker.make(version) do |m|
   m.channel.description = "Ruby for bioinformatics"
   m.items.do_sort = true # sort items by date
 
+  $stderr.print "Loading release info from ./var/bio-projects.yaml\n"
   spec = YAML::load(File.new("./var/bio-projects.yaml").read)
   # remove empty dates
   spec = spec.find_all { |rec| rec[1][:release_date] }
@@ -82,15 +84,18 @@ content = RSS::Maker.make(version) do |m|
       name = rec[0]
       plugin = rec[1]
       rss = m.items.new_item
-      rss.title = "#{name} #{plugin[:version]}"
+      rss.title = "New release: #{name} #{plugin[:version]}"
       rss.link = "http://biogems.info/index.html##{name}"
       rss.date = plugin[:time]
     else
+      # fetch blog entry
       item = rec[1]
-      rss = m.items.new_item
-      rss.title = item[:title]
-      rss.link = item[:link]
-      rss.date = item[:time]
+      if item
+        rss = m.items.new_item
+        rss.title = 'Blog: '+item[:title]
+        rss.link = item[:link]
+        rss.date = item[:time]
+      end
     end
     break if i > 12
   end
