@@ -88,7 +88,7 @@ content = RSS::Maker.make(version) do |m|
       name = rec[0]
       plugin = rec[1]
       rss = m.items.new_item
-      rss.title = "New release: #{name} #{plugin[:version]}"
+      rss.title = "#{name} #{plugin[:version]} released"
       rss.link = "http://biogems.info/index.html##{name}"
       rss.date = plugin[:time]
       rss.description = plugin[:summary]
@@ -97,7 +97,7 @@ content = RSS::Maker.make(version) do |m|
       item = rec[1]
       if item
         rss = m.items.new_item
-        rss.title = 'Blog: '+item[:title]
+        rss.title = item[:title]+' (blog)'
         rss.link = item[:link]
         rss.date = item[:time]
         rss.description = item[:description]
