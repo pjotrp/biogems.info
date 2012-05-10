@@ -49,7 +49,9 @@ def get_xml_with_retry url
         # protection from incomplete xml file
         if !Nokogiri::XML(body).validate.nil?
           body = nil
+          next
         end
+        break
       end
     rescue
       # probably the connection was reset, retry
