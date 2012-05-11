@@ -10,8 +10,10 @@ module ContentHelper
     end
   end
 
-  def by_popularity
-    spec = YAML::load(File.new("./var/bio-projects.yaml").read)
+  def by_popularity(type = nil)
+    projects_fn = "./var/bio-projects.yaml"
+    projects_fn = "./var/ruby-projects.yaml" if type == :rubygems
+    spec = YAML::load(File.new(projects_fn).read)
     sorted = spec.sort { |a, b| b[1][:downloads] <=> a[1][:downloads] }
     # rank trend
     sorted90 = spec.sort { |a, b| b[1][:downloads90] <=> a[1][:downloads90] }
