@@ -20,7 +20,7 @@
         %th.issues{ :align => "left" } issues
         %th.github source 
         %th.citest build status
-        %th.commit{ :align => "left" } commit
+        // %th.commit{ :align => "left" } commit
         %th.dl{ :align => "left" } dl 7d*)
         %th.dl{ :align => "left" } 90d*)
         %th.commits{ :align => "left" } comm. 7d**)
@@ -92,11 +92,11 @@
               - if test_info
                 %a{:href => test_info[:url]}
                   %img#git{:src => test_info[:image]}
-          %td{ :align => "center", :class => "#{rowclass}" }
-            .github
-              - if src =~ /git/
-                %a{:href => commit}
-                  %img#git{:src => "/images/git-logo.png", :width=>"80", :alt => "github"}
+          // %td{ :align => "center", :class => "#{rowclass}" }
+          //  .github
+          //    - if src =~ /git/
+          //      %a{:href => commit}
+          //        %img#git{:src => "/images/git-logo.png", :width=>"80", :alt => "github"}
           %td{ :align => "right", :class => "#{rowclass}" }
             .dl
               = link dl.to_s, "http://rubygems.org/gems/#{name}/stats"
@@ -105,10 +105,16 @@
               = dl90.to_s
           %td{ :align => "right", :class => "#{rowclass}", :style => "background: #{c7_color}" }
             .commits
-              = c7.to_s
+              - if src =~ /git/
+                = link_to c7.to_s,commit
+              - else
+                = c7.to_s
           %td{ :align => "right", :class => "#{rowclass}", :style => "background: #{c90_color}" }
             .commits
-              = c90.to_s
+              - if src =~ /git/
+                = link_to c90.to_s,commit
+              - else
+                = c90.to_s
   .footnote 
     <b>*)</b> gem downloads (dl total &amp; dl last 90 days) from 
     = link "rubygems.org", "http://rubygems.org"
