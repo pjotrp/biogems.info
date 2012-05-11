@@ -109,7 +109,7 @@
               = link dl.to_s, "http://rubygems.org/gems/#{name}/stats"
           %td{ :align => "right", :class => "#{rowclass}" }
             .dl
-              = dl90.to_s
+              = link dl90.to_s, "http://rubygems.org/gems/#{name}/stats"
           %td{ :align => "right", :class => "#{rowclass}", :style => "background: #{c7_color}" }
             .commits
               - if src =~ /git/
