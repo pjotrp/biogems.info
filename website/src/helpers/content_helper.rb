@@ -91,7 +91,7 @@ module ContentHelper
       c90_color = calculate_c90_color c90, c90_max
 
       authors = plugin[:authors][0..1].join(', ')
-      authors += '...' if plugin[:authors].size > 2
+      authors += ' <i>et al.</i>' if plugin[:authors].size > 2
       yield i+1,plugin[:downloads90],plugin[:downloads],name,plugin[:status],version,released,normalize(descr),cite,authors,home,docs,src,issues,num_issues,test_info,commit,trend_direction,rank90[name],c7,c90,c7_color,c90_color
     end
   end
