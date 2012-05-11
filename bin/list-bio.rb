@@ -237,6 +237,7 @@ list.each do | name |
   fn = "./etc/rubygems/#{name}.yaml" if is_rubygems
   if File.exist?(fn)
     added = YAML::load(File.new(fn).read)
+    added = {} if not added 
     info = info.merge(added)
   end
   # Replace http with https
