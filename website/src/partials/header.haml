@@ -17,6 +17,12 @@
           - else
             = link "Biogems", "/"
           |
+          - if current_page == '/rubygems.html'
+            %span{ :style => "background-color: #550009" }
+              = link "&nbsp;Rubygems&nbsp;", "/rubygems.html"
+          - else
+            = link "Rubygems", "/rubygems.html"
+          |
           - if current_page == '/usersmap.html'
             %span{ :style => "background-color: #550009" }
               = link "&nbsp;People&nbsp;", "/usersmap.html"
