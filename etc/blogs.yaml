@@ -11,3 +11,6 @@ blogs:
   - rss_feed: http://sciruby.com/atom.xml
     gsoc_tag: other
     remark: SciRuby
+  - rss_feed: http://feeds.feedburner.com/unlimitednovelty?format=xml
+    gsoc_tag: other
+    remark: Tony Arcieri
