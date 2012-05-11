@@ -142,13 +142,13 @@ module ContentHelper
   end
 
   def calculate_c7_color c7, c7_max
-    return "#FFFFFF" if c7.nil?
+    return "#FFFFFF" if c7.nil? or c7_max == 0
     color_component = sprintf("%02X", 255 - (c7*255/c7_max/2))
     return "#" + color_component + "FF" + color_component
   end
 
   def calculate_c90_color c90, c90_max
-    return "#FFFFFF" if c90.nil?
+    return "#FFFFFF" if c90.nil? or c90_max == 0
     color_component = sprintf("%02X", 255 - (c90*255/c90_max/2))
     return "#" + color_component + "FF" + color_component
   end

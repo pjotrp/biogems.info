@@ -8,6 +8,8 @@ require "uri"
 IS_NEW_IN_DAYS = 7*6   # 6 weeks
 
 is_testing = ARGV[0] == '--test'
+is_rubygems = ARGV[0] == '--rubygems'
+is_biogems = !is_rubygems
 
 # list of biogems not starting with bio- (bio dash)
 ADD = %w{ bio ruby-ensembl-api genfrag eutils dna_sequence_aligner intermine intermine-bio scaffolder }
@@ -19,13 +21,19 @@ projects = Hash.new
 
 $stderr.print "Querying gem list\n"
 list = []
-if is_testing
-  list = ['bio-logger', 'bio-nexml']
-else
-  list = `gem list -r --no-versions bio-`.split(/\n/)
-  prerelease = `gem search -r --prerelease --no-versions bio-`.split(/\n/)
-  list += prerelease
-  list += ADD
+if is_biogems
+  if is_testing
+    list = ['bio-logger', 'bio-nexml']
+  else
+    list = `gem list -r --no-versions bio-`.split(/\n/)
+    prerelease = `gem search -r --prerelease --no-versions bio-`.split(/\n/)
+    list += prerelease
+    list += ADD
+  end
+end
+
+if is_rubygems
+  list = Dir.glob("./etc/rubygems/*.yaml").map { |fn| File.basename(fn).sub(/.yaml$/,'') }
 end
 
 # Return the working URL, otherwise nil
@@ -225,7 +233,8 @@ list.each do | name |
     info[:status] = 'new' if is_new
   end
   # Now parse etc/biogems/name.yaml
-  fn = "./etc/biogems/#{name}.yaml"
+  fn = "./etc/biogems/#{name}.yaml" if is_biogems
+  fn = "./etc/rubygems/#{name}.yaml" if is_rubygems
   if File.exist?(fn)
     added = YAML::load(File.new(fn).read)
     info = info.merge(added)
