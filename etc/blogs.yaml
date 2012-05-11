@@ -1,7 +1,9 @@
 blogs:
  - rss_feed: http://blog.mpthecoder.com/rss
    gsoc_tag: gsoc
+   remark: Marjan's blog
  - rss_feed: http://lomereiter.wordpress.com/feed/
    gsoc_tag: gsoc
+   remark: Artem's blog
 # - rss_feed: http://sciruby.com/atom.xml
 #   gsoc_tag: other

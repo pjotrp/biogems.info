@@ -14,13 +14,13 @@ destination = "rss.xml" # local file to write
 def build_blog_data
   blogs = YAML::load(File.new("./etc/blogs.yaml").read)
   blogs = blogs["blogs"]
-  articles = blogs.map { |blog| get_rss_data(blog["rss_feed"], blog["gsoc_tag"]) }
+  articles = blogs.map { |blog| get_rss_data(blog["rss_feed"], blog["gsoc_tag"], blog['remark']) }
   articles.delete_if { |item| item.nil? }
   articles = articles.inject([]) {|total, one_blog| total.concat one_blog }
   return articles
 end
 
-def get_rss_data rss_feed, tag
+def get_rss_data rss_feed, tag, remark
   tag = tag.downcase
   body = get_xml_with_retry(rss_feed)
   return nil if body.nil?
@@ -30,6 +30,7 @@ def get_rss_data rss_feed, tag
     # print item.to_s
     new_item = {}
     new_item[:title] = item.xpath(".//title").first.content
+    new_item[:remark] = remark
     new_item[:time] = DateTime.parse(item.xpath(".//pubDate").first.content).to_time
     new_item[:tags] = item.xpath(".//category").map { |category| category.content.downcase }
     new_item[:link] = item.xpath(".//link").first.content
@@ -98,7 +99,7 @@ content = RSS::Maker.make(version) do |m|
       item = rec[1]
       if item
         rss = m.items.new_item
-        rss.title = item[:title]+' (blog)'
+        rss.title = item[:title]+' ('+item[:remark]+')'
         rss.link = item[:link]
         rss.date = item[:time]
         rss.description = item[:description]
