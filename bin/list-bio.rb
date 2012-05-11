@@ -263,5 +263,6 @@ list.each do | name |
 end
 # Read the status of bio-core, bio-core-ext and bio-biolinux
 # packages
-update_status(projects)
+update_status(projects) if is_biogems
+
 print projects.to_yaml
