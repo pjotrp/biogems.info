@@ -14,6 +14,7 @@ module ContentHelper
     projects_fn = "./var/bio-projects.yaml"
     projects_fn = "./var/ruby-projects.yaml" if type == :rubygems
     spec = YAML::load(File.new(projects_fn).read)
+    spec = {} if not spec
     sorted = spec.sort { |a, b| b[1][:downloads] <=> a[1][:downloads] }
     # rank trend
     sorted90 = spec.sort { |a, b| b[1][:downloads90] <=> a[1][:downloads90] }

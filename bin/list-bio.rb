@@ -105,7 +105,7 @@ def get_downloads90 name, versions
     dated_stats = YAML::load(text)
     stats = dated_stats.map { | i | i[1] }
     ver_total90 = stats.inject {|sum, n| sum + n } 
-    total += ver_total90
+    total += ver_total90 if ver_total90;
   end
   total
 end
