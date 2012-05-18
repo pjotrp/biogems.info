@@ -1,0 +1,4 @@
+blogs:
+  - rss_feed: test/data/rss/rss.xml
+    gsoc_tag: gsoc
+    remark: RSS blog
