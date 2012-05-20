@@ -14,3 +14,6 @@ blogs:
   - rss_feed: http://feeds.feedburner.com/unlimitednovelty?format=xml
     gsoc_tag:
     remark: Tony Arcieri
+  - rss_feed: http://blog.thebird.nl/?feed=rss2
+    gsoc_tag: gsoc
+    remark: Pjotr's blog
