@@ -5,7 +5,7 @@
 require 'yaml'
 require_relative '../lib/biogems/rss.rb'
 
-feed = generate_biogems_rss_feed "./var/bio-projects.yaml", "./etc/blogs.yaml"
+feed = generate_biogems_rss_feed "./var/bio-projects.yaml", "./etc/blogs.yaml", 50
 
 site_news = []
 feed.items.each do | item |

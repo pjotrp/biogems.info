@@ -1,4 +1,3 @@
-
 require 'yaml'
 require 'rss/maker'
 require 'net/http'
@@ -9,13 +8,13 @@ def rss_version
   "2.0" # ["0.9", "1.0", "2.0"]
 end
 
-def generate_biogems_rss_feed biogems_file, blogs_file
+def generate_biogems_rss_feed biogems_file, blogs_file, max_entries = 25
   blogs = YAML::load(File.new(blogs_file).read)
   blogs = blogs["blogs"]
   feeds = blogs.map { |blog| parse_feed(blog["rss_feed"], blog["gsoc_tag"], blog['remark']) }
   feeds.push(parse_biogem_data(biogems_file))
   huge_feed = merge_rss_feeds feeds
-  output_feed = extract_most_recent 25, huge_feed
+  output_feed = extract_most_recent max_entries, huge_feed
   output_feed.channel.title = "biogems.info"
   output_feed.channel.link = "http://biogems.info/rss.html"
   output_feed.channel.description = "Ruby for bioinformatics"
