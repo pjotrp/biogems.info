@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Atom test feed]]></title>
+  <link href="http://test.feed.com/test/atom.xml" rel="self"/>
+  <link href="http://test.feed.com/test/"/>
+  <updated>2012-05-14T23:28:55-04:00</updated>
+  <id>http://test.feed.com/test/</id>
+  <author>
+    <name><![CDATA[Nobody]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Atom test title 1]]></title>
+    <link href="http://test.feed.com/test/blog/2012/05/13/progress/"/>
+    <updated>2012-05-13T18:14:00-04:00</updated>
+    <id>http://test.feed.com/test/blog/2012/05/13/progress</id>
+    <content type="html"><![CDATA[<p>This is for testing...</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Atom test title 2]]></title>
+    <link href="http://test.feed.com/test/blog/2012/05/09/hello-world/"/>
+    <updated>2012-05-09T19:33:00-04:00</updated>
+    <id>http://test.feed.com/test/blog/2012/05/09/hello-world</id>
+    <content type="html"><![CDATA[<p>This is for testing 2...</p>
+]]></content>
+  </entry>
+  
+</feed>

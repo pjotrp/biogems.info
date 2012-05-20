@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	xmlns:georss="http://www.georss.org/georss" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:media="http://search.yahoo.com/mrss/"
+	>
+
+<channel>
+	<title>RSS test channel</title>
+	<atom:link href="http://test.feed.com/feed/" rel="self" type="application/rss+xml" />
+	<link>http://test.feed.com</link>
+	<description></description>
+	<lastBuildDate>Sun, 13 May 2012 20:01:32 +0000</lastBuildDate>
+	<language>en</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.com/</generator>
+<cloud domain='test.feed.com' port='80' path='/?rsscloud=notify' registerProcedure='' protocol='http-post' />
+<image>
+		<url>http://s2.wp.com/i/buttonw-com.png</url>
+		<title>notes on IT &#38; science</title>
+		<link>http://test.feed.com</link>
+	</image>
+	<atom:link rel="search" type="application/opensearchdescription+xml" href="http://test.feed.com/osd.xml" title="notes on IT &#38; science" />
+	<atom:link rel='hub' href='http://test.feed.com/?pushpress=hub'/>
+		<item>
+		<title>RSS test title 1</title>
+		<link>http://test.feed.com/2012/05/13/gsoc-weekly-report-0-5/</link>
+		<comments>http://test.feed.com/2012/05/13/gsoc-weekly-report-0-5/#comments</comments>
+		<pubDate>Sun, 13 May 2012 19:55:29 +0000</pubDate>
+				<category><![CDATA[programming]]></category>
+		<category><![CDATA[gsoc]]></category>
+
+		<guid isPermaLink="false">http://test.feed.com/?p=185</guid>
+    <description><![CDATA[<p>This is a test 1...</p>]]></description>
+			<content:encoded><![CDATA[<p>This is a test 1...</p>
+]]></content:encoded>
+			<wfw:commentRss>http://test.feed.com/2012/05/13/gsoc-weekly-report-0-5/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+	</item>
+		<item>
+		<title>RSS test title 2</title>
+		<link>http://test.feed.com/2012/05/06/gsoc-weekly-report-0/</link>
+		<comments>http://test.feed.com/2012/05/06/gsoc-weekly-report-0/#comments</comments>
+		<pubDate>Sun, 06 May 2012 19:14:43 +0000</pubDate>
+				<category><![CDATA[programming]]></category>
+		<category><![CDATA[D]]></category>
+		<category><![CDATA[gsoc]]></category>
+		<category><![CDATA[Ruby]]></category>
+
+		<guid isPermaLink="false">http://test.feed.com/?p=175</guid>
+    <description><![CDATA[<p>This is a test 2...</p>]]></description>
+			<content:encoded><![CDATA[<p>This is a test 2...</p>
+]]></content:encoded>
+			<wfw:commentRss>http://test.feed.com/2012/05/06/gsoc-weekly-report-0/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+	</item>
+	</channel>
+</rss>

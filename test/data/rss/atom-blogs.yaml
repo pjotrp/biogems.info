@@ -1,0 +1,4 @@
+blogs:
+  - rss_feed: test/data/rss/atom.xml
+    gsoc_tag:
+    remark: Atom blog
