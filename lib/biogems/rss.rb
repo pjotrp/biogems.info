@@ -3,6 +3,7 @@ require 'yaml'
 require 'rss/maker'
 require 'net/http'
 require 'date'
+require 'nokogiri'
 
 def rss_version
   "2.0" # ["0.9", "1.0", "2.0"]
@@ -111,21 +112,22 @@ def get_xml_with_retry url
 
   body = nil
   # will try 5 times to get a complete xml document
-  5.times do
-    begin 
-      $stderr.print "Fetching "+url+"\n"
-      body = Net::HTTP.get(URI(url)) if body.nil?
-      if !body.nil?
-        # protection from incomplete xml file
-        if !Nokogiri::XML(body).validate.nil?
-          body = nil
-          next
-        end
-        break
-      end
-    rescue
-      # probably the connection was reset, retry
-    end
+  count = 0
+  begin 
+    count += 1
+    $stderr.print "Fetching "+url+" #{count}\n"
+    body = Net::HTTP.get(URI(url)) if body.nil?
+    # Somehow the XML is never correct!
+    # if !body.nil? and body != ""
+      # protection from incomplete xml file
+      # if not Nokogiri::XML(body).validate
+      #   print body
+      #   raise "XML incomplete"
+      # end
+    # end
+  rescue Exception => e
+    print e.message
+    retry if count < 5
   end
   return body
 end
