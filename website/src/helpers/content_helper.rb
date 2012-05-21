@@ -99,7 +99,7 @@ module ContentHelper
       c7_color = calculate_c7_color c7, c7_max
       c90_color = calculate_c90_color c90, c90_max
 
-      authors = plugin[:authors][0..1].map{ |a| a.gsub(/ /,"&nbsp") }.join(', ')
+      authors = plugin[:authors][0..2].map{ |a| a.gsub(/ /,"&nbsp") }.join(', ')
       authors += ' <i>et al.</i>' if plugin[:authors].size > 2
       yield i+1,plugin[:downloads90],plugin[:downloads],name,plugin[:status],version,released,normalize(descr),cite,authors,home,docs,src,issues,num_issues,test_info,commit,trend_direction,rank90[name],c7,c90,c7_color,c90_color
     end
