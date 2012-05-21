@@ -32,6 +32,10 @@ module ContentHelper
       plugin = spec[name]
       descr = plugin[:summary]
       descr = plugin[:description] if !descr
+      if descr
+        words = descr.split(/ /)[0..10]
+        descr = words.join(" ");
+      end
       version = plugin[:version]
       released = ''
       if plugin[:release_date]
