@@ -131,4 +131,6 @@
       %strong **)
       number of commits on GitHub (last 7 days &amp; last 90 days)
 #news
-  = partial('news')
+  // = partial('news')
+  // === The following embeds news as a seperate URL in an iframe (also works!)
+  %iframe{ :src=>"news.html", :height => "2000px;", :frameborder => "0" }
