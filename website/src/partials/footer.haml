@@ -1,8 +1,9 @@
-- if current_page != '/news.html'
+- if current_page != '/news.html' and false
   #footer
     %hr
     #links
-      %div{ :align => "right", :style => "float: right" }
+      // %div{ :align => "right", :style => "float: right" }
+      %span{:align => "right"}
         = link "biogems.info", "https://github.com/bioruby/biogems.info"
         website by
         = link "Pjotr Prins", "http://thebird.nl/"
@@ -12,7 +13,7 @@
         = link "haml", "http://haml-lang.com/"
         and 
         = link "sass", "http://sass-lang.com/"
-      %div
+      %span
         = link "Biogem README", "/doc/README_rdoc.html"
         |
         = link "Create a Biogem!", "/howto.html"
