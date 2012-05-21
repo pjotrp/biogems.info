@@ -1,41 +1,42 @@
-#header
-  .imgtitle
-    %img#logo{:src => "./images/bioruby-gem.png", :alt => "biogems.info"}
-  %div
-    .maintitle
-      = link "Biogems.info", "/"
-  %div{ :style => "background-color: #" + "%06x" % (rand * 0xffffff) }
-    &nbsp;
-  %div
-    .subheader
-      .tabs
-        %span{ :style => "background-color: #880000" }
-          |
-          - if current_page == '/index.html'
-            %span{ :style => "background-color: #550009" }
-              = link "&nbsp;Biogems&nbsp;", "/"
-          - else
-            = link "Biogems", "/"
-          |
-          - if current_page == '/rubygems.html'
-            %span{ :style => "background-color: #550009" }
-              = link "&nbsp;Rubygems&nbsp;", "/rubygems.html"
-          - else
-            = link "Rubygems", "/rubygems.html"
-          |
-          - if current_page == '/usersmap.html'
-            %span{ :style => "background-color: #550009" }
-              = link "&nbsp;People&nbsp;", "/usersmap.html"
-          - else
-            = link "People", "/usersmap.html"
-          |
-      .rightheader
-        %span{ :align => "right", :style => "float: right" }
-          %i
-            The future is bright for Ruby in bioinformatics!&nbsp;&nbsp;&nbsp;
-          = link "Create a Biogem!", "/howto.html"
-          |
-          = link "BioRuby", "http://bioruby.org/"
-          |
-          %a{:href => "/rss.xml"}
-            %img#git{:src => "/images/rss-small.png", :height => 16 , :alt => "RSS"}
+- if current_page != '/news.html'
+  #header
+    .imgtitle
+      %img#logo{:src => "./images/bioruby-gem.png", :alt => "biogems.info"}
+    %div
+      .maintitle
+        = link "Biogems.info", "/"
+    %div{ :style => "background-color: #" + "%06x" % (rand * 0xffffff) }
+      &nbsp;
+    %div
+      .subheader
+        .tabs
+          %span{ :style => "background-color: #880000" }
+            |
+            - if current_page == '/index.html'
+              %span{ :style => "background-color: #550009" }
+                = link "&nbsp;Biogems&nbsp;", "/"
+            - else
+              = link "Biogems", "/"
+            |
+            - if current_page == '/rubygems.html'
+              %span{ :style => "background-color: #550009" }
+                = link "&nbsp;Rubygems&nbsp;", "/rubygems.html"
+            - else
+              = link "Rubygems", "/rubygems.html"
+            |
+            - if current_page == '/usersmap.html'
+              %span{ :style => "background-color: #550009" }
+                = link "&nbsp;People&nbsp;", "/usersmap.html"
+            - else
+              = link "People", "/usersmap.html"
+            |
+        .rightheader
+          %span{ :align => "right", :style => "float: right" }
+            %i
+              The future is bright for Ruby in bioinformatics!&nbsp;&nbsp;&nbsp;
+            = link "Create a Biogem!", "/howto.html"
+            |
+            = link "BioRuby", "http://bioruby.org/"
+            |
+            %a{:href => "/rss.xml"}
+              %img#git{:src => "/images/rss-small.png", :height => 16 , :alt => "RSS"}
