@@ -12,7 +12,7 @@
         %th{ :align => "left" } 
         %th{ :align => "left" } biogem 
         %th{ :align => "left" } description
-        %th{ :align => "left" } by
+        %th.authors{ :align => "left" } by
         %th.cite{ :align => "left" } cite 
         // %th.status{ :align => "left" } status
         %th.version{ :align => "left" } version
@@ -69,9 +69,8 @@
                 %img#anvil{:src => "./images/anvil.png", :width=>"20", :title => "Stable biogem!", :alt => "!", :align => "right" }
               - else
                 = status
-          %td{ :class => "#{rowclass}" }
-            .author
-              = author
+          %td.authors{ :class => "#{rowclass}" }
+            = author
           %td{ :class => "#{rowclass}" }
             .cite
               - if cite and cite != ''
