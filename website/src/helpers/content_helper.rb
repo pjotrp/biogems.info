@@ -113,6 +113,7 @@ module ContentHelper
     s = s.gsub(/ruby/i,'Ruby')
     s = s.gsub(/bioruby/i,'BioRuby')
     s = s.gsub(/gem/i,'gem')
+    s = s.gsub(/ipod/i,'iPod')
     s
   end
 
