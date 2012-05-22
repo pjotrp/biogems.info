@@ -1,27 +1,26 @@
-- if current_page != '/news.html' and false
-  #footer
-    %hr
-    #links
-      // %div{ :align => "right", :style => "float: right" }
-      %span{:align => "right"}
-        = link "biogems.info", "https://github.com/bioruby/biogems.info"
-        website by
-        = link "Pjotr Prins", "http://thebird.nl/"
-        using 
-        = link "staticmatic", "http://staticmatic.rubyforge.org/"
-        ,
-        = link "haml", "http://haml-lang.com/"
-        and 
-        = link "sass", "http://sass-lang.com/"
-      %span
-        = link "Biogem README", "/doc/README_rdoc.html"
-        |
-        = link "Create a Biogem!", "/howto.html"
-        | 
-        = link "BioRuby.org", "http://bioruby.org/"
-        project website and mailing list 
-        |
-        = link "People", "/usersmap.html"
-        |
-        %a{:href => "/rss.xml"}
-          %img#git{:src => "/images/rss-small.png", :height => 10, :alt => "RSS"}
+#footer
+  %hr
+  #links
+    // %div{ :align => "right", :style => "float: right" }
+    %span{:align => "right"}
+      = link "biogems.info", "https://github.com/bioruby/biogems.info"
+      website by
+      = link "Pjotr Prins", "http://thebird.nl/"
+      using 
+      = link "staticmatic", "http://staticmatic.rubyforge.org/"
+      ,
+      = link "haml", "http://haml-lang.com/"
+      and 
+      = link "sass", "http://sass-lang.com/"
+    %span
+      = link "Biogem README", "/doc/README_rdoc.html"
+      |
+      = link "Create a Biogem!", "/howto.html"
+      | 
+      = link "BioRuby.org", "http://bioruby.org/"
+      project website and mailing list 
+      |
+      = link "People", "/usersmap.html"
+      |
+      %a{:href => "/rss.xml"}
+        %img#git{:src => "/images/rss-small.png", :height => 10, :alt => "RSS"}
