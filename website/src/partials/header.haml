@@ -1,4 +1,4 @@
-- if current_page != '/news.html'
+- if not ['/news.html','bioruby.html'].index(current_page)
   #header
     .imgtitle
       %img#logo{:src => "./images/bioruby-gem.png", :alt => "biogems.info"}
