@@ -3,8 +3,8 @@
 #content
   #side
     .title News
-    %iframe{ :src=>"news.html", :height => "2000px;", :frameborder => "0" }
-    .title Links
+    = partial('news')
+    // %iframe{ :src=>"news.html", :height => "2000px;", :frameborder => "0" }
   #title
     %img#bioruby-logo{:src => "./images/bioruby-gem.png", :alt => "BioRuby"}
     .titletop BioRuby
@@ -14,6 +14,125 @@
     #main_top
       .section_title Announcements
       %ul
-        %li Biogem community developed plugins for BioRuby.
+        %li 
+          Community developed biogems for BioRuby. See 
+          = link_to "biogems.info", "http://biogems.info/"
+      .section_title Project overview
+      %ul
+        %li
+          BioRuby project provides an integrated environment in bioinformatics
+          for the Ruby language. BioRuby is supported by the 
+          = link_to "Open Bioinformatics Foundation","http://www.open-bio.org/"
+          or O|B|F.
+      .section_title Reference
+      %ul
+        %li
+          BioRuby: Bioinformatics software for the Ruby programming language, by
+          Naohisa Goto, Pjotr Prins, Mitsuteru Nakao, Raoul Bonnal, Jan Aerts and Toshiaki Katayama
+          Bioinformatics (2010) 26(20): 2617-2619. doi: 
+          = link_to "10.1093/bioinformatics/btq475", "http://bioinformatics.oxfordjournals.org/cgi/content/abstract/btq475"
 
+    #main_left
+      .section
+        %table
+          %tr
+            %td
+              %img.section_image{:src => "./images/bioruby-icon-doc.png", :alt => "documentation"}
+            %td
+              .section_text
+                .section_title Documentation
+              %ul
+                %li 
+                  = link_to "Wiki", "http://bioruby.open-bio.org/wiki/"
+                  %div
+                    = link_to "+ Tutorial", "http://bioruby.open-bio.org/wiki/Tutorial"
+                  %div
+                    = link_to "+ Examples", "http://bioruby.open-bio.org/wiki/SampleCodes"
+                %li
+                  = link_to "Japanese Wiki", "http://dev.bioruby.org/ja/"
+                %li
+                  = link_to "API documentation","http://bioruby.org/rdoc/"
+                
+          %tr
+            %td
+              %img.section_image{:src => "./images/bioruby-icon-keynote.png", :alt => "presentations"}
+            %td
+              .section_text
+                .section_title Presentations
+              %ul
+                %li
+                  = link_to "BOSC 2011", "http://www.slideshare.net/ngotogenome/bioruby-bioinformatics-library"
+          %tr
+            %td
+              %img.section_image{:src => "./images/bioruby-icon-dev.png", :alt => "development"}
+            %td
+              .section_text
+                .section_title Development
+              %ul
+                %li 
+                  = link_to "GitHub","https://github.com/bioruby/bioruby"
+          %tr
+            %td
+              %img.section_image{:src => "./images/bioruby-icon-shell.png", :alt => "shell"}
+            %td
+              .section_text
+                .section_title BioRuby Shell
+              %p
+                BioRuby comes with an 
+                = link_to "interactive shell", "http://bioruby.open-bio.org/wiki/BioRubyOnRails"
+                , which can act as a 
+                = link_to "Ruby on Rails plugin","http://rubyonrails.org/"
+
+
+    #main_right
+      .section
+        %table
+          %tr
+            %td
+              %img.section_image{:src => "./images/bioruby-icon-download.png", :alt => "download"}
+            %td
+              .section_text
+                .section_title Download
+              %ul
+                %li 
+                  = link_to "gem install bioruby","https://rubygems.org/gems/bio"
+                %li 
+                  = link_to "Source code","https://github.com/bioruby/bioruby"
+                %li 
+                  = link_to "Biogems","http://biogems.info/"
+          %tr
+            %td
+              %img.section_image{:src => "./images/bioruby-icon-mail.png", :alt => "mailing list"}
+            %td
+              .section_text
+                .section_title Mailing lists
+              %ul
+                %li 
+                  = link_to "English list", "http://lists.open-bio.org/mailman/listinfo/bioruby"
+                %li
+                  = link_to "Japanese list", "http://lists.open-bio.org/mailman/listinfo/bioruby-ja"
+          %tr
+            %td
+              %img.section_image{:src => "./images/bioruby-icon-link.png", :alt => "community"}
+            %td
+              .section_text
+                .section_title Community
+              %ul
+                %li 
+                  = link_to "Wiki", "http://bioruby.open-bio.org/wiki/"
+          %tr
+            %td
+              %img.section_image{:src => "./images/bioruby-icon-ipa.png", :alt => "IPA"}
+            %td
+              .section_text
+                .section_title BioRuby sponsors
+              %ul
+                %li
+                  BioRuby was supported by Information-technology Promotion Agency (
+                  = link_to "IPA", "http://www.ipa.go.jp/"
+                  )
+                %li
+                  BioRuby development was sponsored by the 
+                  = link_to "Google Summer of Code", "http://bioruby.open-bio.org/wiki/Google_Summer_of_Code"
+                  in 2010,2011 and 2012
 
