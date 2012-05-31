@@ -21,7 +21,7 @@
         %th.github source 
         %th.citest build
         // %th.commit{ :align => "left" } commit
-        %th.dl{ :align => "left" } 7d&nbsp;&nbsp;
+        %th.dl{ :align => "left" } total
         %th.dl{ :align => "left" } 90d*)
         %th.commits{ :align => "left" } 7d&nbsp;&nbsp;
         %th.commits{ :align => "left" } 90d**)
@@ -123,7 +123,7 @@
               - else
                 = c90.to_s
   .footnote 
-    <b>*)</b> gem downloads (dl total &amp; dl last 90 days) from 
+    <b>*)</b> gem downloads (total &amp; last 90 days) from 
     = link "rubygems.org", "http://rubygems.org"
     as of
     = Time.now.to_s.split[0]
