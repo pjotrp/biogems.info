@@ -24,4 +24,4 @@ point	title	description	icon	URL
 45.2551,19.8451	Marjan Povolni	Novi Sad, Serbia
 42.7491,-84.4762	Nick Thrower	East Lansing
 59.8944,30.2642	Artem Tarasov	St. Petersburg, Russia
-41.7057	-70.2286	Dmitry Mozzherin	Yarmouth, MA, USA
+41.7057,-70.2286	Dmitry Mozzherin	Yarmouth, MA, USA
