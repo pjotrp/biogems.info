@@ -13,11 +13,11 @@ module BioGemInfo
     # Pass in a project URI, and return the issue list
     def get_github_issues github_uri
       user,project = get_github_user_project(github_uri)
-      url = "http://github.com/api/v2/json/issues/list/#{user}/#{project}/open"
+      url = "http://github.com/legacy/issues/search/#{user}/#{project}/open/number"
       $stderr.print url,"\n"
       issues = JSON.parse(Http::get_http_body(url))
       if issues == nil or issues == {}
-        $stderr.print "WARNING: issues link not working!\n"
+        $stderr.print "\nWARNING: issues link not working!\n"
         issues = {"issues"=>[]} 
       end
       $stderr.print issues['issues'].size, "\n" 
