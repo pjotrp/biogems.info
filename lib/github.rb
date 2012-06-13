@@ -14,13 +14,15 @@ module BioGemInfo
     def get_github_issues github_uri
       user,project = get_github_user_project(github_uri)
       url = "http://github.com/api/v2/json/issues/list/#{user}/#{project}/open"
-      $stderr.print url
-      issues = JSON.parse(get_http_body(url))
-      issues = {"issues"=>[]} if issues == nil
-      $stderr.print issues['issues'].size, "\n"
+      $stderr.print url,"\n"
+      issues = JSON.parse(Http::get_http_body(url))
+      if issues == nil or issues == {}
+        $stderr.print "WARNING: issues link not working!\n"
+        issues = {"issues"=>[]} 
+      end
+      $stderr.print issues['issues'].size, "\n" 
       issues['issues']
     end
-
  
 
   end
