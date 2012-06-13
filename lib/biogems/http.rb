@@ -15,7 +15,7 @@ module BioGemInfo
       response.body
     end
 
-    def get_https_body url
+    def self.get_https_body url
       uri = URI.parse(url)
       $stderr.print "Fetching #{url}\n"
       https = Net::HTTP.new(uri.host, 443)

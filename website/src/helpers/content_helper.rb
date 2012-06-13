@@ -62,7 +62,8 @@ module ContentHelper
         issues += '/issues' if issues =~ /github/
       end
       num_issues = plugin[:num_issues]
-      num_issues = '...' if num_issues == nil
+      num_issues = '' if num_issues == nil
+      num_issues = '...' if num_issues == 0
       commit = plugin[:commit]
       if not commit
         commit = src

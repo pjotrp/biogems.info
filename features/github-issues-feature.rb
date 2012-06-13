@@ -1,7 +1,6 @@
 $: << "lib"
 
 require 'biogems'
-require 'github'
 
 include BioGemInfo::GitHub
 

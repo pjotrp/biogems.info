@@ -1,11 +1,14 @@
 #! /usr/bin/env ruby
 
+$: << "lib"
+
 require 'json'
 require 'yaml'
 require 'net/http'
 require 'uri'
-require 'lib/github'
+require 'biogems'
 
+include BioGemInfo
 include BioGemInfo::GitHub
 
 IS_NEW_IN_DAYS = 7*6   # 6 weeks
@@ -66,7 +69,7 @@ end
 
 def get_versions name
   url = "http://rubygems.org/api/v1/versions/#{name}.json"
-  versions = JSON.parse(get_http_body(url))
+  versions = JSON.parse(Http::get_http_body(url))
   versions
 end
 
@@ -75,7 +78,7 @@ def get_downloads90 name, versions
   total = 0
   version_numbers.each do | ver |
     url="http://rubygems.org/api/v1/versions/#{name}-#{ver}/downloads.yaml"
-    text = get_http_body(url)
+    text = Http::get_http_body(url)
     dated_stats = YAML::load(text)
     stats = dated_stats.map { | i | i[1] }
     ver_total90 = stats.inject {|sum, n| sum + n } 
@@ -88,10 +91,10 @@ def get_github_commit_stats github_uri
   user,project = get_github_user_project(github_uri)
   url = "https://github.com/#{user}/#{project}/graphs/participation"
   $stderr.print url
-  body = get_https_body(url)
+  body = Http::get_https_body(url)
   if body.strip == "" || body.nil? || body == "{}"
     # try once more
-    body = get_https_body(url)
+    body = Http::get_https_body(url)
   end
   if body.strip == "" || body.nil?
     # data not retrieved, set safe default for JSON parsing
