@@ -2,8 +2,11 @@
 
 require 'json'
 require 'yaml'
-require "net/http"
-require "uri"
+require 'net/http'
+require 'uri'
+require 'lib/github'
+
+include BioGemInfo::GitHub
 
 IS_NEW_IN_DAYS = 7*6   # 6 weeks
 
@@ -109,23 +112,6 @@ def get_downloads90 name, versions
     total += ver_total90 if ver_total90;
   end
   total
-end
-
-def get_github_user_project github_uri
-  tokens = github_uri.split(/\//).reverse
-  project = tokens[0]
-  user = tokens[1]
-  return user, project
-end
-
-def get_github_issues github_uri
-  user,project = get_github_user_project(github_uri)
-  url = "http://github.com/api/v2/json/issues/list/#{user}/#{project}/open"
-  $stderr.print url
-  issues = JSON.parse(get_http_body(url))
-  issues = {"issues"=>[]} if issues == nil
-  $stderr.print issues['issues'].size, "\n"
-  issues['issues']
 end
 
 def get_github_commit_stats github_uri
