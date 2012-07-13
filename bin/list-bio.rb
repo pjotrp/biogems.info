@@ -58,7 +58,12 @@ def check_url url
       if response.code.to_i == 200 and response.body !~ /301 Moved/
         $stderr.print "pass!\n"
         return url
+      elsif response.code.to_i == 301
+        raise LoadError
       end
+    rescue LoadError
+      url = response['location']
+      retry
     rescue
       $stderr.print $!
     end
