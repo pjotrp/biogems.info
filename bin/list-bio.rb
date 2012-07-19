@@ -1,4 +1,7 @@
 #! /usr/bin/env ruby
+#
+# This script fetches information of bioruby gems, first querying the gem
+# tool, followed by visiting rubygems.org and github.com.
 
 $: << "lib"
 
@@ -17,7 +20,8 @@ is_testing = ARGV[0] == '--test'
 is_rubygems = ARGV[0] == '--rubygems'
 is_biogems = !is_rubygems
 
-# list of biogems not starting with bio- (bio dash)
+# We fetch all gems automatically that start with bio- (bio dash). 
+# This is the list of biogems not starting with bio- (bio dash)
 ADD = %w{ bio ruby-ensembl-api genfrag eutils dna_sequence_aligner intermine intermine-bio scaffolder biodiversity goruby sequenceserver 
 }
 
@@ -26,6 +30,7 @@ print "# Using Ruby ",RUBY_VERSION,"\n"
 
 projects = Hash.new
 
+# Set up the search using a local gem tool
 $stderr.print "Querying gem list\n"
 list = []
 if is_biogems
