@@ -1,3 +1,4 @@
+@biolinux
 Feature: Fetching Debian Manifest from Biolinux
 
   (Cloud)Biolinux provides a manifest of packages that are installed
@@ -6,7 +7,6 @@ Feature: Fetching Debian Manifest from Biolinux
   list includes Debian Bio Med, BioLinux and other Debian packages, 
   including generic and science packages.
 
-  @biolinux
   Scenario: Fetch Debian package info
     Given I have a Debian package description in a BioLinux Manifest
     When I fetch Debian package info for "blast2"
