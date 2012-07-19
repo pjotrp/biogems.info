@@ -10,6 +10,12 @@ class BiolinuxManifest
     @pkgs[str]
   end
 
+  def each
+    @pkgs.each do |p| 
+      yield p 
+    end
+  end
+
   def is_biolinux? name
     name =~ /^(bio-linux|biolinux)/i
   end
