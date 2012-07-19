@@ -19,23 +19,23 @@ When /^I should get the popularity count of (\d+)$/ do |arg1|
 end
 
 When /^I check the Bio Med information$/ do
-  pending # express the regexp above with the code you wish you had
+  @biomed = DebianBlendTask.new(File.read("test/data/debian/bio-task.txt"))
 end
 
 Then /^it should check it is a Bio Med package$/ do
-  pending # express the regexp above with the code you wish you had
+  @biomed[@pkg["name"]].should_be true
 end
 
 Then /^it should check it is not a Bio Med package$/ do
-  pending # express the regexp above with the code you wish you had
+  @biomed[@pkg["name"]].should_be false
 end
 
 Then /^it should check it is a BioLinux package$/ do
-  pending # express the regexp above with the code you wish you had
+  Biolinux::package?(@pkg["name"]).should_be true
 end
 
 Then /^it should check it is a science package$/ do
-  pending # express the regexp above with the code you wish you had
+  @biomed[@pkg["name"]].science?.should_be true
 end
 
 
