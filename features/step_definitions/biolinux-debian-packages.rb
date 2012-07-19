@@ -2,10 +2,10 @@ require 'biogems/biolinux/biolinux_manifest'
 require 'biogems/debian/debian'
 
 Given /^I have a Debian package description in a BioLinux Manifest$/ do
-  @biolinux = BiolinuxManifest.new(File.read("test/data/biolinux/debian-packages.yaml"))
 end
 
 When /^I fetch Debian package info for "(.*?)"$/ do |arg1|
+  @biolinux = BiolinuxManifest.new(File.read("test/data/biolinux/debian-packages.yaml"))
   @pkg = @biolinux[arg1]
   @pkg["name"].should == arg1
 end
@@ -32,11 +32,11 @@ Then /^it should check it is not a Bio Med package$/ do
 end
 
 Then /^it should check it is a BioLinux package$/ do
-  Biolinux::package?(@pkg["name"]).should be_true
+  @biolinux.is_biolinux?(@pkg["name"]).should be_true
 end
 
 Then /^it should check it is a science package$/ do
-  @biomed[@pkg["name"]].science?.should be_true
+  @biolinux.is_science?(@pkg["name"]).should be_true
 end
 
 
