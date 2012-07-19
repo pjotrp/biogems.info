@@ -6,10 +6,11 @@ Feature: Fetching Debian Manifest from Biolinux
   list includes Debian Bio Med, BioLinux and other Debian packages, 
   including generic and science packages.
 
+  @biolinux
   Scenario: Fetch Debian package info
     Given I have a Debian package description in a BioLinux Manifest
     When I fetch Debian package info for "blast2"
-    Then I should get the name "blast2" and description "Basic Local Alignment Tool"
+    Then I should get the name "blast2" and description "Basic Local Alignment Search Tool"
     And I should get the popularity count of 64
     When I check the Bio Med information 
     Then it should check it is a Bio Med package
