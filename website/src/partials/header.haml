@@ -37,9 +37,10 @@
           |
       .rightheader
         %span{ :align => "right", :style => "float: right" }
-          %i
-            %small
-              The future is bright for Ruby in bioinformatics!&nbsp;&nbsp;&nbsp;
+          - if current_page != '/biolinux.html'
+            %i
+              %small
+                The future is bright for Ruby in bioinformatics!&nbsp;&nbsp;&nbsp;
           = link "Create a Biogem!", "/howto.html"
           |
           = link "BioRuby", "http://bioruby.org/"
