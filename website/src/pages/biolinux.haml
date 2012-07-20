@@ -5,9 +5,9 @@
 
 #top_newsitem
   %p
-    Important bioinformatics software packages (installed and tested on 
+    Important bioinformatics software packages; installed and tested on 
     = link_to "CloudBiolinux","http://cloudbiolinux.org/"
-    instances)
+    instances
 #plugins
   #list
     %table
@@ -55,12 +55,11 @@
                 %img#uparrow{:src => "./images/bioruby-gem.png", :width=>"20", :title => "new biogem!", :alt => "!"}
           %td{ :class => "#{rowclass}" }
             .name
-              = link pkg.name.gsub(/[_-]/,' '), "http://rubygems.org/gems/#{pkg.name}"
+              = link pkg.name.gsub(/[_-]/,' '), pkg.url
           %td{ :class => "#{rowclass}" }
             .descr
               = pkg.descr
-              - if pkg.docs and pkg.docs != ''
-                = link " (...)", pkg.docs
+              = link " (...)", pkg.home
           %td.authors{ :class => "#{rowclass}" }
             = pkg.author
           %td{ :class => "#{rowclass}" }
@@ -73,7 +72,7 @@
           // (moved to descr)
           %td{ :align => "right", :class => "#{rowclass}" }
             .version
-              = link pkg.version, "http://rubygems.org/gems/#{pkg.name}"
+              = link pkg.version, pkg.version_url
           %td{ :align => "right", :class => "#{rowclass}" }
             .released
               = pkg.released
@@ -89,7 +88,7 @@
             .citest
           %td{ :align => "right", :class => "#{rowclass}" }
             .dl
-              = link pkg.downloads.to_s, "http://rubygems.org/gems/#{pkg.name}/stats"
+              = link pkg.downloads.to_s, "http://popcon.debian.org/by_vote"
           // %td{ :align => "right", :class => "#{rowclass}" }
           //  .dl
   .footnote 

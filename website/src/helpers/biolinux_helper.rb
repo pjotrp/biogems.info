@@ -36,11 +36,19 @@ module BiolinuxHelper
         pkg.descr = words.join(" ");
       end
       pkg.version = rec["version"]
+      pkg.is_biomed = rec[:biomed]
+      pkg.home = rec["homepage_uri"] 
+      pkg.url = if pkg.is_biomed
+                  "http://packages.debian.org/"+pkg.name
+                else
+                  pkg.home
+                end
+      pkg.version_url = "https://launchpad.net/+search?field.text="+pkg.name
+   
       # docs - just get the most likely one
       if false
         docs = rec[:docs_uri]   # from the biogem descr
         home = rec[:homepage]
-        home = rec[:homepage_uri] if !home or home==''
         home = rec[:source_code_uri] if !home or home==''
         home = rec[:project_uri] if !home or home==''
         src = rec[:source_code_uri]
