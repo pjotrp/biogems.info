@@ -44,12 +44,15 @@ module BiolinuxHelper
       pkg.is_custom = rec[:custom]
       pkg.home = rec["homepage_uri"] 
       if pkg.is_biomed 
+        pkg.origin = "Debian"
         pkg.url = "http://packages.debian.org/"+pkg.name
         pkg.version_url = "https://launchpad.net/+search?field.text="+pkg.name
       elsif pkg.is_biolinux and not pkg.is_custom
+        pkg.origin = "BioLinux"
         pkg.url = "http://nebc.nerc.ac.uk/tools/bio-linux/other-bl-docs/package-repository"
         pkg.home = pkg.url if pkg.home == ""
       elsif pkg.is_custom
+        pkg.origin = "Custom"
         pkg.url = "https://github.com/chapmanb/cloudbiolinux/tree/master/cloudbio/custom"
       else
         pkg.url = pkg.home
