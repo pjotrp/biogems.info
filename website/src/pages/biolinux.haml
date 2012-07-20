@@ -21,10 +21,10 @@
         %th.cite{ :align => "left" } cite 
         // %th.status{ :align => "left" } status
         %th.version{ :align => "left" } version
-        %th.released{ :align => "left" } released
-        %th.issues{ :align => "left" } issues
-        %th.github source 
-        %th.citest build
+        // %th.released{ :align => "left" } released
+        // %th.issues{ :align => "left" } issues
+        // %th.github source 
+        // %th.citest build
         %th.dl pop*)
         // %th.commit{ :align => "left" } commit
         // %th.dl{ :align => "left" } total
@@ -73,19 +73,19 @@
           %td{ :align => "right", :class => "#{rowclass}" }
             .version
               = link pkg.version, pkg.version_url
-          %td{ :align => "right", :class => "#{rowclass}" }
-            .released
-              = pkg.released
-          %td{ :class => "#{rowclass}" }
-            .issues
-              = link pkg.num_issues.to_s, pkg.issues
-          %td{ :align => "center", :class => "#{rowclass}" }
-            .commit
-              - if pkg.src =~ /git/
-                %a{:href => pkg.src}
-                  %img#git{:src => "/images/commit.png", :width => "30", :alt => "github"}
-          %td{ :align => "center", :class => "#{rowclass}" }
-            .citest
+          // %td{ :align => "right", :class => "#{rowclass}" }
+          //   .released
+          //     = pkg.released
+          // %td{ :class => "#{rowclass}" }
+          //   .issues
+          //     = link pkg.num_issues.to_s, pkg.issues
+          // %td{ :align => "center", :class => "#{rowclass}" }
+          //   .commit
+          //     - if pkg.src =~ /git/
+          //      %a{:href => pkg.src}
+          //        %img#git{:src => "/images/commit.png", :width => "30", :alt => "github"}
+          // %td{ :align => "center", :class => "#{rowclass}" }
+          //  .citest
           %td{ :align => "right", :class => "#{rowclass}" }
             .dl
               = link pkg.downloads.to_s, "http://popcon.debian.org/by_vote"
