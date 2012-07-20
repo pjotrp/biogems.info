@@ -14,10 +14,13 @@ module BiolinuxHelper
     projects_fn = "./var/biolinux-packages.yaml"
     packages = YAML::load(File.new(projects_fn).read)
     packages = {} if not packages
-    sorted = packages.sort { |a, b| b["downloads"] <=> a["downloads"] }
+    # packages.each do |name,pkg|   
+    #   $stderr.print name,"\n"
+    # end
+    sorted = packages.sort { |a, b| b[1]["downloads"] <=> a[1]["downloads"] }
     # now iterate for display
-    dl = 0
-    sorted.each_with_index do | rec, i |
+    i = 0
+    sorted.each do | name, rec |
       # - description: Basic Local Alignment Search Tool
       #   downloads: 64
       #   homepage_uri: http://www.ncbi.nih.gov/BLAST/
@@ -26,7 +29,6 @@ module BiolinuxHelper
       #   version: 1:2.2.25.20110713-3ubuntu2
       #   :tab: :biolinux
       #   :biomed: true
-
       pkg = OpenStruct.new
       pkg.name = rec["name"]
       pkg.descr = rec["description"]
@@ -98,6 +100,7 @@ module BiolinuxHelper
         authors += ' <i>et al.</i>' if rec[:authors].size > NUM_AUTHORS
       end
       yield i+1,pkg
+      i += 1
     end
   end
 

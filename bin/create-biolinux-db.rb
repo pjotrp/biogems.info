@@ -30,13 +30,13 @@ else
     biomed << Debian::BlendTask.new(`curl -s http://anonscm.debian.org/viewvc/blends/projects/med/trunk/debian-med/tasks/#{taskname}?view=co`)
   end
 end
-pkgs = []
+pkgs = {}
 @biolinux.each do | name, pkg |
   biomed.each do |bm|
     if bm[name] == true
       pkg[:tab] = :biolinux
       pkg[:biomed] = true
-      pkgs << pkg
+      pkgs[name] = pkg
     end
   end
 end
