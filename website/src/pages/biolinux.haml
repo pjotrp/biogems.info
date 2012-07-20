@@ -10,7 +10,7 @@
         %th
           = "#"
         %th{ :align => "left" } 
-        %th{ :align => "left" } biogem 
+        %th{ :align => "left" } package
         %th{ :align => "left" } description
         %th.authors{ :align => "left" } by
         %th.cite{ :align => "left" } cite 
@@ -31,49 +31,37 @@
             downloads
           %td.commits{ :colspan => 2}
             commits
-      - by_popularity do |i, dl90, dl, name, status, version, released, descr, cite, author, home, docs, src, issues, num_issues, test_info, commit, trend_direction, rank90, c7, c90, c7_color, c90_color|
+      - biolinux_by_popularity do |i, pkg|
         - rowclass = "odd"
         - if i.even?
           - rowclass = "even"
         %tr
           %td{ :align => "right", :class => "#{rowclass}" }
             .index
-              <a name="#{name}">
+              <a name="#{pkg.name}">
               = i
               </a>
           %td{ :align => "right", :class => "#{rowclass}" }
             .trend
-              - if trend_direction ==1 
+              - if pkg.trend_direction ==1 
                 %img#uparrow{:src => "./images/up1.png", :width=>"20", :title => "trend is up", :alt => "+"}
-              - if trend_direction ==-1
+              - if pkg.trend_direction ==-1
                 %img#uparrow{:src => "./images/down1.png", :width=>"20", :title => "trend is down", :alt => "-"}
-              - if status == 'new' 
+              - if pkg.status == 'new' 
                 %img#uparrow{:src => "./images/bioruby-gem.png", :width=>"20", :title => "new biogem!", :alt => "!"}
           %td{ :class => "#{rowclass}" }
             .name
-              = link name.gsub(/[_-]/,' '), "http://rubygems.org/gems/#{name}"
+              = link pkg.name.gsub(/[_-]/,' '), "http://rubygems.org/gems/#{pkg.name}"
           %td{ :class => "#{rowclass}" }
             .descr
-              = descr
-              - if docs and docs != ''
-                = link " (...)", docs
-              - if name == 'bio' or name == 'bio-core' or name == 'bio-core-ext' or name == 'bio-biolinux' or status == 'core' or status == 'bio'
-                %img#uparrow{:src => "./images/bioruby-gem.png", :width=>"15", :title => "BioRuby core gem!", :alt => "!", :align => "right" }
-              - elsif status == 'bio-core'
-                %img#pickaxe{:src => "./images/pickaxe.png", :width=>"20", :title => "bio-core gem!", :alt => "!", :align => "right" }
-              - elsif status == 'bio-core-ext'
-                %img#pickaxe{:src => "./images/pickaxe.png", :width=>"20", :title => "bio-core-ext gem!", :alt => "!", :align => "right" }
-              - elsif status == 'bio-biolinux'
-                %img#anvil{:src => "./images/biolinux.png", :width=>"20", :title => "bio-biolinux gem!", :alt => "!", :align => "right" }
-              - elsif status == 'stable'
-                %img#anvil{:src => "./images/anvil.png", :width=>"20", :title => "Stable biogem!", :alt => "!", :align => "right" }
-              - else
-                = status
+              = pkg.descr
+              - if pkg.docs and pkg.docs != ''
+                = link " (...)", pkg.docs
           %td.authors{ :class => "#{rowclass}" }
-            = author
+            = pkg.author
           %td{ :class => "#{rowclass}" }
             .cite
-              - if cite and cite != ''
+              - if pkg.cite and pkg.cite != ''
                 %a{:href => cite}
                   %img#git{:src => "/images/books_64.png", :height=>"25", :alt => "reference"}
           // %td{ :class => "#{rowclass}" }
@@ -81,17 +69,17 @@
           // (moved to descr)
           %td{ :align => "right", :class => "#{rowclass}" }
             .version
-              = link version, "http://rubygems.org/gems/#{name}"
+              = link version, "http://rubygems.org/gems/#{pkg.name}"
           %td{ :align => "right", :class => "#{rowclass}" }
             .released
-              = released
+              = pkg.released
           %td{ :class => "#{rowclass}" }
             .issues
-              = link num_issues.to_s, issues
+              = link pkg.num_issues.to_s, pkg.issues
           %td{ :align => "center", :class => "#{rowclass}" }
             .commit
-              - if src =~ /git/
-                %a{:href => src}
+              - if pkg.src =~ /git/
+                %a{:href => pkg.src}
                   %img#git{:src => "/images/commit.png", :width => "30", :alt => "github"}
           %td{ :align => "center", :class => "#{rowclass}" }
             .citest
