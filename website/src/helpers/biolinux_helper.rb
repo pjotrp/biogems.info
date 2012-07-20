@@ -52,7 +52,7 @@ module BiolinuxHelper
         pkg.url = "http://nebc.nerc.ac.uk/tools/bio-linux/other-bl-docs/package-repository"
         pkg.home = pkg.url if pkg.home == ""
       elsif pkg.is_custom
-        pkg.origin = "Custom"
+        pkg.origin = "CloudBiolinx "
         pkg.url = "https://github.com/chapmanb/cloudbiolinux/tree/master/cloudbio/custom"
       else
         pkg.url = pkg.home
