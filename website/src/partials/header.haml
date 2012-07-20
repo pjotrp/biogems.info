@@ -23,6 +23,12 @@
           - else
             = link "Rubygems", "/rubygems.html"
           |
+          - if current_page == '/biolinux.html'
+            %span{ :style => "background-color: #550009" }
+              = link "&nbsp;BioLinuxs&nbsp;", "/biolinux.html"
+          - else
+            = link "BioLinux", "/biolinux.html"
+          |
           - if current_page == '/usersmap.html'
             %span{ :style => "background-color: #550009" }
               = link "&nbsp;People&nbsp;", "/usersmap.html"

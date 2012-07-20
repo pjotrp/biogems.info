@@ -34,6 +34,8 @@ pkgs = []
 @biolinux.each do | name, pkg |
   biomed.each do |bm|
     if bm[name] == true
+      pkg[:tab] = :biolinux
+      pkg[:biomed] = true
       pkgs << pkg
     end
   end
