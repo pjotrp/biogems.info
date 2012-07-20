@@ -39,13 +39,17 @@ module BiolinuxHelper
       end
       pkg.version = rec["version"]
       pkg.is_biomed = rec[:biomed]
+      pkg.is_biolinux = rec[:biolinux]
       pkg.home = rec["homepage_uri"] 
-      pkg.url = if pkg.is_biomed
-                  "http://packages.debian.org/"+pkg.name
-                else
-                  pkg.home
-                end
-      pkg.version_url = "https://launchpad.net/+search?field.text="+pkg.name
+      if pkg.is_biomed
+        pkg.url = "http://packages.debian.org/"+pkg.name
+        pkg.version_url = "https://launchpad.net/+search?field.text="+pkg.name
+      elsif pkg.is_biolinux 
+        pkg.url = "http://nebc.nerc.ac.uk/tools/bio-linux/other-bl-docs/package-repository"
+        pkg.home = pkg.url if pkg.home == ""
+      else
+        pkg.url = pkg.home
+      end
    
       # docs - just get the most likely one
       if false

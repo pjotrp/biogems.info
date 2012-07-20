@@ -32,13 +32,22 @@ else
 end
 pkgs = {}
 @biolinux.each do | name, pkg |
+  $stderr.print "- ",name
   biomed.each do |bm|
     if bm[name] == true
       pkg[:tab] = :biolinux
       pkg[:biomed] = true
       pkgs[name] = pkg
+      $stderr.print " biomed"
+    elsif @biolinux.is_biolinux?(name)
+      pkg[:tab] = :biolinux
+      pkg[:biomed] = false
+      pkg[:biolinux] = true
+      pkgs[name] = pkg
+      $stderr.print " biolinux"
     end
   end
+  $stderr.print "\n"
 end
 
 print pkgs.to_yaml

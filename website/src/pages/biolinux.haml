@@ -15,7 +15,7 @@
         %th
           = "#"
         %th{ :align => "left" } 
-        %th{ :align => "left" } package
+        %th{ :align => "left" } package (.deb)
         %th{ :align => "left" } description
         %th.authors{ :align => "left" } by
         %th.cite{ :align => "left" } cite 
@@ -88,7 +88,7 @@
           //  .citest
           %td{ :align => "right", :class => "#{rowclass}" }
             .dl
-              = link pkg.downloads.to_s, "http://popcon.debian.org/by_vote"
+              = link pkg.downloads.to_s, "http://popcon.debian.org/by_vote" if pkg.downloads>0
           // %td{ :align => "right", :class => "#{rowclass}" }
           //  .dl
   .footnote 
