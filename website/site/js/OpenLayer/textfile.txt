@@ -1,7 +1,8 @@
 point	title	description	icon	URL
-51.9685,5.6651	Pjotr Prins	Who is he? Wageningen
-45.46,9.19	Raoul Bonnal	Il puccio
-35.68007,139.76	Toshiaki Katayama	BioRuby Guru
+51.9685,5.6651	Pjotr Prins	Wageningen/Groningen, Netherlands
+45.46,9.19	Raoul Bonnal	Il puccio, Milano, Italy
+35.68007,139.76	Toshiaki Katayama	BioRuby Guru, Tokyo
+35.681,139.81	Mitsuteru Nakao	Tokyo, Japan
 32.78334,129.86666	Hiroyuki Mishima	Japan
 34.68529,135.5147	Naohisa Goto	BioRuby maintainer, Osaka
 50.879,4.701	Jan Aerts	Leuven, Belgium
@@ -10,7 +11,7 @@ point	title	description	icon	URL
 -37.814,144.9633	Ben Woodcroft	Melbourne
 -31.9333,115.8333	Rob Syme	Perth
 44.9773,-93.26547	Trevor Wennblom	Restriction enzymes
-45.50,9.25	Francesco Strozzi	Italia
+45.50,9.25	Francesco Strozzi	Bergamo, Italia
 42.33,-71.2	Chase Miller	Boston
 42.3586,-71.0598	Joon Lee	Boston
 42.153,-83.4454	Clayton Wheeler	Ann Arbor, US
