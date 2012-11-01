@@ -221,6 +221,7 @@ list.uniq.each do | name |
   # Check github issues
   # print info
   for uri in [:source_code_uri, :homepage, :homepage_uri, :project_uri] do
+    break # we don't fetch issues : it is not working
     if info[uri] =~ /^https:\/\/github\.com/
       info[:num_issues] = get_github_issues(info[uri]).size
       user,project = get_github_user_project(info[uri])
