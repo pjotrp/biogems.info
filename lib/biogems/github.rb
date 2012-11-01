@@ -23,8 +23,10 @@ module BioGemInfo
       $stderr.print issues['issues'].size, "\n" 
       issues['issues']
     end
- 
 
+    def valid_github_url user, project
+      check_url("http//github.com/#{user}/#{project}")
+    end
   end
 
 end

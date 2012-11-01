@@ -35,7 +35,7 @@ $stderr.print "Querying gem list\n"
 list = []
 if is_biogems
   if is_testing
-    list = ['bio-logger', 'bio-nexml']
+    list = ['bio-logger', 'bio-table']
   else
     list = `gem list -r --no-versions bio-`.split(/\n/)
     prerelease = `gem search -r --prerelease --no-versions bio-`.split(/\n/)
@@ -218,17 +218,16 @@ list.uniq.each do | name |
     end
   end
 
-  # Check github issues
+  # Check github stuff
   # print info
   for uri in [:source_code_uri, :homepage, :homepage_uri, :project_uri] do
-    break # we don't fetch issues : it is not working
     if info[uri] =~ /^https:\/\/github\.com/
-      info[:num_issues] = get_github_issues(info[uri]).size
+      # info[:num_issues] = get_github_issues(info[uri]).size
       user,project = get_github_user_project(info[uri])
       info[:github_user] = user
       info[:github_project] = project
       info[:commit_stats] = get_github_commit_stats(info[uri])
-      break if info[:num_issues] > 0
+      break
     end
   end
 
