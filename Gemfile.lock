@@ -21,6 +21,7 @@ GEM
     multi_json (1.7.2)
     nokogiri (1.5.9)
     rack (1.5.2)
+    rake (10.0.3)
     rspec (2.5.0)
       rspec-core (~> 2.5.0)
       rspec-expectations (~> 2.5.0)
@@ -41,11 +42,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.1.5)
+  bundler (~> 1.2.0)
   compass (~> 0.11.7)
   cucumber (~> 1.2.0)
   haml
   nokogiri (~> 1.5.2)
+  rake
   rspec (~> 2.5.0)
   staticmatic
   yard (~> 0.7.4)
