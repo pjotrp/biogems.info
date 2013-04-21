@@ -5,11 +5,13 @@ task :default => "./website/site/rss.xml" do
 end
 
 file "./var/bio-projects.yaml" do |t|
-  `./bin/list-bio.rb > #{t.name}`
+  require 'biogems/fetch'
+  File.open(t.name,'w'){|f| f.print fetch }
 end
 
 file "./var/ruby-projects.yaml" do |t|
-  `./bin/list-bio.rb --rubygems > #{t.name}`
+  require 'biogems/fetch'
+  File.open(t.name,'w'){|f| f.print fetch('--rubygems') }
 end
 
 file "./website/site/rss.xml" => ["./var/bio-projects.yaml", "./etc/blogs.yaml"] do |t|
