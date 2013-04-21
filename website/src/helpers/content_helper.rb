@@ -62,7 +62,7 @@ module ContentHelper
         stargazers += '/stargazers' if stargazers =~ /github/
       end
       num_stargazers = plugin[:num_stargazers]
-      num_stargazers = '' if num_stargazers == nil
+      num_stargazers = 0 if num_stargazers == nil
       issues = plugin[:issues]
       if not issues 
         issues = src
