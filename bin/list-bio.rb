@@ -226,7 +226,7 @@ list.uniq.each do | name |
   # print info
   for uri in [:source_code_uri, :homepage, :homepage_uri, :project_uri] do
     if info[uri] =~ /^https:\/\/github\.com/
-      # info[:num_issues] = get_github_issues(info[uri]).size
+      info[:num_issues] = get_github_issues(info[uri]).size
       user,project = get_github_user_project(info[uri])
       info[:github_user] = user
       info[:github_project] = project
