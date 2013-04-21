@@ -12,20 +12,30 @@ module BioGemInfo
 
     # Pass in a project URI, and return the issue list
     def get_github_issues github_uri
-      user,project = get_github_user_project(github_uri)
-      url = "http://github.com/legacy/issues/search/#{user}/#{project}/open/number"
-      $stderr.print url,"\n"
-      issues = JSON.parse(Http::get_http_body(url))
-      if issues == nil or issues == {}
-        $stderr.print "\nWARNING: issues link not working!\n"
-        issues = {"issues"=>[]} 
-      end
-      $stderr.print issues['issues'].size, "\n" 
-      issues['issues']
+      github_api_helper github_uri,'issues'
+    end
+
+    # Pass in a project URI, and return the stargazer list
+    def get_github_stargazers github_uri
+      github_api_helper github_uri,'stargazers'
     end
 
     def valid_github_url user, project
       check_url("http//github.com/#{user}/#{project}")
+    end
+
+    def github_api_helper github_uri,method
+      user,project = get_github_user_project(github_uri)
+      url = "https://api.github.com/repos/#{user}/#{project}/#{method}"
+      # $stderr.print url,"\n"
+      res = JSON.parse(Http::get_https_body(url))
+      if res == nil or res == {}
+        $stderr.print url,"\n"
+        $stderr.print "\nWARNING: link not working!\n"
+        res = []
+      end
+      $stderr.print "Found ",res.size, "\n" 
+      res
     end
   end
 

@@ -56,6 +56,13 @@ module ContentHelper
       if cite
         cite = 'http://dx.doi.org/'+plugin[:doi] if cite !~ /^http:/
       end
+      stargazers = plugin[:stargazers]
+      if not stargazers
+        stargazers = src
+        stargazers += '/stargazers' if stargazers =~ /github/
+      end
+      num_stargazers = plugin[:num_stargazers]
+      num_stargazers = '' if num_stargazers == nil
       issues = plugin[:issues]
       if not issues 
         issues = src
@@ -103,7 +110,7 @@ module ContentHelper
 
       authors = plugin[:authors][0..NUM_AUTHORS-1].map{ |a| a.gsub(/ /,"&nbsp") }.join(', ')
       authors += ' <i>et al.</i>' if plugin[:authors].size > NUM_AUTHORS
-      yield i+1,plugin[:downloads90],plugin[:downloads],name,plugin[:status],version,released,normalize(descr),cite,authors,home,docs,src,issues,num_issues,test_info,commit,trend_direction,rank90[name],c7,c90,c7_color,c90_color
+      yield i+1,plugin[:downloads90],plugin[:downloads],name,plugin[:status],version,released,normalize(descr),cite,authors,home,docs,src,stargazers,num_stargazers,issues,num_issues,test_info,commit,trend_direction,rank90[name],c7,c90,c7_color,c90_color
     end
   end
 

@@ -1,3 +1,3 @@
 #! /bin/sh
 
-staticmatic preview website/
+bundle exec staticmatic preview website/
