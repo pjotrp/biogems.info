@@ -11,7 +11,9 @@ end
 def generate_biogems_rss_feed biogems_file, blogs_file, max_entries = 25
   blogs = YAML::load(File.new(blogs_file).read)
   blogs = blogs["blogs"]
-  feeds = blogs.map { |blog| parse_feed(blog["rss_feed"], blog["gsoc_tag"], blog['remark']) }
+  feeds = blogs.map { |blog| 
+    parse_feed(blog["rss_feed"], blog["gsoc_tag"], blog['remark']) 
+  }
   feeds.compact.push(parse_biogem_data(biogems_file))
   huge_feed = merge_rss_feeds feeds
   output_feed = extract_most_recent max_entries, huge_feed
@@ -24,7 +26,10 @@ end
 def parse_feed feed, tag, remark
   tag = tag.downcase if !tag.nil?
   body = get_xml_with_retry(feed)
-  return nil if body.nil?
+  if body.nil?
+    $stderr.puts "Received empty body"
+    return nil 
+  end
 
   begin
     output_feed = RSS::Parser.parse body, false

@@ -5,11 +5,15 @@
 require 'yaml'
 require_relative '../lib/biogems/rss.rb'
 
+# First generate the YAML file
 feed = generate_biogems_rss_feed "./var/bio-projects.yaml", "./etc/blogs.yaml", 50
 
 site_news = []
 feed.items.each do | item |
-  site_news << { :title => item.title, :date => item.date, :link => item.link } if item.date.to_i > Time.now.to_i - 120*24*3600
+  if item.date.to_i > Time.now.to_i - 356*24*3600
+    entry = { :title => item.title, :date => item.date, :link => item.link } 
+    site_news << entry
+  end
 end
 
 # print site_news
@@ -19,4 +23,4 @@ File.open('./var/news.yaml','w') do | f |
   YAML.dump(site_news,f)
 end
 
-print feed # output RSS to stdout
+print feed # output RSS XML info to stdout

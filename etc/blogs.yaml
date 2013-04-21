@@ -17,3 +17,9 @@ blogs:
   - rss_feed: http://blog.thebird.nl/?feed=rss2
     gsoc_tag: gsoc
     remark: Pjotr's blog
+  - rss_feed: http://tonyarcieri.com/feed
+    goc_tag: 
+    remark: Tony Arcieri
+  - rss_feed: http://feeds.feedburner.com/RubyInside  
+    gsoc_tag:
+    remark: Ruby inside

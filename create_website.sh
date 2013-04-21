@@ -10,7 +10,7 @@ curl https://api.github.com/rate_limit
 ./bin/list-bio.rb --rubygems > ./var/ruby-projects.yaml
 # bundle exec ./bin/list-bio.rb > ./var/bio-projects.yaml 
 
-# RSS
+# Create RSS feed for others to use
 bundle exec ./bin/rss.rb > website/site/rss.xml
 
 # Generate site into website/site/

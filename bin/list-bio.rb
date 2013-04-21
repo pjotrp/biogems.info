@@ -34,6 +34,8 @@ projects = Hash.new
 $stderr.print "Querying gem list\n"
 list = []
 if is_biogems
+  # We re-read the last information from the resident YAML file.
+  # projects = YAML::load('var/bio-projects.yaml')
   if is_testing
     list = ['bio-logger', 'bio-table']
   else
