@@ -113,10 +113,10 @@
           //        %img#git{:src => "/images/git-logo.png", :width=>"80", :alt => "github"}
           %td{ :align => "right", :class => "#{rowclass}" }
             .dl
-              = link dl.to_s, "http://rubygems.org/gems/#{name}/stats"
+              = dl.to_s
           %td{ :align => "right", :class => "#{rowclass}" }
             .dl
-              = link dl90.to_s, "http://rubygems.org/gems/#{name}/stats"
+              = dl90.to_s
           %td{ :align => "right", :class => "#{rowclass}", :style => "background: #{c7_color}" }
             .commits
               - if src =~ /git/

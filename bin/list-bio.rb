@@ -46,7 +46,11 @@ if is_biogems
 end
 
 if is_rubygems
-  list = Dir.glob("./etc/rubygems/*.yaml").map { |fn| File.basename(fn).sub(/.yaml$/,'') }
+  list = if is_testing
+           Dir.glob("./etc/rubygems/*.yaml").map { |fn| File.basename(fn).sub(/.yaml$/,'') }
+         else
+           []
+         end
 end
 
 # Return the working URL, otherwise nil
