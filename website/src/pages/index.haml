@@ -25,6 +25,7 @@
         // %th.status{ :align => "left" } status
         %th.version{ :align => "left" } version
         %th.released{ :align => "left" } released
+        %th.stargazers{ :align => "left" } stars
         %th.issues{ :align => "left" } issues
         %th.github source 
         %th.citest build
@@ -39,7 +40,7 @@
             downloads
           %td.commits{ :colspan => 2}
             commits
-      - by_popularity do |i, dl90, dl, name, status, version, released, descr, cite, author, home, docs, src, issues, num_issues, test_info, commit, trend_direction, rank90, c7, c90, c7_color, c90_color|
+      - by_popularity do |i, dl90, dl, name, status, version, released, descr, cite, author, home, docs, src, stargazers, num_stargazers, issues, num_issues, test_info, commit, trend_direction, rank90, c7, c90, c7_color, c90_color|
         - rowclass = "odd"
         - if i.even?
           - rowclass = "even"
@@ -93,6 +94,14 @@
           %td{ :align => "right", :class => "#{rowclass}" }
             .released
               = released
+          %td{ :class => "#{rowclass}" }
+            .stargazers
+              - if num_stargazers > 0
+                %span
+                  = link num_stargazers.to_s, stargazers
+                %span
+                  %a{:href => stargazers}
+                    %img#git{:src => "/images/hp_fav_star.png", :width => "25", :alt => "star"}
           %td{ :class => "#{rowclass}" }
             .issues
               = link num_issues.to_s, issues

@@ -31,7 +31,7 @@
             downloads
           %td.commits{ :colspan => 2}
             commits
-      - by_popularity(:rubygems) do |i, dl90, dl, name, status, version, released, descr, cite, author, home, docs, src, issues, num_issues, test_info, commit, trend_direction, rank90, c7, c90, c7_color, c90_color|
+      - by_popularity(:rubygems) do |i, dl90, dl, name, status, version, released, descr, cite, author, home, docs, src, stargazers, num_stargazers, issues, num_issues, test_info, commit, trend_direction, rank90, c7, c90, c7_color, c90_color|
         - rowclass = "odd"
         - if i.even?
           - rowclass = "even"
