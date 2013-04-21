@@ -1,5 +1,9 @@
 $:.unshift File.join(File.dirname(__FILE__),'lib')
 
+task :default => "./website/site/rss.xml" do
+  `staticmatic build website/`
+end
+
 file "./var/bio-projects.yaml" do |t|
   `./bin/list-bio.rb > #{t.name}`
 end
