@@ -1,8 +1,11 @@
 $:.unshift File.join(File.dirname(__FILE__),'lib')
 
 file "./var/bio-projects.yaml" do |t|
-  target = t.name
-  `./bin/list-bio.rb > #{target}`
+  `./bin/list-bio.rb > #{t.name}`
+end
+
+file "./var/ruby-projects.yaml" do |t|
+  `./bin/list-bio.rb --rubygems > #{t.name}`
 end
 
 file "./website/site/rss.xml" => ["./var/bio-projects.yaml", "./etc/blogs.yaml"] do |t|
