@@ -173,7 +173,7 @@ list.uniq.each do | name |
   request = Net::HTTP::Get.new(uri.request_uri)
   response = http.request(request)
   if response.code.to_i==200
-    # print response.body       
+    # print response.body
     biogems = YAML::load(response.body)
     info[:downloads] = biogems["downloads"]
     info[:version_downloads] = biogems["version_downloads"]
