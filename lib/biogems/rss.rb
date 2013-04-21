@@ -12,7 +12,7 @@ def generate_biogems_rss_feed biogems_file, blogs_file, max_entries = 25
   blogs = YAML::load(File.new(blogs_file).read)
   blogs = blogs["blogs"]
   feeds = blogs.map { |blog| parse_feed(blog["rss_feed"], blog["gsoc_tag"], blog['remark']) }
-  feeds.push(parse_biogem_data(biogems_file))
+  feeds.compact.push(parse_biogem_data(biogems_file))
   huge_feed = merge_rss_feeds feeds
   output_feed = extract_most_recent max_entries, huge_feed
   output_feed.channel.title = "biogems.info"
@@ -26,7 +26,12 @@ def parse_feed feed, tag, remark
   body = get_xml_with_retry(feed)
   return nil if body.nil?
 
-  output_feed = RSS::Parser.parse body, false
+  begin
+    output_feed = RSS::Parser.parse body, false
+  rescue RSS::NotWellFormedError => e
+    $stderr.puts "Could not parse RSS feed at #{feed}. RSS is not well formed."
+    return nil
+  end
   if !remark.nil?
     output_feed.items.each do |item|
       if item.class == RSS::Atom::Feed::Entry
