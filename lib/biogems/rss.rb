@@ -80,6 +80,7 @@ def merge_rss_feeds feeds
   RSS::Maker.make(rss_version) do |m|
     set_bogus_header m
     feeds.each do |feed|
+      next if not feed or not feed.items
       feed.items.each do |item|
         new_item = m.items.new_item
         if item.class == RSS::Atom::Feed::Entry
