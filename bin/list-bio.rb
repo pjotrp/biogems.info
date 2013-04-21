@@ -156,16 +156,13 @@ list.uniq.each do | name |
     spec = YAML::load(fetch)
     # print fetch
     # p spec
-    ivars = spec.ivars
-    info[:authors] = ivars["authors"]
-    info[:summary] = ivars["summary"]
-    ver = ivars["version"].ivars['version']
-    info[:version] = ver
-    info[:release_date] = ivars["date"] # can not fix the time, it comes from rubygems
-    # set homepage
-    info[:homepage] = ivars["homepage"]
-    info[:licenses] = ivars["licenses"]
-    info[:description] = ivars["description"]
+    info[:authors] = spec.authors
+    info[:summary] = spec.summary
+    info[:version] = spec.version.to_s
+    info[:release_date] = spec.date
+    info[:homepage] = spec.homepage
+    info[:licenses] = spec.licenses.join(' ')
+    info[:description] = spec.description
   else
     info[:version] = 'pre'
     info[:status]  = 'pre'
