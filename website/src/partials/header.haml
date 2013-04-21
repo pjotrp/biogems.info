@@ -23,6 +23,12 @@
           - else
             = link "Rubygems", "/rubygems.html"
           |
+          - if current_page == '/biolinux.html'
+            %span{ :style => "background-color: #550009" }
+              = link "&nbsp;BioLinux&nbsp;", "/biolinux.html"
+          - else
+            = link "BioLinux", "/biolinux.html"
+          |
           - if current_page == '/usersmap.html'
             %span{ :style => "background-color: #550009" }
               = link "&nbsp;People&nbsp;", "/usersmap.html"
@@ -31,8 +37,10 @@
           |
       .rightheader
         %span{ :align => "right", :style => "float: right" }
-          %i
-            The future is bright for Ruby in bioinformatics!&nbsp;&nbsp;&nbsp;
+          - if current_page != '/biolinux.html'
+            %i
+              %small
+                The future is bright for Ruby in bioinformatics!&nbsp;&nbsp;&nbsp;
           = link "Create a Biogem!", "/howto.html"
           |
           = link "BioRuby", "http://bioruby.org/"

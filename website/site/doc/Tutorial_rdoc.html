@@ -433,6 +433,11 @@ and now you have two ways</p>
 
 <pre>$ bundle exec rake release</pre>
 
+<p><em>Note:</em> in case bundle insists to use RubyForge to deploy your gem, you can manually deploy on Rubygems via:</p>
+
+<pre>gem build yourgemname.gemspec
+gem push yourgemname-yourversion.gem</pre>
+
 <h3 id="label-Prerelease">Prerelease</h3>
 
 <p>To create a prerelease of your plugin, set the version to include a letter
