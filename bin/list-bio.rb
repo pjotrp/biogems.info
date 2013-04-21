@@ -147,7 +147,9 @@ def update_status(projects)
   end
 end
 
-list.uniq.each do | name |
+list_in_random_order = list.uniq.sort_by { rand }
+
+list_in_random_order.each do | name |
   $stderr.print name,"\n"
   info = Hash.new
   # Fetch the gem YAML definition of the project
