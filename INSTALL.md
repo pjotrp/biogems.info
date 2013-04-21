@@ -21,6 +21,10 @@ show_website.sh scripts, to see the latest commands.
 
   bundle update
 
+To run the cucumber tests
+
+  bundle exec cucumber features/
+
 To run a 'quick' test run
 
   ./create_website.sh --test
