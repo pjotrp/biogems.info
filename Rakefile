@@ -5,30 +5,27 @@ file "./var/bio-projects.yaml" do |t|
   `./bin/list-bio.rb > #{target}`
 end
 
-file "./website/site/rss.xml" => "./var/bio-projects.yaml" do |t|
-  require 'yaml'
+file "./website/site/rss.xml" => ["./var/bio-projects.yaml", "./etc/blogs.yaml"] do |t|
   require 'biogems/rss'
+  projects, blogs = t.prerequisite_tasks.map(&:name)
+  File.open(t.name,'w') do |f|
+    f.print generate_biogems_rss_feed(projects, blogs, 50).to_s
+  end
+end
 
-  # First generate the YAML file
-  feed = generate_biogems_rss_feed "./var/bio-projects.yaml", "./etc/blogs.yaml", 50
+file "./var/news.yaml" =>"./website/site/rss.xml" do |t|
+  require 'yaml'
+  require 'rss'
 
-  site_news = []
-  feed.items.each do | item |
+  feed = RSS::Parser.parse File.read(t.prerequisite_tasks[0].name), false
+
+  site_news = feed.items.inject(Array.new) do |news, item|
     if item.date.to_i > Time.now.to_i - 356*24*3600
       entry = { :title => item.title, :date => item.date, :link => item.link } 
-      site_news << entry
+      news << entry
     end
+    news
   end
 
-  # print site_news
-
-  # write a YAML file for the site
-  File.open('./var/news.yaml','w') do | f |
-    YAML.dump(site_news,f)
-  end
-
-
-  target = t.dependencies.first
-
-  File.open(target,'w'){|out| out.puts feed}
+  File.open(t.name,'w'){|f| YAML.dump(site_news,f) }
 end
