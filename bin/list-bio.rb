@@ -190,7 +190,7 @@ list.uniq.each do | name |
   else
     raise Exception.new("Response code for #{name} is "+response.code)
   end
-  info[:docs_uri] = "http://rubydoc.info/gems/#{name}/#{ver}/frames" if not info[:docs_uri]
+  info[:docs_uri] = "http://rubydoc.info/gems/#{name}/#{info[:version]}/frames" if not info[:docs_uri]
   versions = get_versions(name)
   info[:downloads90] = get_downloads90(name, versions)
   # if a gem is less than one month old, mark it as new
