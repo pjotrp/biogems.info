@@ -19,3 +19,10 @@ Install Ruby with openssl support
 Checkout the source code and run bundler. See also the create_website.sh and
 show_website.sh scripts, to see the latest commands.
 
+To run a 'quick' test run
+
+  ./create_website.sh --test
+
+which will generate the site with just a few biogems
+
+
