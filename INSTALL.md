@@ -38,3 +38,10 @@ The rakefile has some useful tasks, which can be viewed with
 
   rake -T
 
+## Trouble shooting
+
+If you get an error
+
+  ./bin/fetch-geminfo.rb:163:in `block in <main>': undefined method `authors'
+
+run the script with 'bundle exec' prepended.
