@@ -16,8 +16,8 @@ include BioGemInfo::GitHub
 
 IS_NEW_IN_DAYS = 7*6   # 6 weeks
 
-is_testing = ARGV[0] == '--test'
-is_rubygems = ARGV[0] == '--rubygems'
+is_testing = ARGV[1] == '--test'
+is_rubygems = ARGV[1] == '--rubygems'
 is_biogems = !is_rubygems
 
 # We fetch all gems automatically that start with bio- (bio dash). 

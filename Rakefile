@@ -1,15 +1,14 @@
 $:.unshift File.join(File.dirname(__FILE__),'lib')
 
-task :default => "./website/site/rss.xml" do
-  `staticmatic build website/`
-end
+BIOGEMS = './var/bio-projects.yaml'
+RUBYGEMS = './var/ruby-projects.yaml'
+GENERATE_DATA_FILES = [ 
+  BIOGEMS,
+  RUBYGEMS,
+  './var/news.yaml'
+]
 
-file "./var/bio-projects.yaml" do |t|
-  require 'biogems/fetch'
-  File.open(t.name,'w'){|f| f.print fetch }
-end
-
-file "./var/ruby-projects.yaml" do |t|
+file RUBYGEMS do |t|
   require 'biogems/fetch'
   File.open(t.name,'w'){|f| f.print fetch('--rubygems') }
 end
@@ -38,3 +37,16 @@ file "./var/news.yaml" =>"./website/site/rss.xml" do |t|
 
   File.open(t.name,'w'){|f| YAML.dump(site_news,f) }
 end
+
+task :rss => BIOGEMS 
+
+desc "Fetch biogems to stdout (optionally add -- --test)"
+task :biogems => [ BIOGEMS ] do |t|
+  require 'biogems/fetch'
+end
+
+task :default => [ :biogems ] do
+  `staticmatic build website/`
+end
+
+
