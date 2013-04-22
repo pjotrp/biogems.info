@@ -1,7 +1,8 @@
 # INSTALL
 
 Biogem.info is a staticmatic generated website, which can be viewed with
-staticmatic. 
+staticmatic. It comes with a number of scripts and rake tasks which generate
+the information displayed on the site in YAML format (usually to STDOUT).
 
 ## Installation
 
@@ -33,4 +34,7 @@ which will generate the site with just a few biogems. Next run
 
   bundle exec staticmatic preview website/
 
+The rakefile has some useful tasks, which can be viewed with
+
+  rake -T
 

@@ -1,5 +1,9 @@
 = Biogems.info
 
+The following information describes the steps to getting your biogem
+registered on biogems.info. If you are looking to generate the
+biogems.info website instead: read INSTALL.md!
+
 http://biogems.info tracks interesting Ruby gems for bioinformatics.
 
 To get your gem listed, simply create a gem named 'bio-mygem', i.e.

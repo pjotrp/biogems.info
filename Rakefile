@@ -40,9 +40,9 @@ end
 
 task :rss => BIOGEMS 
 
-desc "Fetch biogems to stdout (optionally add -- --test)"
+desc "Fetch gem info and write YAML to stdout (optionally use -- --test)"
 task :biogems => [ BIOGEMS ] do |t|
-  require 'biogems/fetch'
+  load 'bin/fetch-geminfo.rb'
 end
 
 task :default => [ :biogems ] do
