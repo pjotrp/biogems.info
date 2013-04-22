@@ -3,9 +3,11 @@ $lightgrey2: #F8F8F8
 $plugin: #7D2252
 $ruby: #990000
 $tab:  #880000
-$status: #9900CC
+$status: rgb(228, 123, 53)
 $url: blue
 $url_visited: $ruby
+
+
 
 body
   background: $lightgrey2
@@ -105,8 +107,27 @@ body
   float: left
   width: 80%
   #list
-    background: $lightgrey
+    //background: $lightgrey
     color: $plugin
+    table
+      border-collapse: collapse
+      //border: 1px solid #03476F
+      color: #363636
+      background: $ruby
+      thead
+        td, th
+          padding: 3px 5px
+          color: #FFFFFF
+      tbody tr, td
+        text-align: left
+        color: #363636
+        div
+          padding: 2px 5px 1px 5px
+      a
+        color: #363636
+        font-weight: 700
+      a:hover
+        color: $ruby
     .even
       background: $lightgrey
     .odd
