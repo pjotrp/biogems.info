@@ -38,7 +38,7 @@ file "./var/news.yaml" =>"./website/site/rss.xml" do |t|
   File.open(t.name,'w'){|f| YAML.dump(site_news,f) }
 end
 
-task :rss => BIOGEMS 
+task :rss => [ "./website/site/rss.xml" ]
 
 desc "Fetch gem info and write YAML to stdout (optionally use -- --test)"
 task :biogems => [ BIOGEMS ] do |t|
