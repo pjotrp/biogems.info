@@ -8,29 +8,31 @@ def rss_version
   "2.0" # ["0.9", "1.0", "2.0"]
 end
 
+# This method puts together all the different feeds
 def generate_biogems_rss_feed biogems_file, blogs_file, max_entries = 25
   blogs = YAML::load(File.new(blogs_file).read)
   blogs = blogs["blogs"]
+  feeds = []
   feeds = blogs.map { |blog| 
     parse_feed(blog["rss_feed"], blog["gsoc_tag"], blog['remark']) 
   }
   feeds.compact.push(parse_biogem_data(biogems_file))
-  huge_feed = merge_rss_feeds feeds
-  output_feed = extract_most_recent max_entries, huge_feed
+  huge_feed = merge_rss_feeds(feeds)
+  output_feed = extract_most_recent(max_entries, huge_feed)
   output_feed.channel.title = "biogems.info"
   output_feed.channel.link = "http://biogems.info/rss.html"
   output_feed.channel.description = "Ruby for bioinformatics"
   output_feed
 end
 
+# Parse existing RSS feeds
 def parse_feed feed, tag, remark
   tag = tag.downcase if !tag.nil?
   body = get_xml_with_retry(feed)
   if body.nil?
-    $stderr.puts "Received empty body"
+    $stderr.puts "WARNING: Received empty body for feed "+feed
     return nil 
   end
-
   begin
     output_feed = RSS::Parser.parse body, false
   rescue RSS::NotWellFormedError => e
@@ -53,6 +55,7 @@ def parse_feed feed, tag, remark
   output_feed
 end
 
+# Parse the biogem release info
 def parse_biogem_data input_file
   RSS::Maker.make(rss_version) do |m|
     set_bogus_header m
@@ -85,7 +88,7 @@ def merge_rss_feeds feeds
   RSS::Maker.make(rss_version) do |m|
     set_bogus_header m
     feeds.each do |feed|
-      next if not feed or not feed.items
+      # next if not feed or not feed.items
       feed.items.each do |item|
         new_item = m.items.new_item
         if item.class == RSS::Atom::Feed::Entry
