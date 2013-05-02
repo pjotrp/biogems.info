@@ -17,6 +17,8 @@
         // %th.status{ :align => "left" } status
         %th.version{ :align => "left" } version
         %th.released{ :align => "left" } released
+        %th.stargazers{ :align => "left" } stars
+        %th.stargazers{ :align => "left" } 
         %th.issues{ :align => "left" } issues
         %th.github source 
         %th.citest build
@@ -86,6 +88,15 @@
           %td{ :align => "right", :class => "#{rowclass}" }
             .released
               = released
+          %td{ :class => "#{rowclass}" }
+            .stargazers
+              - if num_stargazers > 0
+                = link num_stargazers.to_s, stargazers
+          %td{ :class => "#{rowclass}" }
+            .stargazers
+              - if num_stargazers > 0
+                %a{:href => stargazers}
+                  %img#git{:src => "/images/hp_fav_star.png", :width => "25", :alt => "star"}
           %td{ :class => "#{rowclass}" }
             .issues
               = link num_issues.to_s, issues

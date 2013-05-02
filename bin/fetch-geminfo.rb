@@ -53,7 +53,7 @@ if is_rubygems
   list = if not is_testing
            Dir.glob("./etc/rubygems/*.yaml").map { |fn| File.basename(fn).sub(/.yaml$/,'') }
          else
-           []
+           [ 'sciruby' ]
          end
 end
 
