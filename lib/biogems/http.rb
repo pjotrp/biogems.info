@@ -27,7 +27,7 @@ module BioGemInfo
       request = Net::HTTP::Get.new(uri.request_uri)
       response = https.request(request)
       if response.code.to_i != 200
-        $stderr.print "get_https_body not found for "+url
+        $stderr.print "get_https_body not found for "+url+"\n"
         return "{}"
       end
       response.body
