@@ -4,7 +4,7 @@ module BioGemInfo
 
     def self.get_http_body url
       uri = URI.parse(url)
-      $stderr.print "Fetching #{url}\n"
+      $stderr.print "Fetching #{url}\n" if $is_debug
       http = Net::HTTP.new(uri.host, uri.port)
       request = Net::HTTP::Get.new(uri.request_uri)
       response = http.request(request)
@@ -17,7 +17,7 @@ module BioGemInfo
 
     def self.get_https_body url
       uri = URI.parse(url)
-      $stderr.print "Fetching #{url}\n"
+      $stderr.print "Fetching #{url}\n" if $is_debug
       https = Net::HTTP.new(uri.host, 443)
       https.use_ssl = true
       https.verify_mode = OpenSSL::SSL::VERIFY_PEER

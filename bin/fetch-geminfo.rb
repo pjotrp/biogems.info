@@ -16,6 +16,7 @@ include BioGemInfo::GitHub
 
 IS_NEW_IN_DAYS = 7*6   # 6 weeks
 
+$is_debug = ARGV.index('--debug')  
 is_testing = ARGV.index('--test')  
 is_rubygems = ARGV.index('--rubygems')
 is_biogems = !is_rubygems
@@ -33,7 +34,7 @@ print "# Using Ruby ",RUBY_VERSION,"\n"
 projects = Hash.new
 
 # Set up the search using a local gem tool
-$stderr.print "Querying gem list\n"
+$stderr.print "Querying gem list\n" if $is_debug
 list = []
 if is_biogems
   # We re-read the last information from the resident YAML file.
@@ -63,14 +64,14 @@ def check_url url
     url = url.sub(/^http:\/\/github\.com/,"https://github.com")
   end
   if url =~ /^http:\/\//
-    $stderr.print "Checking #{url}..."
+    $stderr.print "Checking #{url}..." if $is_debug
     begin
       uri = URI.parse(url)
       http = Net::HTTP.new(uri.host, uri.port)
       request = Net::HTTP::Get.new(uri.request_uri)
       response = http.request(request)
       if response.code.to_i == 200 and response.body !~ /301 Moved/
-        $stderr.print "pass!\n"
+        $stderr.print "pass!\n" if $is_debug
         return url
       elsif response.code.to_i == 301
         raise LoadError
@@ -81,7 +82,7 @@ def check_url url
     rescue
       $stderr.print $!
     end
-    $stderr.print "check_url failed!\n"
+    $stderr.print "check_url failed!\n" if $is_debug
   end
   nil
 end
@@ -109,7 +110,7 @@ end
 def get_github_commit_stats github_uri
   user,project = get_github_user_project(github_uri)
   url = "https://github.com/#{user}/#{project}/graphs/participation"
-  $stderr.print url
+  $stderr.print url if $is_debug
   body = Http::get_https_body(url)
   if body.strip == "" || body.nil? || body == "{}"
     # try once more
@@ -129,7 +130,7 @@ end
 
 def update_status(projects)
   for biogem in ['bio-biolinux','bio-core-ext','bio-core','bio'] do 
-    $stderr.print "Getting status of #{biogem}\n"
+    $stderr.print "Getting status of #{biogem}\n" if $is_debug
     uri = URI.parse("http://rubygems.org/api/v1/gems/#{biogem}.yaml")
     http = Net::HTTP.new(uri.host, uri.port)
     request = Net::HTTP::Get.new(uri.request_uri)
@@ -142,7 +143,7 @@ def update_status(projects)
         if projects[n]
           projects[n][:status] = biogem
         else
-          $stderr.print "Warning: can not find #{n} for #{biogem}\n"
+          $stderr.print "Warning: can not find #{n} for #{biogem}\n" if $is_debug
         end
       end
     else
@@ -154,7 +155,7 @@ end
 list_in_random_order = list.uniq.sort_by { rand }
 
 list_in_random_order.each do | name |
-  $stderr.print name,"\n"
+  $stderr.print name,"\n" if $is_debug
   info = Hash.new
   # Fetch the gem YAML definition of the project
   fetch = `bundle exec gem specification -r #{name.strip}`

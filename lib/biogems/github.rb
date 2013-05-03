@@ -34,7 +34,7 @@ module BioGemInfo
         $stderr.print "\nWARNING: link not working!\n"
         res = []
       end
-      $stderr.print "Found ",res.size, "\n" 
+      $stderr.print "Found ",res.size, "github issues\n" if $is_debug
       res
     end
   end

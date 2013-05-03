@@ -134,7 +134,7 @@ def get_xml_with_retry url
   count = 0
   begin 
     count += 1
-    $stderr.print "Fetching "+url+" #{count}\n"
+    $stderr.print "Fetching "+url+" #{count}\n" if $is_debug
     body = Net::HTTP.get(URI(url)) if body.nil?
     # Somehow the XML is never correct!
     # if !body.nil? and body != ""
