@@ -30,8 +30,8 @@ module BioGemInfo
       # $stderr.print url,"\n"
       res = JSON.parse(Http::get_https_body(url))
       if res == nil or res == {}
+        $stderr.print "WARNING: link not working! "
         $stderr.print url,"\n"
-        $stderr.print "\nWARNING: link not working!\n"
         res = []
       end
       $stderr.print "Found ",res.size, "github issues\n" if $is_debug
