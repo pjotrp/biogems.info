@@ -9,14 +9,19 @@ def rss_version
 end
 
 # This method puts together all the different feeds
-def generate_biogems_rss_feed biogems_file, blogs_file, max_entries = 25
+def generate_biogems_rss_feed biogems_file, blogs_file, max_entries = 25, is_testing=false
   blogs = YAML::load(File.new(blogs_file).read)
   blogs = blogs["blogs"]
   feeds = []
-  feeds = blogs.map { |blog| 
-    parse_feed(blog["rss_feed"], blog["gsoc_tag"], blog['remark']) 
-  }
-  feeds.compact.push(parse_biogem_data(biogems_file))
+  if not is_testing
+    feeds = blogs.map { |blog| 
+      parse_feed(blog["rss_feed"], blog["gsoc_tag"], blog['remark']) 
+    }.compact
+  else
+    feeds = [ parse_feed('http://sciruby.com/atom.xml', 'test_tag', 'test_remark') ]
+  end
+  biogem_releases = parse_biogem_data(biogems_file)
+  feeds.push biogem_releases
   huge_feed = merge_rss_feeds(feeds)
   output_feed = extract_most_recent(max_entries, huge_feed)
   output_feed.channel.title = "biogems.info"
@@ -55,7 +60,7 @@ def parse_feed feed, tag, remark
   output_feed
 end
 
-# Parse the biogem release info
+# Parse the biogem release info and return RSS object
 def parse_biogem_data input_file
   RSS::Maker.make(rss_version) do |m|
     set_bogus_header m
@@ -65,7 +70,7 @@ def parse_biogem_data input_file
       # remove empty dates
       spec = spec.find_all { |rec| rec[1][:release_date] }
       spec.each do | rec |
-        # $stderr.print rec[1][:release_date]
+        $stderr.print rec[1][:release_date]
         rec[1][:release_date].to_s =~ /^(\d\d\d\d)\-(\d+)\-(\d+) (\d+):(\d+)/
         t = Time.new($1.to_i,$2.to_i,$3.to_i,$4.to_i,$5.to_i)
         rec[1][:time] = t
@@ -84,6 +89,7 @@ def parse_biogem_data input_file
   end
 end
 
+# Pass in an array of RSS feeds (list of list) and merge them into one list
 def merge_rss_feeds feeds
   RSS::Maker.make(rss_version) do |m|
     set_bogus_header m
@@ -139,7 +145,7 @@ def get_xml_with_retry url
       # end
     # end
   rescue Exception => e
-    print e.message
+    $stderr.print e.message
     retry if count < 5
   end
   return body

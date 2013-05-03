@@ -5,8 +5,10 @@
 require 'yaml'
 require_relative '../lib/biogems/rss.rb'
 
+is_testing = ARGV.index('--test')  
+
 # First fetch all information
-feed = generate_biogems_rss_feed "./var/bio-projects.yaml", "./etc/blogs.yaml", 50
+feed = generate_biogems_rss_feed "./var/bio-projects.yaml", "./etc/blogs.yaml", 50, is_testing
 
 site_news = []
 feed.items.each do | item |
