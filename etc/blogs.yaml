@@ -17,6 +17,9 @@ blogs:
   - rss_feed: http://ankurgoel.com/atom.xml
     gsoc_tag:
     remark: Ankur's GSoC
+  - rss_feed: http://gene-prediction.blogspot.com/feeds/posts/default
+    gsoc_tag: gsoc
+    remark: Monica's GSoC
   - rss_feed: http://csw.github.com/bioruby-maf/atom.xml
     gsoc_tag:
     remark: Clayton's blog
