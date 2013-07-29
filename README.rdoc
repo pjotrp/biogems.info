@@ -50,7 +50,7 @@ It is also possible the overriding gemname.yaml is in your github
 repository(!) Just tell us where it resides through
 https://github.com/pjotrp/biogems.info/issues
 
-= GitHub API access limits =
+= GitHub API access limits
 
 Without using authentication, the GitHub API allows only 60 requests
 per hour from a single IP address. But during the data collection
