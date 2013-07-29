@@ -50,6 +50,24 @@ It is also possible the overriding gemname.yaml is in your github
 repository(!) Just tell us where it resides through
 https://github.com/pjotrp/biogems.info/issues
 
+= GitHub API access limits
+
+Without using authentication, the GitHub API allows only 60 requests
+per hour from a single IP address. But during the data collection
+phase of generating the biogems.info website, the script currently
+needs to make around 200 requests to this API to fetch the number of
+issues and stargazers for each gem.
+
+To get around this, go to the applications tab on your GitHub
+settings page and generate a new "Personal API access token". Then
+copy that token, and before running the ./create_website.sh script,
+set the GITHUB_API_TOKEN environment variable like this:
+
+    export GITHUB_API_TOKEN="copy-here-the-token-string-from-github"
+
+That lets the script make 5000 requests per hour, which should be
+more then enough.
+
 = Website source
 
 This repository on github contains the source code for the

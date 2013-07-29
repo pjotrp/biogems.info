@@ -24,11 +24,11 @@ module BioGemInfo
       check_url("http//github.com/#{user}/#{project}")
     end
 
-    def github_api_helper github_uri,method
+    def github_api_helper github_uri, method
       user,project = get_github_user_project(github_uri)
       url = "https://api.github.com/repos/#{user}/#{project}/#{method}"
       # $stderr.print url,"\n"
-      res = JSON.parse(Http::get_https_body(url))
+      res = JSON.parse(Http::get_https_body(url, auth_header))
       if res == nil or res == {}
         $stderr.print "WARNING: link not working! "
         $stderr.print url,"\n"
@@ -36,6 +36,14 @@ module BioGemInfo
       end
       $stderr.print "Found ",res.size, "github issues\n" if $is_debug
       res
+    end
+
+    def auth_header
+      if ENV['GITHUB_API_TOKEN']
+        { 'Authorization' => "token #{ENV['GITHUB_API_TOKEN']}" }
+      else
+        {}
+      end
     end
   end
 
