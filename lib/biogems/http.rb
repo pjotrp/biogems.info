@@ -15,7 +15,7 @@ module BioGemInfo
       response.body
     end
 
-    def self.get_https_body url
+    def self.get_https_body url, initheader={}
       uri = URI.parse(url)
       $stderr.print "Fetching #{url}\n" if $is_debug
       https = Net::HTTP.new(uri.host, 443)
@@ -24,7 +24,7 @@ module BioGemInfo
       https.ca_path = '/etc/ssl/certs' if File.exists?('/etc/ssl/certs') # Ubuntu
       https.ca_file = '/opt/local/share/curl/curl-ca-bundle.crt' if File.exists?('/opt/local/share/curl/curl-ca-bundle.crt') # Mac OS X
       https.read_timeout = 60
-      request = Net::HTTP::Get.new(uri.request_uri)
+      request = Net::HTTP::Get.new(uri.request_uri, initheader)
       response = https.request(request)
       if response.code.to_i != 200
         $stderr.print "get_https_body not found for "+url+"\n"

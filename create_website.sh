@@ -1,9 +1,24 @@
-#! /bin/sh
+#! /bin/bash
 #
 # Create the website
 
-# Download stats
-curl https://api.github.com/rate_limit
+# Helper functions
+
+## GitHub stats
+function print_github_limits {
+  RATE_LIMIT_URL="https://api.github.com/rate_limit"
+
+  if [ -z "$GITHUB_API_TOKEN" ]; then
+    curl $RATE_LIMIT_URL
+  else
+    curl -H "Authorization: token $GITHUB_API_TOKEN" $RATE_LIMIT_URL
+  fi
+}
+
+
+# Work starts here
+
+print_github_limits
 
 # curl http://github.com/api/v2/json/issues/list/pjotrp/bioruby-affy/open
 bundle exec ./bin/fetch-geminfo.rb $* > ./var/bio-projects.yaml1
@@ -18,4 +33,5 @@ bundle exec ./bin/rss.rb > website/site/rss.xml
 # Generate site into website/site/
 staticmatic build website/
 
-curl https://api.github.com/rate_limit
+print_github_limits
+
