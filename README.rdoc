@@ -60,7 +60,7 @@ issues and stargazers for each gem.
 
 To get around this, go to the applications tab on your GitHub
 settings page and generate a new "Personal API access token". Then
-copy that token, and before running the ./create_website.sh script,
+copy that token (but not into the repository!), and before running the ./create_website.sh script,
 set the GITHUB_API_TOKEN environment variable like this:
 
     export GITHUB_API_TOKEN="copy-here-the-token-string-from-github"
