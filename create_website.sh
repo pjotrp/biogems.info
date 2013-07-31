@@ -2,6 +2,7 @@
 #
 # Create the website
 
+
 # Helper functions
 
 ## GitHub stats
@@ -18,6 +19,7 @@ function print_github_limits {
 
 # Work starts here
 
+echo Github token=$GITHUB_API_TOKEN
 print_github_limits
 
 # curl http://github.com/api/v2/json/issues/list/pjotrp/bioruby-affy/open
