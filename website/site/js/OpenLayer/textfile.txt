@@ -1,9 +1,11 @@
 point	title	description	icon	URL
 51.9685,5.6651	Pjotr Prins	Wageningen/Groningen, Netherlands
+51.52461,-0.04204@Yannick Wurm@Fogg building, Queen Mary University of London,E1 4NS, London, UK
 45.46,9.19	Raoul Bonnal	Il puccio, Milano, Italy
 35.68007,139.76	Toshiaki Katayama	BioRuby Guru, Tokyo
 35.681,139.81	Mitsuteru Nakao	Tokyo, Japan
 32.78334,129.86666	Hiroyuki Mishima	Japan
+35.6800,139.76784	Hiroyuki Nakamura	Japan
 34.68529,135.5147	Naohisa Goto	BioRuby maintainer, Osaka
 50.879,4.701	Jan Aerts	Leuven, Belgium
 52.1518,4.4817	Rutger Vos	Leiden, Netherlands
@@ -29,10 +31,9 @@ point	title	description	icon	URL
 41.7057,-70.2286	Dmitry Mozzherin	Yarmouth, MA, USA
 43.07258,-89.39941	Will Strinz	Madison, USA
 28.645,77.093	Ankur Goel	New Delhi, India
+1.290629,103.85215@Zuhao Wan@Singapore
 53.568,10.027	Fernando Izquierdo	Hamburg, Germany
 45.4615,9.1593	Alberto Arrigioni	Milano, Italy
 -33.5242867,-70.4501782	Claudio Bustos	Santiago, Chile
-49.9-84.7,5	Joachim Baran	Ontario, Canada
-35.680074139.767849,18	Hiroyuki Nakamura	Japan
-1.290632103.852829,18	Zuhao Wan	Singapore
-44.432326.1063,12	Monica Dragan	Romania
+49.9,-84.7	Joachim Baran	Ontario, Canada
+44.4323,26.1063	Monica Dragan	Romania
