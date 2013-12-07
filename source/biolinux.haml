@@ -55,14 +55,14 @@
                 %img#uparrow{:src => "./images/bioruby-gem.png", :width=>"20", :title => "new biogem!", :alt => "!"}
           %td{ :class => "#{rowclass}" }
             .name
-              = link pkg.name.gsub(/[_-]/,' '), pkg.url
+              = link_to pkg.name.gsub(/[_-]/,' '), pkg.url
           %td{ :class => "#{rowclass}" }
             .origin
               = pkg.origin
           %td{ :class => "#{rowclass}" }
             .descr
               = pkg.descr
-              = link " (...)", pkg.home
+              = link_to " (...)", pkg.home
           %td.authors{ :class => "#{rowclass}" }
             = pkg.author
           %td{ :class => "#{rowclass}" }
@@ -75,14 +75,14 @@
           // (moved to descr)
           %td{ :align => "right", :class => "#{rowclass}" }
             .version
-              = link pkg.version, pkg.version_url if pkg.version_url
+              = link_to pkg.version, pkg.version_url if pkg.version_url
               = pkg.version if not pkg.version_url
           // %td{ :align => "right", :class => "#{rowclass}" }
           //   .released
           //     = pkg.released
           // %td{ :class => "#{rowclass}" }
           //   .issues
-          //     = link pkg.num_issues.to_s, pkg.issues
+          //     = link_to pkg.num_issues.to_s, pkg.issues
           // %td{ :align => "center", :class => "#{rowclass}" }
           //   .commit
           //     - if pkg.src =~ /git/
@@ -92,12 +92,12 @@
           //  .citest
           %td{ :align => "right", :class => "#{rowclass}" }
             .dl
-              = link pkg.downloads.to_s, "http://popcon.debian.org/by_vote" if pkg.downloads>0
+              = link_to pkg.downloads.to_s, "http://popcon.debian.org/by_vote" if pkg.downloads>0
           // %td{ :align => "right", :class => "#{rowclass}" }
           //  .dl
   .footnote 
     <b>*)</b> package updates (total &amp; last 90 days) from 
-    = link "Debian popularity index", "http://popcon.debian.org/by_vote"
+    = link_to "Debian popularity index", "http://popcon.debian.org/by_vote"
     as of
     = Time.now.to_s.split[0]
     // %br

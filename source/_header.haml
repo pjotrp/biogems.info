@@ -3,7 +3,7 @@
     %img#logo{:src => "./images/bioruby-gem.png", :alt => "biogems.info"}
   %div
     .maintitle
-      = link "Biogems.info", "/"
+      = link_to "Biogems.info", "/"
   %div{ :style => "background-color: #" + "%06x" % (rand * 0xffffff) }
     &nbsp;
   %div
@@ -13,27 +13,27 @@
           |
           - if current_page == '/index.html'
             %span{ :style => "background-color: #550009" }
-              = link "&nbsp;Biogems&nbsp;", "/"
+              = link_to "&nbsp;Biogems&nbsp;", "/"
           - else
-            = link "Biogems", "/"
+            = link_to "Biogems", "/"
           |
           - if current_page == '/rubygems.html'
             %span{ :style => "background-color: #550009" }
-              = link "&nbsp;Rubygems&nbsp;", "/rubygems.html"
+              = link_to "&nbsp;Rubygems&nbsp;", "/rubygems.html"
           - else
-            = link "Rubygems", "/rubygems.html"
+            = link_to "Rubygems", "/rubygems.html"
           |
           - if current_page == '/biolinux.html'
             %span{ :style => "background-color: #550009" }
-              = link "&nbsp;BioLinux&nbsp;", "/biolinux.html"
+              = link_to "&nbsp;BioLinux&nbsp;", "/biolinux.html"
           - else
-            = link "BioLinux", "/biolinux.html"
+            = link_to "BioLinux", "/biolinux.html"
           |
           - if current_page == '/usersmap.html'
             %span{ :style => "background-color: #550009" }
-              = link "&nbsp;People&nbsp;", "/usersmap.html"
+              = link_to "&nbsp;People&nbsp;", "/usersmap.html"
           - else
-            = link "People", "/usersmap.html"
+            = link_to "People", "/usersmap.html"
           |
       .rightheader
         %span{ :align => "right", :style => "float: right" }
@@ -41,9 +41,9 @@
             %i
               %small
                 The future is bright for Ruby in bioinformatics!&nbsp;&nbsp;&nbsp;
-          = link "Create a Biogem!", "/howto.html"
+          = link_to "Create a Biogem!", "/howto.html"
           |
-          = link "BioRuby", "http://bioruby.org/"
+          = link_to "BioRuby", "http://bioruby.org/"
           |
           %a{:href => "/rss.xml"}
             %img#git{:src => "/images/rss-small.png", :height => 16 , :alt => "RSS"}

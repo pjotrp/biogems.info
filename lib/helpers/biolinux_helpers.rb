@@ -1,9 +1,8 @@
 require 'ostruct'
 
-module BiolinuxHelper
+module BiolinuxHelpers
   def news_items
-    news = YAML::load(File.new("./var/news.yaml").read)
-    news.each do | item |
+    data.news.each do | item |
       item[:date].to_s =~ /(\d+-\d+-\d+)/
       item[:short_date] = $1
       yield item
@@ -11,8 +10,7 @@ module BiolinuxHelper
   end
 
   def biolinux_by_popularity(type = nil)
-    projects_fn = "./var/biolinux-packages.yaml"
-    packages = YAML::load(File.new(projects_fn).read)
+    packages = data.biolinux
     packages = {} if not packages
     # packages.each do |name,pkg|   
     #   $stderr.print name,"\n"

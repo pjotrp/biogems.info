@@ -61,12 +61,12 @@
                 %img#uparrow{:src => "./images/bioruby-gem.png", :width=>"20", :title => "new biogem!", :alt => "!"}
           %td{ :class => "#{rowclass}" }
             .name
-              = link name.gsub(/[_-]/,' '), "http://rubygems.org/gems/#{name}"
+              = link_to name.gsub(/[_-]/,' '), "http://rubygems.org/gems/#{name}"
           %td{ :class => "#{rowclass}" }
             .descr
               = descr
               - if docs and docs != ''
-                = link " (...)", docs
+                = link_to " (...)", docs
               - if name == 'bio' or name == 'bio-core' or name == 'bio-core-ext' or name == 'bio-biolinux' or status == 'core' or status == 'bio'
                 %img#uparrow{:src => "./images/bioruby-gem.png", :width=>"15", :title => "BioRuby core gem!", :alt => "!", :align => "right" }
               - elsif status == 'bio-core'
@@ -91,14 +91,14 @@
           // (moved to descr)
           %td{ :align => "right", :class => "#{rowclass}" }
             .version
-              = link version, "http://rubygems.org/gems/#{name}"
+              = link_to version, "http://rubygems.org/gems/#{name}"
           %td{ :align => "right", :class => "#{rowclass}" }
             .released
               = released
           %td{ :class => "#{rowclass}" }
             .stargazers
               - if num_stargazers > 0
-                = link num_stargazers.to_s, stargazers
+                = link_to num_stargazers.to_s, stargazers
           %td{ :class => "#{rowclass}" }
             .stargazers
               - if num_stargazers > 0
@@ -106,7 +106,7 @@
                   %img#git{:src => "/images/hp_fav_star.png", :width => "25", :alt => "star"}
           %td{ :class => "#{rowclass}" }
             .issues
-              = link num_issues.to_s, issues
+              = link_to num_issues.to_s, issues
           %td{ :align => "center", :class => "#{rowclass}" }
             .commit
               - if src =~ /git/
@@ -142,7 +142,7 @@
                 = c90.to_s
   .footnote 
     <b>*)</b> gem downloads (total &amp; last 90 days) from 
-    = link "rubygems.org", "http://rubygems.org"
+    = link_to "rubygems.org", "http://rubygems.org"
     as of
     = Time.now.to_s.split[0]
     %br

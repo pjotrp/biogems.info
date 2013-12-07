@@ -8,7 +8,7 @@ require_relative '../lib/biogems/rss.rb'
 is_testing = ARGV.index('--test')  
 
 # First fetch all information
-feed = generate_biogems_rss_feed "./var/bio-projects.yaml", "./etc/blogs.yaml", 50, is_testing
+feed = generate_biogems_rss_feed "./data/biogems.yaml", "./etc/blogs.yaml", 50, is_testing
 
 site_news = []
 feed.items.each do | item |
@@ -21,7 +21,7 @@ end
 # print site_news
 
 # write a YAML file for the site
-File.open('./var/news.yaml','w') do | f |
+File.open('./data/news.yaml','w') do | f |
   YAML.dump(site_news,f)
 end
 

@@ -1,11 +1,8 @@
-website/site/images/
 pkg/
 contrib/
-var/
-website/site/*.html
-website/site/*.xml
-website/site/stylesheets/
-bio-projects.yaml
 *.swp
 *#
 *~
+source/rss.xml
+build/
+data/

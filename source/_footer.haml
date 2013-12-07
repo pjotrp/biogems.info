@@ -1,0 +1,29 @@
+- if false
+  #footer
+    %hr
+    #links
+      %table
+        %tr
+          %td
+            = link_to "biogems.info", "https://github.com/bioruby/biogems.info"
+            website by
+            = link_to "Pjotr Prins", "http://thebird.nl/"
+            using 
+            = link_to "middleman", "http://middlemanapp.com/"
+            ,
+            = link_to "haml", "http://haml-lang.com/"
+            and 
+            = link_to "sass", "http://sass-lang.com/"
+          %td
+            = link_to "Biogem README", "/doc/README_rdoc.html"
+            |
+            = link_to "Create a Biogem!", "/howto.html"
+            | 
+            = link_to "BioRuby.org", "http://bioruby.org/"
+            project website and mailing list 
+            |
+            = link_to "People", "/usersmap.html"
+            |
+            %a{:href => "/rss.xml"}
+              %img#git{:src => "/images/rss-small.png", :height => 10, :alt => "RSS"}
+
