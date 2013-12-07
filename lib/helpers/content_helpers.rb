@@ -3,10 +3,9 @@ require 'yaml'
 MAX_WORDS = 7
 NUM_AUTHORS = 3
 
-module ContentHelper
+module ContentHelpers
   def news_items
-    news = YAML::load(File.new("./var/news.yaml").read)
-    news.each do | item |
+    data.news.each do | item |
       item[:date].to_s =~ /(\d+-\d+-\d+)/
       item[:short_date] = $1
       yield item
@@ -14,9 +13,8 @@ module ContentHelper
   end
 
   def by_popularity(type = nil)
-    projects_fn = "./var/bio-projects.yaml"
-    projects_fn = "./var/ruby-projects.yaml" if type == :rubygems
-    spec = YAML::load(File.new(projects_fn).read)
+    spec = (type == :rubygems ? data.rubygems : data.biogems)
+
     spec = {} if not spec
     sorted = spec.sort { |a, b| b[1][:downloads] <=> a[1][:downloads] }
     # rank trend

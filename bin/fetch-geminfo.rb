@@ -1,4 +1,4 @@
-#! /usr/bin/env ruby
+#!/usr/bin/env ruby
 #
 # This script fetches information of bioruby gems, first querying the gem
 # tool, followed by visiting rubygems.org and github.com.
@@ -10,6 +10,7 @@ require 'yaml'
 require 'net/http'
 require 'uri'
 require 'biogems'
+require 'thread/pool'
 
 include BioGemInfo
 include BioGemInfo::GitHub
@@ -38,7 +39,6 @@ $stderr.print "Querying gem list\n" if $is_debug
 list = []
 if is_biogems
   # We re-read the last information from the resident YAML file.
-  # projects = YAML::load('var/bio-projects.yaml')
   if is_testing
     list = ['bio-logger', 'bio-table']
   else
@@ -154,95 +154,102 @@ end
 
 list_in_random_order = list.uniq.sort_by { rand }
 
+pool = Thread.pool(15)
+
 list_in_random_order.each do | name |
-  $stderr.print name,"\n" if $is_debug
-  info = Hash.new
-  # Fetch the gem YAML definition of the project
-  fetch = `bundle exec gem specification -r #{name.strip}`
-  if fetch != ''
-    spec = YAML::load(fetch)
-    # print fetch
-    # p spec
-    # When you get undefined method `authors' for #<Syck::Object:0x000000028cf3f0> (NoMethodError) make sure you try with 'bundle exec' instead!
-    info[:authors] = spec.authors
-    info[:summary] = spec.summary
-    info[:version] = spec.version.to_s
-    info[:release_date] = spec.date
-    info[:homepage] = spec.homepage
-    info[:licenses] = spec.licenses.join(' ')
-    info[:description] = spec.description
-  else
-    info[:version] = 'pre'
-    info[:status]  = 'pre'
-  end
-  # Query rubygems.org directly
-  uri = URI.parse("http://rubygems.org/api/v1/gems/#{name}.yaml")
-  http = Net::HTTP.new(uri.host, uri.port)
-  request = Net::HTTP::Get.new(uri.request_uri)
-  response = http.request(request)
-  if response.code.to_i==200
-    # print response.body
-    biogems = YAML::load(response.body)
-    info[:downloads] = biogems["downloads"]
-    info[:version_downloads] = biogems["version_downloads"]
-    info[:gem_uri] = biogems["gem_uri"]
-    info[:homepage_uri] = check_url(biogems["homepage_uri"])
-    info[:project_uri] = check_url(biogems["project_uri"])
-    info[:source_code_uri] = biogems["sourcecode_uri"]
-    info[:docs_uri] = check_url(biogems["documentation_uri"])
-    info[:dependencies] = biogems["dependencies"]
-    # query for recent downloads
-  else
-    raise Exception.new("Response code for #{name} is "+response.code)
-  end
-  info[:docs_uri] = "http://rubydoc.info/gems/#{name}/#{info[:version]}/frames" if not info[:docs_uri]
-  versions = get_versions(name)
-  info[:downloads90] = get_downloads90(name, versions)
-  # if a gem is less than one month old, mark it as new
-  if versions.size <= 5
-    is_new = true
-    versions.each do | ver |
-      date = ver['built_at']
-      date.to_s =~ /^(\d\d\d\d)\-(\d\d)\-(\d\d)/
-      t = Time.new($1.to_i,$2.to_i,$3.to_i)
-      if Time.now - t > IS_NEW_IN_DAYS*24*3600
-        is_new = false
+  pool.process do
+    $stderr.print name,"\n" if $is_debug
+    info = Hash.new
+    # Fetch the gem YAML definition of the project
+    fetch = `bundle exec gem specification -r #{name.strip}`
+    if fetch != ''
+      spec = YAML::load(fetch)
+      # print fetch
+      # p spec
+      # When you get undefined method `authors' for #<Syck::Object:0x000000028cf3f0> (NoMethodError) make sure you try with 'bundle exec' instead!
+      info[:authors] = spec.authors
+      info[:summary] = spec.summary
+      info[:version] = spec.version.to_s
+      info[:release_date] = spec.date
+      info[:homepage] = spec.homepage
+      info[:licenses] = spec.licenses.join(' ')
+      info[:description] = spec.description
+    else
+      info[:version] = 'pre'
+      info[:status]  = 'pre'
+    end
+    # Query rubygems.org directly
+    uri = URI.parse("http://rubygems.org/api/v1/gems/#{name}.yaml")
+    http = Net::HTTP.new(uri.host, uri.port)
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(request)
+    if response.code.to_i==200
+      # print response.body
+      biogems = YAML::load(response.body)
+      info[:downloads] = biogems["downloads"]
+      info[:version_downloads] = biogems["version_downloads"]
+      info[:gem_uri] = biogems["gem_uri"]
+      info[:homepage_uri] = check_url(biogems["homepage_uri"])
+      info[:project_uri] = check_url(biogems["project_uri"])
+      info[:source_code_uri] = biogems["sourcecode_uri"]
+      info[:docs_uri] = check_url(biogems["documentation_uri"])
+      info[:dependencies] = biogems["dependencies"]
+      # query for recent downloads
+    else
+      raise Exception.new("Response code for #{name} is "+response.code)
+    end
+    info[:docs_uri] = "http://rubydoc.info/gems/#{name}/#{info[:version]}/frames" if not info[:docs_uri]
+    versions = get_versions(name)
+    info[:downloads90] = get_downloads90(name, versions)
+    # if a gem is less than one month old, mark it as new
+    if versions.size <= 5
+      is_new = true
+      versions.each do | ver |
+        date = ver['built_at']
+        date.to_s =~ /^(\d\d\d\d)\-(\d\d)\-(\d\d)/
+        t = Time.new($1.to_i,$2.to_i,$3.to_i)
+        if Time.now - t > IS_NEW_IN_DAYS*24*3600
+          is_new = false
+          break
+        end
+      end
+      info[:status] = 'new' if is_new
+    end
+    # Now parse etc/biogems/name.yaml
+    fn = "./etc/biogems/#{name}.yaml" if is_biogems
+    fn = "./etc/rubygems/#{name}.yaml" if is_rubygems
+    if File.exist?(fn)
+      added = YAML::load(File.new(fn).read)
+      added = {} if not added 
+      info = info.merge(added)
+    end
+    # Replace http with https
+    for uri in [:source_code_uri, :homepage, :homepage_uri, :project_uri] do
+      if info[uri] =~ /^http:\/\/github/
+        info[uri] = info[uri].sub(/^http:\/\/github\.com/,"https://github.com")
+      end
+    end
+
+    # Check github stuff
+    # print info
+    for uri in [:source_code_uri, :homepage, :homepage_uri, :project_uri] do
+      if info[uri] =~ /^https:\/\/github\.com/
+        info[:num_issues] = get_github_issues(info[uri]).size
+        info[:num_stargazers] = get_github_stargazers(info[uri]).size
+        user,project = get_github_user_project(info[uri])
+        info[:github_user] = user
+        info[:github_project] = project
+        info[:commit_stats] = get_github_commit_stats(info[uri])
         break
       end
     end
-    info[:status] = 'new' if is_new
-  end
-  # Now parse etc/biogems/name.yaml
-  fn = "./etc/biogems/#{name}.yaml" if is_biogems
-  fn = "./etc/rubygems/#{name}.yaml" if is_rubygems
-  if File.exist?(fn)
-    added = YAML::load(File.new(fn).read)
-    added = {} if not added 
-    info = info.merge(added)
-  end
-  # Replace http with https
-  for uri in [:source_code_uri, :homepage, :homepage_uri, :project_uri] do
-    if info[uri] =~ /^http:\/\/github/
-      info[uri] = info[uri].sub(/^http:\/\/github\.com/,"https://github.com")
-    end
-  end
 
-  # Check github stuff
-  # print info
-  for uri in [:source_code_uri, :homepage, :homepage_uri, :project_uri] do
-    if info[uri] =~ /^https:\/\/github\.com/
-      info[:num_issues] = get_github_issues(info[uri]).size
-      info[:num_stargazers] = get_github_stargazers(info[uri]).size
-      user,project = get_github_user_project(info[uri])
-      info[:github_user] = user
-      info[:github_project] = project
-      info[:commit_stats] = get_github_commit_stats(info[uri])
-      break
-    end
+    projects[name] = info
   end
-
-  projects[name] = info
 end
+
+pool.shutdown
+
 # Read the status of bio-core, bio-core-ext and bio-biolinux
 # packages
 update_status(projects) if is_biogems

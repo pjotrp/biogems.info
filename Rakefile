@@ -1,19 +1,18 @@
 $:.unshift File.join(File.dirname(__FILE__),'lib')
 
-BIOGEMS = './var/bio-projects.yaml'
-RUBYGEMS = './var/ruby-projects.yaml'
+BIOGEMS = './data/biogems.yaml'
+RUBYGEMS = './data/rubygems.yaml'
 GENERATE_DATA_FILES = [ 
   BIOGEMS,
   RUBYGEMS,
-  './var/news.yaml'
+  './data/news.yaml'
 ]
 
-file RUBYGEMS do |t|
-  require 'biogems/fetch'
-  File.open(t.name,'w'){|f| f.print fetch('--rubygems') }
-end
+file BIOGEMS => [ :biogems ]
 
-file "./website/site/rss.xml" => ["./var/bio-projects.yaml", "./etc/blogs.yaml"] do |t|
+file RUBYGEMS => [ :biogems ]
+
+file "./source/rss.xml" => ["./data/biogems.yaml", "./etc/blogs.yaml"] do |t|
   require 'biogems/rss'
   projects, blogs = t.prerequisite_tasks.map(&:name)
   File.open(t.name,'w') do |f|
@@ -21,7 +20,7 @@ file "./website/site/rss.xml" => ["./var/bio-projects.yaml", "./etc/blogs.yaml"]
   end
 end
 
-file "./var/news.yaml" =>"./website/site/rss.xml" do |t|
+file "./data/news.yaml" =>"./source/rss.xml" do |t|
   require 'yaml'
   require 'rss'
 
@@ -38,15 +37,15 @@ file "./var/news.yaml" =>"./website/site/rss.xml" do |t|
   File.open(t.name,'w'){|f| YAML.dump(site_news,f) }
 end
 
-task :rss => [ "./website/site/rss.xml" ]
+task :rss => [ "./source/rss.xml" ]
 
-desc "Fetch gem info and write YAML to stdout (optionally use -- --test)"
-task :biogems => [ BIOGEMS ] do |t|
-  load 'bin/fetch-geminfo.rb'
+desc "Fetch gem info and write to data directory (optionally use -- --test)"
+task :biogems do |t|
+  %x{./bin/create_data.sh #{ARGV.join(' ')} 1>&2}
 end
 
 task :default => [ :biogems ] do
-  `staticmatic build website/`
+  `bundle exec middleman build`
 end
 
 

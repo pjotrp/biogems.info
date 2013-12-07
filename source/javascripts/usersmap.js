@@ -17,7 +17,7 @@ map = new OpenLayers.Map({
 
     map.setCenter(new OpenLayers.LonLat(0, 0), 0);
 
-    var newl = new OpenLayers.Layer.Text( "text", { location:"./js/OpenLayer/textfile.txt"} );
+    var newl = new OpenLayers.Layer.Text( "text", { location:"./javascripts/OpenLayer/textfile.txt"} );
     map.addLayer(newl);
 
 //    var markers = new OpenLayers.Layer.Markers( "Markers" );

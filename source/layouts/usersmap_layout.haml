@@ -1,0 +1,18 @@
+!!!
+%html
+  %head
+    %meta{:name=>"viewport", :content=>"width=device-width", "initial-scale"=>1.0, "maximum-scale"=>1.0, "user-scalable"=>0}
+    %meta{:name=>"apple-mobile-web-app-capable", :content=>"yes"}
+    %title biogems.info
+    %link{:rel =>"stylesheet", :href=>"/stylesheets/screen.css", :media => "screen"}
+    %link{:rel=>"stylesheet", :href=>"/javascripts/OpenLayer/theme/default/style.css", :type=>"text/css"}
+    %link{:rel=>"stylesheet", :href=>"/javascripts/OpenLayer/theme/default/google.css", :type=>"text/css"}
+    %script{:src=>"http://maps.google.com/maps/api/js?sensor=false"}
+    %script{:type=>"text/javascript", :src=>"/javascripts/OpenLayer/OpenLayers.js"}
+    %script{:type=>"text/javascript", :src=>"/javascripts/usersmap.js"}
+
+  %body{:onload=>"init()"}
+  #page
+    = partial('header')
+    #content= yield
+    = partial('footer')
