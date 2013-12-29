@@ -1,6 +1,11 @@
 #! /bin/bash
 #
 # Create the website
+#
+# To run with GITHUB token, first set 
+#
+#   export GITHUB_API_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxx
+#   
 
 
 # Helper functions
@@ -23,17 +28,16 @@ echo Github token=$GITHUB_API_TOKEN
 print_github_limits
 
 # curl http://github.com/api/v2/json/issues/list/pjotrp/bioruby-affy/open
-bundle exec ./bin/fetch-geminfo.rb $* > ./var/bio-projects.yaml1
-sed -e 's/!!null//g' < ./var/bio-projects.yaml1 > ./var/bio-projects.yaml
-bundle exec ./bin/fetch-geminfo.rb --rubygems > ./var/ruby-projects.yaml1
-sed -e 's/!!null//g' < ./var/ruby-projects.yaml1 > ./var/ruby-projects.yaml
-# bundle exec ./bin/fetch-geminfo.rb > ./var/bio-projects.yaml 
+bundle exec ./bin/fetch-geminfo.rb $* > ./data/bio-projects.yaml1
+sed -e 's/!!null//g' < ./data/bio-projects.yaml1 > ./data/bio-projects.yaml
+# bundle exec ./bin/fetch-geminfo.rb $* --rubygems > ./data/ruby-projects.yaml1
+# sed -e 's/!!null//g' < ./data/ruby-projects.yaml1 > ./data/ruby-projects.yaml
 
 # Create RSS feed for others to use
-bundle exec ./bin/rss.rb > website/site/rss.xml
+bundle exec ./bin/rss.rb > ./source/rss.xml
 
-# Generate site into website/site/
-staticmatic build website/
+# Generate site 
+bundle exec middleman server
 
 print_github_limits
 
