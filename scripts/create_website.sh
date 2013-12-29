@@ -5,6 +5,11 @@
 # To run with GITHUB token, first set 
 #
 #   export GITHUB_API_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxx
+#
+# run the small test with
+#
+#   ./scripts/create_website.sh --test
+#   
 #   
 
 
@@ -21,23 +26,31 @@ function print_github_limits {
   fi
 }
 
-
 # Work starts here
+mkdir -p ./data
 
 echo Github token=$GITHUB_API_TOKEN
 print_github_limits
+[ $? -ne 0 ] && exit 1
 
 # curl http://github.com/api/v2/json/issues/list/pjotrp/bioruby-affy/open
+echo "Fetching data/bio-projects.yaml"
 bundle exec ./bin/fetch-geminfo.rb $* > ./data/bio-projects.yaml1
+[ $? -ne 0 ] && exit 1
 sed -e 's/!!null//g' < ./data/bio-projects.yaml1 > ./data/bio-projects.yaml
+[ $? -ne 0 ] && exit 1
+echo "Fetching data/ruby-projects.yaml"
 # bundle exec ./bin/fetch-geminfo.rb $* --rubygems > ./data/ruby-projects.yaml1
 # sed -e 's/!!null//g' < ./data/ruby-projects.yaml1 > ./data/ruby-projects.yaml
 
 # Create RSS feed for others to use
+echo "Fetching data/rss.xml"
 bundle exec ./bin/rss.rb > ./source/rss.xml
+[ $? -ne 0 ] && exit 1
 
 # Generate site 
-bundle exec middleman server
+bundle exec middleman build
+[ $? -ne 0 ] && exit 1
 
 print_github_limits
 

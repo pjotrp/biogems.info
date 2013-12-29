@@ -32,6 +32,7 @@ end
 
 # Parse existing RSS feeds
 def parse_feed feed, tag, remark
+  $stderr.print "Parsing ",feed,"\n"
   tag = tag.downcase if !tag.nil?
   body = get_xml_with_retry(feed)
   if body.nil?
@@ -44,7 +45,7 @@ def parse_feed feed, tag, remark
     $stderr.puts "Could not parse RSS feed at #{feed}. RSS is not well formed."
     return nil
   end
-  if !remark.nil?
+  if !remark.nil? and output_feed and output_feed.items
     output_feed.items.each do |item|
       if item.class == RSS::Atom::Feed::Entry
         item.title.content = item.title.content + ' (' + remark + ')'
@@ -52,6 +53,8 @@ def parse_feed feed, tag, remark
         item.title = item.title + ' (' + remark + ')'
       end
     end
+  else
+    $stderr.print "WARNING: Failed to parse RSS feed "+feed+"!\n"
   end
   if !tag.nil?
     output_feed.items.select {
