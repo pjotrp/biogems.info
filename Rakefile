@@ -41,7 +41,7 @@ task :rss => [ "./source/rss.xml" ]
 
 desc "Fetch gem info and write to data directory (optionally use -- --test)"
 task :biogems do |t|
-  %x{./bin/create_data.sh #{ARGV.join(' ')} 1>&2}
+  %x{./bin/fetch-geminfo.rb #{ARGV.join(' ')} 1>&2}
 end
 
 task :default => [ :biogems ] do

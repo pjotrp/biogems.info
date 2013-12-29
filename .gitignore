@@ -6,3 +6,5 @@ contrib/
 source/rss.xml
 build/
 data/
+var/
+website/
