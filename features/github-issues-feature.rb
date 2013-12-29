@@ -18,6 +18,7 @@ end
 
 Then /^I should have fetched at least one issue$/ do
   # assuming biogems.info has one ;)
+  # If the API rate has been exceeded this may fail.
   @list.size.should > 0
 end
 
