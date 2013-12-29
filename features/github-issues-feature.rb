@@ -18,7 +18,7 @@ end
 
 Then /^I should have fetched at least one issue$/ do
   # assuming biogems.info has one ;)
-  # If the API rate has been exceeded this may fail.
+  # If the API rate has been exceeded this may fail. Make sure to set GITHUB_API_TOKEN first.
   @list.size.should > 0
 end
 

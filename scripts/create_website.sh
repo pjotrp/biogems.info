@@ -49,7 +49,7 @@ bundle exec ./bin/rss.rb > ./source/rss.xml
 [ $? -ne 0 ] && exit 1
 
 # Generate site 
-bundle exec middleman build
+bundle exec middleman build --verbose
 [ $? -ne 0 ] && exit 1
 
 print_github_limits
