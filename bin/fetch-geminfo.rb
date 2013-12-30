@@ -89,8 +89,8 @@ def check_url url
 end
 
 def get_versions name
-  url = "http://rubygems.org/api/v1/versions/#{name}.json"
-  versions = JSON.parse(Http::get_http_body(url))
+  url = "https://rubygems.org/api/v1/versions/#{name}.json"
+  versions = JSON.parse(Http::get_https_body(url))
   versions
 end
 
@@ -98,8 +98,9 @@ def get_downloads90 name, versions
   version_numbers = versions.map { | ver | ver['number'] }
   total = 0
   version_numbers.each do | ver |
-    url="http://rubygems.org/api/v1/versions/#{name}-#{ver}/downloads.yaml"
-    text = Http::get_http_body(url)
+    # curl https://rubygems.org/api/v1/versions/bio-logger-1.0.1/downloads.yaml
+    url="https://rubygems.org/api/v1/versions/#{name}-#{ver}/downloads.yaml"
+    text = Http::get_https_body(url)
     dated_stats = YAML::load(text)
     stats = dated_stats.map { | i | i[1] }
     ver_total90 = stats.inject {|sum, n| sum + n } 
