@@ -78,7 +78,7 @@ module ContentHelpers
       trend_direction = 0
       if false
         if rank90[name] < i - 4
-          trend_direction = +1
+          trend_direction = 1
         end
         if rank90[name] > i + 4
           trend_direction = -1
