@@ -1,7 +1,3 @@
-require 'json'
-require 'net/http'
-require 'uri'
-require 'biogems'
 
 Given(/^I have the biogems\.info project$/) do
 end
