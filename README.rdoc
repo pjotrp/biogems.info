@@ -74,4 +74,4 @@ This repository on github contains the source code for the
 http://biogems.info website.
 
 Biogems.info is an initiative by the BioRuby developers
-Copyright (C) 2011,2012 Pjotr Prins <pjotr.prins@thebird.nl> 
+Copyright (C) 2011,2012,2013,2014 Pjotr Prins <pjotr.prins@thebird.nl> 
