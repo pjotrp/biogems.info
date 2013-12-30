@@ -8,6 +8,10 @@ gem "middleman-livereload", "~> 3.1.0"
 # For faster file watcher updates on Windows:
 gem "wdm", "~> 0.1.0", :platforms => [:mswin, :mingw]
 
+# Javascript
+gem 'execjs' 
+gem 'therubyracer' 
+
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
 group :development do
