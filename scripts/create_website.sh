@@ -38,9 +38,9 @@ bundle exec ./bin/fetch-geminfo.rb $* > ./data/biogems.yaml1
 [ $? -ne 0 ] && exit 1
 sed -e 's/!!null//g' < ./data/biogems.yaml1 > ./data/biogems.yaml
 [ $? -ne 0 ] && exit 1
-echo "Fetching data/ruby-projects.yaml"
-# bundle exec ./bin/fetch-geminfo.rb $* --rubygems > ./data/ruby-projects.yaml1
-# sed -e 's/!!null//g' < ./data/ruby-projects.yaml1 > ./data/ruby-projects.yaml
+echo "Fetching data/rubygems.yaml"
+bundle exec ./bin/fetch-geminfo.rb $* --rubygems > ./data/rubygems.yaml1
+sed -e 's/!!null//g' < ./data/rubygems.yaml1 > ./data/rubygems.yaml
 
 # Create RSS feed for others to use
 echo "Fetching data/rss.xml"
