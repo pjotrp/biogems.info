@@ -12,7 +12,6 @@
 #   
 #   
 
-
 # Helper functions
 
 ## GitHub stats
@@ -34,10 +33,10 @@ print_github_limits
 [ $? -ne 0 ] && exit 1
 
 # curl http://github.com/api/v2/json/issues/list/pjotrp/bioruby-affy/open
-echo "Fetching data/bio-projects.yaml"
-bundle exec ./bin/fetch-geminfo.rb $* > ./data/bio-projects.yaml1
+echo "Fetching data/biogems.yaml"
+bundle exec ./bin/fetch-geminfo.rb $* > ./data/biogems.yaml1
 [ $? -ne 0 ] && exit 1
-sed -e 's/!!null//g' < ./data/bio-projects.yaml1 > ./data/bio-projects.yaml
+sed -e 's/!!null//g' < ./data/biogems.yaml1 > ./data/biogems.yaml
 [ $? -ne 0 ] && exit 1
 echo "Fetching data/ruby-projects.yaml"
 # bundle exec ./bin/fetch-geminfo.rb $* --rubygems > ./data/ruby-projects.yaml1
@@ -45,7 +44,7 @@ echo "Fetching data/ruby-projects.yaml"
 
 # Create RSS feed for others to use
 echo "Fetching data/rss.xml"
-bundle exec ./bin/rss.rb > ./source/rss.xml
+bundle exec ./bin/rss.rb $* > ./source/rss.xml
 [ $? -ne 0 ] && exit 1
 
 # Generate site 

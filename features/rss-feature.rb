@@ -8,7 +8,7 @@ Given /^I have one rss blog feed configured$/ do
 end
 
 When /^I parse the rss feed$/ do
-  @rss_feed = generate_biogems_rss_feed "test/data/bio-projects.yaml", "test/data/rss/rss-blogs.yaml"
+  @rss_feed = generate_biogems_rss_feed "test/data/biogems.yaml", "test/data/rss/rss-blogs.yaml"
 end
 
 Then /^the resulting rss feed should have the same contents as the rss feed$/ do
@@ -23,7 +23,7 @@ Given /^I have one atom blog feed configured$/ do
 end
 
 When /^I parse the atom feed$/ do
-  @atom_feed = generate_biogems_rss_feed "test/data/bio-projects.yaml", "test/data/rss/atom-blogs.yaml"
+  @atom_feed = generate_biogems_rss_feed "test/data/biogems.yaml", "test/data/rss/atom-blogs.yaml"
 end
 
 Then /^the resulting rss feed should have the same contents as the atom feed$/ do
