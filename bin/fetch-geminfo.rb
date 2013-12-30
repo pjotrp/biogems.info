@@ -155,7 +155,7 @@ end
 
 list_in_random_order = list.uniq.sort_by { rand }
 
-pool = Thread.pool(15)
+pool = Thread.pool(3) # fires up 3 Rubies - make sure you have the RAM :)
 
 list_in_random_order.each do | name |
   pool.process do
