@@ -127,7 +127,7 @@
               = dl.to_s
           %td{ :align => "right", :class => "#{rowclass}" }
             .dl
-              = dl90.to_s
+              = (dl90 > 0 ? dl90.to_s : '')
           %td{ :align => "right", :class => "#{rowclass}", :style => "background: #{c7_color}" }
             .commits
               - if src =~ /git/
