@@ -1,3 +1,3 @@
 #! /bin/sh
 
-bundle exec staticmatic preview website/
+bundle exec middleman server
