@@ -76,11 +76,13 @@ module ContentHelpers
       end
       # calc trend
       trend_direction = 0
-      if rank90[name] < i - 4
-        trend_direction = +1
-      end
-      if rank90[name] > i + 4
-        trend_direction = -1
+      if false
+        if rank90[name] < i - 4
+          trend_direction = +1
+        end
+        if rank90[name] > i + 4
+          trend_direction = -1
+        end
       end
       plugin[:authors] = [] if not plugin[:authors]
 
