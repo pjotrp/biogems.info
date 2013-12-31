@@ -27,7 +27,7 @@ module BiolinuxHelpers
       #   version: 1:2.2.25.20110713-3ubuntu2
       #   :tab: :biolinux
       #   :biomed: true
-      $stderr.print rec
+      # $stderr.print rec
       pkg = OpenStruct.new
       pkg.name = rec["name"]
       pkg.descr = rec["description"]
