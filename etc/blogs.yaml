@@ -11,18 +11,18 @@ blogs:
 #   - rss_feed: http://rubyminingsoc.wordpress.com/feed/
 #     gsoc_tag:
 #     remark: Alberto's GSoC
-  - rss_feed: http://wanzuhao.com/atom.xml
-    gsoc_tag:
-    remark: Zuhao's GSoC
+#  - rss_feed: http://wanzuhao.com/atom.xml
+#    gsoc_tag:
+#    remark: Zuhao's GSoC
 #  - rss_feed: http://gsocsemantic.wordpress.com/feed/
 #    gsoc_tag:
 #    remark: Will's GSoC
 #  - rss_feed: http://ankurgoel.com/atom.xml
 #    gsoc_tag:
 #    remark: Ankur's GSoC
-  - rss_feed: http://csw.github.com/bioruby-maf/atom.xml
-    gsoc_tag:
-    remark: Clayton's blog
+#  - rss_feed: http://csw.github.com/bioruby-maf/atom.xml
+#    gsoc_tag:
+#    remark: Clayton's blog
   - rss_feed: http://sciruby.com/atom.xml
     gsoc_tag:
     remark: SciRuby

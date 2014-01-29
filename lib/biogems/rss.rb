@@ -139,17 +139,21 @@ def get_xml_with_retry url
     count += 1
     $stderr.print "Fetching "+url+" #{count}\n" if $is_debug
     body = Net::HTTP.get(URI(url)) if body.nil?
-    # Somehow the XML is never correct!
-    # if !body.nil? and body != ""
+    # Sometimes a feed fails and needs more tries
+    if body.nil? or body.strip == ""
       # protection from incomplete xml file
-      # if not Nokogiri::XML(body).validate
-      #   print body
-      #   raise "XML incomplete"
-      # end
-    # end
+      if not Nokogiri::XML(body).validate
+        $stderr.print "Incomplete body {",body,"}\n"
+        raise "XML incomplete"
+      end
+    end
   rescue Exception => e
     $stderr.print e.message
-    retry if count < 5
+    if count < 5
+      $stderr.print "Retry (#{count})\n"
+      sleep 1
+      retry 
+    end
   end
   return body
 end
