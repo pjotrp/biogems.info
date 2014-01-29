@@ -23,11 +23,11 @@ def generate_biogems_rss_feed biogems_file, blogs_file, max_entries = 25, is_tes
   biogem_releases = parse_biogem_data(biogems_file)
   feeds.push biogem_releases
   huge_feed = merge_rss_feeds(feeds)
-  output_feed = extract_most_recent(max_entries, huge_feed)
-  output_feed.channel.title = "biogems.info"
-  output_feed.channel.link = "http://biogems.info/rss.html"
-  output_feed.channel.description = "Ruby for bioinformatics"
-  output_feed
+  parsed_feed = extract_most_recent(max_entries, huge_feed)
+  parsed_feed.channel.title = "biogems.info"
+  parsed_feed.channel.link = "http://biogems.info/rss.html"
+  parsed_feed.channel.description = "Ruby for bioinformatics"
+  parsed_feed
 end
 
 # Parse existing RSS feeds
@@ -40,13 +40,13 @@ def parse_feed feed, tag, remark
     return nil 
   end
   begin
-    output_feed = RSS::Parser.parse body, false
+    parsed_feed = RSS::Parser.parse body, false
   rescue RSS::NotWellFormedError => e
     $stderr.puts "Could not parse RSS feed at #{feed}. RSS is not well formed."
     return nil
   end
-  if !remark.nil? and output_feed and output_feed.items
-    output_feed.items.each do |item|
+  if !remark.nil? and parsed_feed and parsed_feed.items
+    parsed_feed.items.each do |item|
       if item.class == RSS::Atom::Feed::Entry
         item.title.content = item.title.content + ' (' + remark + ')'
       else
@@ -57,10 +57,10 @@ def parse_feed feed, tag, remark
     $stderr.print "WARNING: Failed to parse RSS feed "+feed+"!\n"
   end
   if !tag.nil?
-    output_feed.items.select {
+    parsed_feed.items.select {
       |item| item.categories.map {|category| category.content}.join.downcase.include? tag}
   end
-  output_feed
+  parsed_feed
 end
 
 # Parse the biogem release info and return RSS object
@@ -117,14 +117,14 @@ def merge_rss_feeds feeds
 end
 
 def extract_most_recent how_many, feed
-  output_feed = RSS::Maker.make(rss_version) do |m|
+  parsed_feed = RSS::Maker.make(rss_version) do |m|
     set_bogus_header m
   end
-  output_feed.items.concat feed.items
-  output_feed.items.sort! { |a, b| b.date <=> a.date }
-  while !(output_feed.items.delete_at(how_many)).nil?
+  parsed_feed.items.concat feed.items
+  parsed_feed.items.sort! { |a, b| b.date <=> a.date }
+  while !(parsed_feed.items.delete_at(how_many)).nil?
   end
-  output_feed
+  parsed_feed
 end
 
 def get_xml_with_retry url
