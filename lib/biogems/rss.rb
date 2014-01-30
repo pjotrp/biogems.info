@@ -35,7 +35,7 @@ def parse_feed feed, tag, remark
   $stderr.print "Parsing ",feed,"\n"
   tag = tag.downcase if !tag.nil?
   body = get_xml_with_retry(feed)
-  if body.nil?
+  if body.nil? or body == ""
     $stderr.puts "WARNING: Received empty body for feed "+feed
     return nil 
   end
@@ -53,13 +53,11 @@ def parse_feed feed, tag, remark
         item.title = item.title + ' (' + remark + ')'
       end
     end
-  else
-    $stderr.print "WARNING: Failed to parse RSS feed "+feed+"!\n"
   end
-  if !tag.nil?
-    parsed_feed.items.select {
-      |item| item.categories.map {|category| category.content}.join.downcase.include? tag}
-  end
+  # if !tag.nil?
+  #   parsed_feed.items.select {
+  #      |item| item.categories.map {|category| category.content}.join.downcase.include? tag}
+  # end
   parsed_feed
 end
 
@@ -127,6 +125,23 @@ def extract_most_recent how_many, feed
   parsed_feed
 end
 
+def fetch(uri_str, limit = 5)
+  # You should choose better exception.
+  raise ArgumentError, 'HTTP redirect too deep' if limit == 0
+
+  url = URI.parse(uri_str)
+  # req = Net::HTTP::Get.new(url.path, { 'User-Agent' => ua })
+  req = Net::HTTP::Get.new(url.path)
+  response = Net::HTTP.start(url.host, url.port) { |http| http.request(req) }
+  case response
+    when Net::HTTPSuccess     then response
+    when Net::HTTPRedirection then fetch(response['location'], limit - 1)
+  else
+    response.error!
+  end
+end
+
+
 def get_xml_with_retry url
   if !url.start_with?("http")
     return File.new(url).read
@@ -138,24 +153,26 @@ def get_xml_with_retry url
   begin 
     count += 1
     $stderr.print "Fetching "+url+" #{count}\n" if $is_debug
-    body = Net::HTTP.get(URI(url)) if body.nil?
-    # Sometimes a feed fails and needs more tries
+    # body = Net::HTTP.get(URI(url)) if body.nil?
+    body = fetch(url).body
     if body.nil? or body.strip == ""
-      # protection from incomplete xml file
-      if not Nokogiri::XML(body).validate
-        $stderr.print "Incomplete body {",body,"}\n"
-        raise "XML incomplete"
-      end
+      raise "Empty body"
     end
+    # retry on incomplete xml file
+    # if not Nokogiri::XML(body).validate
+    #   $stderr.print "Incomplete body {",body,"}\n"
+    #   raise "XML incomplete"
+    # end
   rescue Exception => e
     $stderr.print e.message
-    if count < 5
-      $stderr.print "Retry (#{count})\n"
+    if count < 3
+      $stderr.print " Retry (#{count})\n"
       sleep 1
       retry 
     end
+    raise e
   end
-  return body
+  body
 end
 
 def set_bogus_header m
