@@ -225,7 +225,7 @@ list_in_random_order.each do | name |
       added = {} if not added 
       info = info.merge(added)
     end
-    next if info[:status].to_s =~ /^delete/i
+    next if info[:status].to_s =~ /^(delete|disable|remove)/i 
     # Replace http with https
     for uri in [:source_code_uri, :homepage, :homepage_uri, :project_uri] do
       if info[uri] =~ /^http:\/\/github/
