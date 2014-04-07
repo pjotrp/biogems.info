@@ -15,11 +15,11 @@ allow for rapid creation of new software modules with a command line interface,
 a testing frame work and support for the Travis testing service. 
 
 In addition we will discuss how the BioRuby community is making great strides
-in leveraging web technologies for data analysis with web services and
-towards linked data. 
+in leveraging web technologies for biomedical data analysis using web services and
+linked data. This opens heterogeneous data silos and facilitates easier data integration
+in bioinformatic analysis pipelines.
 
-We would like to track other Bio* projects in http://biogems.info/ and make it
-a more comprehensive resource for OBF. The BOSC meeting will allow us to fine
-tune such ideas.
-
-
+We aim to track other Bio* projects in http://biogems.info/ and expand it to become
+a comprehensive resource for the Open Bioinformatics Foundation. The BOSC meeting
+will allow us to fine tune such ideas and gather feedback from the bioinformatics
+community.
