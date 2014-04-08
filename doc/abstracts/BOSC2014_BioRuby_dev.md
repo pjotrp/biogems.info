@@ -2,8 +2,7 @@
 
 With the distributed development of biogems, as listed on http://biogems.info/,
 the BioRuby community is one of the most active Open Bioinformatics Foundation
-communities in terms of number of projects (over a century now), git commits and
-library downloads.
+communities in terms of number of projects, git commits and library downloads.
 
 In this talk we will quantify and visualize what it means to allow contributing
 independent small modules and tools to the bioinformatics community. Not only
