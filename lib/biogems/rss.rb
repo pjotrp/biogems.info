@@ -129,15 +129,19 @@ def fetch(uri_str, limit = 5)
   # You should choose better exception.
   raise ArgumentError, 'HTTP redirect too deep' if limit == 0
 
-  url = URI.parse(uri_str)
-  # req = Net::HTTP::Get.new(url.path, { 'User-Agent' => ua })
-  req = Net::HTTP::Get.new(url.path)
-  response = Net::HTTP.start(url.host, url.port) { |http| http.request(req) }
-  case response
-    when Net::HTTPSuccess     then response
-    when Net::HTTPRedirection then fetch(response['location'], limit - 1)
-  else
-    response.error!
+  begin
+    url = URI.parse(uri_str)
+    # req = Net::HTTP::Get.new(url.path, { 'User-Agent' => ua })
+    req = Net::HTTP::Get.new(url.path)
+    response = Net::HTTP.start(url.host, url.port) { |http| http.request(req) }
+    case response
+      when Net::HTTPSuccess     then response
+      when Net::HTTPRedirection then fetch(response['location'], limit - 1)
+    else
+      response.error!
+    end
+  rescue SocketError
+    $stderr.print "RSS parser can not connect to #{uri_str}!\n"
   end
 end
 
