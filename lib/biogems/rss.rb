@@ -152,7 +152,7 @@ def get_xml_with_retry url
   end
 
   body = nil
-  # will try 5 times to get a complete xml document
+  # will try multiple times to get a complete xml document
   count = 0
   begin 
     count += 1
@@ -174,7 +174,7 @@ def get_xml_with_retry url
       sleep 1
       retry 
     end
-    raise e
+    return nil
   end
   body
 end
