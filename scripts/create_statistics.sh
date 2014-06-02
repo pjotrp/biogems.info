@@ -5,5 +5,7 @@ if [ ! -e 'data/biogems.yaml' ]; then
   exit 1
 fi
 
+mkdir -p data/repositories
+
 ./bin/fetch-repositories.rb data/biogems.yaml
 

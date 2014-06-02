@@ -23,8 +23,9 @@ is_rubygems = ARGV.index('--rubygems')
 is_biogems = !is_rubygems
 
 # We fetch all gems automatically that start with bio- (bio dash). 
-# This is the list of biogems not starting with bio- (bio dash)
-ADD = %w{ bio ruby-ensembl-api genfrag eutils dna_sequence_aligner intermine intermine-bio scaffolder biodiversity goruby sequenceserver
+# This is the list of biogems not starting with bio- (bio dash) - actually this should move to 
+# /etc!
+ADD = %w{ bio ruby-ensembl-api genfrag eutils dna_sequence_aligner intermine-bio scaffolder biodiversity goruby sequenceserver
 }
 
 $stderr.print "# testing!!\n" if is_testing
