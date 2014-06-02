@@ -25,8 +25,7 @@ is_biogems = !is_rubygems
 # We fetch all gems automatically that start with bio- (bio dash). 
 # This is the list of biogems not starting with bio- (bio dash) - actually this should move to 
 # /etc!
-ADD = %w{ bio ruby-ensembl-api genfrag eutils dna_sequence_aligner biodiversity goruby 
-}
+# ADD = %w{ }
 
 $stderr.print "# testing!!\n" if is_testing
 print "# testing!!\n" if is_testing
@@ -47,7 +46,7 @@ if is_biogems
     list = `gem list -r --no-versions bio-`.split(/\n/)
     prerelease = `gem search -r --prerelease --no-versions bio-`.split(/\n/)
     list += prerelease
-    list += ADD
+    # list += ADD
     list += Dir.glob("./etc/biogems/*.yaml").map { |fn| File.basename(fn).sub(/.yaml$/,'') }
   end
 end
