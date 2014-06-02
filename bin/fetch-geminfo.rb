@@ -156,13 +156,14 @@ end
 
 list_in_random_order = list.uniq.sort_by { rand }
 
-pool = Thread.pool(3) # fires up 3 Rubies - make sure you have the RAM :)
+# pool = Thread.pool(3) # fires up 3 Rubies - make sure you have the RAM :)
 
 list_in_random_order.each do | name |
-  pool.process do
+  # pool.process do
     $stderr.print name,"\n" if $is_debug
     info = Hash.new
     # Fetch the gem YAML definition of the project
+    $stderr.print "bundle exec gem specification -r #{name.strip}\n" if $is_debug
     fetch = `bundle exec gem specification -r #{name.strip}`
     if fetch != ''
       spec = YAML::load(fetch)
@@ -186,7 +187,7 @@ list_in_random_order.each do | name |
     request = Net::HTTP::Get.new(uri.request_uri)
     response = http.request(request)
     if response.code.to_i==200
-      # print response.body
+      $stderr.print response.body if $is_debug
       biogems = YAML::load(response.body)
       info[:downloads] = biogems["downloads"]
       info[:version_downloads] = biogems["version_downloads"]
@@ -203,6 +204,7 @@ list_in_random_order.each do | name |
     info[:docs_uri] = "http://rubydoc.info/gems/#{name}/#{info[:version]}/frames" if not info[:docs_uri]
     versions = get_versions(name)
     info[:downloads90] = get_downloads90(name, versions)
+    $stderr.print info if $is_debug
     # if a gem is less than one month old, mark it as new
     if versions.size <= 5
       is_new = true
@@ -225,7 +227,10 @@ list_in_random_order.each do | name |
       added = {} if not added 
       info = info.merge(added)
     end
-    next if info[:status].to_s =~ /^(delete|disable|remove)/i 
+    if info[:status].to_s =~ /^(delete|disable|remove)/i 
+      $stderr.print info[:status]," skipping!\n" if $is_debug
+      next 
+    end
     # Replace http with https
     for uri in [:source_code_uri, :homepage, :homepage_uri, :project_uri] do
       if info[uri] =~ /^http:\/\/github/
@@ -247,11 +252,13 @@ list_in_random_order.each do | name |
       end
     end
 
+    $stderr.print info if $is_debug
+    $stderr.print "---> Completed #{name}\n"
     projects[name] = info
-  end
+  # end
 end
 
-pool.shutdown
+# pool.shutdown
 
 # Read the status of bio-core, bio-core-ext and bio-biolinux
 # packages

@@ -22,6 +22,9 @@ module BioGemInfo
       https.use_ssl = true
       https.verify_mode = OpenSSL::SSL::VERIFY_PEER
       https.ca_path = '/etc/ssl/certs' if File.exists?('/etc/ssl/certs') # Ubuntu
+      # curl http://curl.haxx.se/ca/cacert.pem -o /etc/pki/tls/certs/ca-bundle.crt
+      https.ca_file = '/etc/pki/tls/certs/ca-bundle.crt' if File.exists?('/etc/pki/tls/certs/ca-bundle.crt')
+
       https.ca_file = '/opt/local/share/curl/curl-ca-bundle.crt' if File.exists?('/opt/local/share/curl/curl-ca-bundle.crt') # Mac OS X
       https.read_timeout = 60
       request = Net::HTTP::Get.new(uri.request_uri, initheader)
