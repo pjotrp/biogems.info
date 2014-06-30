@@ -13,6 +13,7 @@ geminfo.each do | name, info |
   project = info[:github_project]
   p [name, user, project]
   dir = 'data/repositories/'+project
-  Dir.mkdir(dir)
+  p dir
+  # Dir.mkdir(dir)
 end
 

@@ -1,7 +1,9 @@
 #! /bin/bash
 
-if [ ! -e 'data/biogems.yaml' ]; then
-  echo "Update biogems.yaml first!"
+yaml=$1
+
+if [ ! -e $yaml ]; then
+  echo "Update biogems.yaml ($yaml) first!"
   exit 1
 fi
 
