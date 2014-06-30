@@ -12,8 +12,12 @@ geminfo.each do | name, info |
   user = info[:github_user]
   project = info[:github_project]
   p [name, user, project]
-  dir = 'data/repositories/'+project
-  p dir
-  # Dir.mkdir(dir)
+  if project
+    dir = 'data/repositories/'+project
+    p dir
+    # Dir.mkdir(dir)
+  else
+    $stderr.print "WARNING: no project defined for #{name}!\n"
+  end
 end
 
