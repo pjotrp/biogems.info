@@ -11,8 +11,12 @@ class BiolinuxManifest
   end
 
   def each
-    @pkgs.each do |p| 
-      yield p 
+    if @pkgs
+      @pkgs.each do |p| 
+        yield p 
+      end
+    else
+      $stderr.print("WARNING: BioLinux manifest not found\n")
     end
   end
 
