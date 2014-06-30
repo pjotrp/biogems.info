@@ -20,8 +20,8 @@ website is through
 ./scripts/create_website.sh
 ```
 
-which pulls current information for rubygems.org and github.com. The bulk of the work 
-happens in
+which pulls current information for rubygems.org and github.com, as well as
+cached statistics. The bulk of the work happens in
 
 ```sh
 bundle exec ./bin/fetch-geminfo.rb $* > ./data/biogems.yaml1
@@ -29,7 +29,7 @@ bundle exec middleman build --verbose
 ```
 
 We take ./data/biogems.yaml as the starting point for fetching all the git
-repositories. After creating bioyems.yaml1 this will happen with
+repositories. After creating ./data/bioyems.yaml this happens with
 
 ```sh
 ./scripts/update_statistics.sh
@@ -51,6 +51,12 @@ Probably need to install nokogiri separately with dependencies. Next create the 
 env GITHUB_API_TOKEN="XXXXXX" ./scripts/create_website.sh
 ```
 
+or if you have the key elsewhere
+
+```sh
+env GITHUB_API_TOKEN=`cat $HOME/.GITHUB_API_TOKEN` ./scripts/create_website.sh
+```
+
 So that ./data/biogems.yaml contains entries for every registered gem. The base entries are the
 package names, but what interests us mostly are the entries
 
@@ -62,6 +68,10 @@ package names, but what interests us mostly are the entries
 which allow us to clone and update the project source trees with
 
 ```sh
-env GITHUB_API_TOKEN="XXXXXX" ./scripts/create_statistics.sh
+./scripts/update_git_repos.sh data/biogems.yaml
+```
+
+```sh
+env GITHUB_API_TOKEN=`cat $HOME/.GITHUB_API_TOKEN` ./scripts/create_statistics.sh
 ```
 
