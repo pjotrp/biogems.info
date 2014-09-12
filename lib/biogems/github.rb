@@ -42,6 +42,7 @@ module BioGemInfo
       if ENV['GITHUB_API_TOKEN']
         { 'Authorization' => "token #{ENV['GITHUB_API_TOKEN']}" }
       else
+        $stderr.print "No GITHUP_API_TOKEN defined\n"
         {}
       end
     end
