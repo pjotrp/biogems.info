@@ -29,6 +29,8 @@ function print_github_limits {
 mkdir -p ./data
 
 echo Github token=$GITHUB_API_TOKEN
+export GITHUB_API_TOKEN=$GITHUB_API_TOKEN
+
 print_github_limits
 [ $? -ne 0 ] && exit 1
 

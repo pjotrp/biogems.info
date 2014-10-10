@@ -10,12 +10,14 @@ require 'yaml'
 require 'net/http'
 require 'uri'
 require 'biogems'
-require 'thread/pool'
+# require 'thread/pool'
 
 include BioGemInfo
 include BioGemInfo::GitHub
 
 IS_NEW_IN_DAYS = 7*6   # 6 weeks
+
+$stderr.print ENV['GITHUB_API_TOKEN']
 
 $is_debug = ARGV.index('--debug')  
 is_testing = ARGV.index('--test')  
@@ -122,7 +124,7 @@ def update_status(projects)
   end
 end
 
-list_in_random_order = list.uniq.sort_by { rand }
+list_in_random_order = list.uniq # .sort_by { rand }
 
 # pool = Thread.pool(3) # fires up 3 Rubies - make sure you have the RAM :)
 
