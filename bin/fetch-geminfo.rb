@@ -201,7 +201,8 @@ list_in_random_order.each do | name |
       info[:dependencies] = biogems["dependencies"]
       # query for recent downloads
     else
-      raise Exception.new("Response code for #{name} is "+response.code)
+      $stderr.print "ERROR: Response code for #{name} is #{response.code}, skipping...\n"
+      next
     end
     info[:docs_uri] = "http://rubydoc.info/gems/#{name}/#{info[:version]}/frames" if not info[:docs_uri]
     versions = get_versions(name)
