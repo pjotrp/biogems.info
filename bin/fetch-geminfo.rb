@@ -79,26 +79,6 @@ def get_downloads90 name, versions
   total
 end
 
-def get_github_commit_stats github_uri
-  user,project = get_github_user_project(github_uri)
-  url = "https://github.com/#{user}/#{project}/graphs/participation"
-  $stderr.print url if $is_debug
-  body = Http::get_https_body(url)
-  if body.strip == "" || body.nil? || body == "{}"
-    # try once more
-    body = Http::get_https_body(url)
-  end
-  if body.strip == "" || body.nil?
-    # data not retrieved, set safe default for JSON parsing
-    body = "{}"
-  end
-  stats = JSON.parse(body)
-  if stats.empty?
-    return nil
-  else
-    return stats['all']
-  end
-end
 
 def update_status(projects)
   for biogem in ['bio-biolinux','bio-core-ext','bio-core','bio'] do 
@@ -169,7 +149,8 @@ list_in_random_order.each do | name |
       info[:dependencies] = biogems["dependencies"]
       # query for recent downloads
     else
-      raise Exception.new("Response code for #{name} is "+response.code)
+      $stderr.print "ERROR: Response code for #{name} is #{response.code}, skipping...\n"
+      next
     end
     info[:docs_uri] = "http://rubydoc.info/gems/#{name}/#{info[:version]}/frames" if not info[:docs_uri]
     versions = get_versions(name)

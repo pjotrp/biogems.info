@@ -1,3 +1,7 @@
+# Github support. Test methods by hand with
+#
+# curl -H "Authorization: token XXXXXXXX" "https://api.github.com/repos/pjotrp/bigbio/stats/participation"
+
 module BioGemInfo
 
   module GitHub
@@ -22,6 +26,33 @@ module BioGemInfo
 
     def valid_github_url user, project
       check_url("http//github.com/#{user}/#{project}")
+    end
+
+    def get_github_commit_stats github_uri
+      begin
+        user,project = get_github_user_project(github_uri)
+        # url = "https://github.com/#{user}/#{project}/stats/participation"
+        url = "https://api.github.com/repos/#{user}/#{project}/stats/participation"
+        $stderr.print url if $is_debug
+        body = Http::get_https_body(url)
+        if body.strip == "" || body.nil? || body == "{}"
+          # try once more
+          body = Http::get_https_body(url)
+        end
+        if body.strip == "" || body.nil?
+          # data not retrieved, set safe default for JSON parsing
+          body = "{}"
+        end
+        stats = JSON.parse(body)
+      rescue
+        $stderr.print "Print could not fetch ",url,"\n"
+        return nil
+      end
+      if stats.empty?
+        return nil
+      else
+        return stats['all']
+      end
     end
 
     def github_api_helper github_uri, method
