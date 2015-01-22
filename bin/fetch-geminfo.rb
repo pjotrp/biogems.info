@@ -127,7 +127,7 @@ def get_github_commit_stats github_uri
     end
     stats = JSON.parse(body)
   rescue
-    $stderr.print "Print could not fetch ",url
+    $stderr.print "Print could not fetch ",url,"\n"
     return nil
   end
   if stats.empty?
