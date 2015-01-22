@@ -112,19 +112,24 @@ def get_downloads90 name, versions
 end
 
 def get_github_commit_stats github_uri
-  user,project = get_github_user_project(github_uri)
-  url = "https://github.com/#{user}/#{project}/graphs/participation"
-  $stderr.print url if $is_debug
-  body = Http::get_https_body(url)
-  if body.strip == "" || body.nil? || body == "{}"
-    # try once more
+  begin
+    user,project = get_github_user_project(github_uri)
+    url = "https://github.com/#{user}/#{project}/graphs/participation"
+    $stderr.print url if $is_debug
     body = Http::get_https_body(url)
+    if body.strip == "" || body.nil? || body == "{}"
+      # try once more
+      body = Http::get_https_body(url)
+    end
+    if body.strip == "" || body.nil?
+      # data not retrieved, set safe default for JSON parsing
+      body = "{}"
+    end
+    stats = JSON.parse(body)
+  rescue
+    $stderr.print "Print could not fetch ",url
+    return nil
   end
-  if body.strip == "" || body.nil?
-    # data not retrieved, set safe default for JSON parsing
-    body = "{}"
-  end
-  stats = JSON.parse(body)
   if stats.empty?
     return nil
   else
