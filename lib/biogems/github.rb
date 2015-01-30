@@ -34,10 +34,10 @@ module BioGemInfo
         # url = "https://github.com/#{user}/#{project}/stats/participation"
         url = "https://api.github.com/repos/#{user}/#{project}/stats/participation"
         $stderr.print url if $is_debug
-        body = Http::get_https_body(url)
+        body = Http::get_https_body(url, auth_header)
         if body.strip == "" || body.nil? || body == "{}"
           # try once more
-          body = Http::get_https_body(url)
+          body = Http::get_https_body(url, auth_header)
         end
         if body.strip == "" || body.nil?
           # data not retrieved, set safe default for JSON parsing
