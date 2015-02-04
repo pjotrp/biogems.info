@@ -43,7 +43,7 @@ list = []
 if is_biogems
   # We re-read the last information from the resident YAML file.
   if is_testing
-    list = ['bio-logger', 'bio-table']
+    list = ['bio-logger', 'bio-table', 'bio-incanter']
   else
     list = `gem list -r --no-versions bio-`.split(/\n/)
     prerelease = `gem search -r --prerelease --no-versions bio-`.split(/\n/)
@@ -226,9 +226,9 @@ list_in_random_order.each do | name |
     for uri in [:source_code_uri, :homepage, :homepage_uri, :project_uri] do
       if info[uri] =~ /^https:\/\/github\.com/
         project_info = get_github_project_info(info[uri])
-        p project_info
         info[:num_issues] = project_info["open_issues"]
         info[:num_stargazers] = project_info["stargazers_count"]
+
         user,project = get_github_user_project(info[uri])
         info[:github_user] = user
         info[:github_project] = project

@@ -15,8 +15,11 @@ module BioGemInfo
     end
 
     # Pass in a project URI, and return the issue list
+    # It may be an empty hash on error
     def get_github_project_info github_uri
-      result = github_api_helper github_uri
+      res = github_api_helper(github_uri)
+      return {} if res == []
+      res
     end
 
     # Pass in a project URI, and return the issue list
@@ -59,7 +62,8 @@ module BioGemInfo
         return stats['all']
       end
     end
-    
+
+    # Returns empty array on error
     def github_api_helper github_uri, method = nil
       user,project = get_github_user_project(github_uri)
       url = "https://api.github.com/repos/#{user}/#{project}"
