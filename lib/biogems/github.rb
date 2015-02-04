@@ -15,6 +15,11 @@ module BioGemInfo
     end
 
     # Pass in a project URI, and return the issue list
+    def get_github_project_info github_uri
+      result = github_api_helper github_uri
+    end
+
+    # Pass in a project URI, and return the issue list
     def get_github_issues github_uri
       github_api_helper github_uri,'issues'
     end
@@ -54,10 +59,11 @@ module BioGemInfo
         return stats['all']
       end
     end
-
-    def github_api_helper github_uri, method
+    
+    def github_api_helper github_uri, method = nil
       user,project = get_github_user_project(github_uri)
-      url = "https://api.github.com/repos/#{user}/#{project}/#{method}"
+      url = "https://api.github.com/repos/#{user}/#{project}"
+      url += "/#{method}" if method
       # $stderr.print url,"\n"
       res = JSON.parse(Http::get_https_body(url, auth_header))
       if res == nil or res == {}
