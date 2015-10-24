@@ -35,7 +35,10 @@ print_github_limits
 [ $? -ne 0 ] && exit 1
 
 # curl http://github.com/api/v2/json/issues/list/pjotrp/bioruby-affy/open
-echo "Fetching data/biogems.yaml"
+echo "RUNNING ./bin/fetch-gemlist.rb $* > data/gemlist_biogems.yaml"
+./bin/fetch-gemlist.rb $* > data/gemlist_biogems.yaml
+
+exit 1
 bundle exec ./bin/fetch-geminfo.rb $* > ./data/biogems.yaml1
 [ $? -ne 0 ] && exit 1
 sed -e 's/!!null//g' < ./data/biogems.yaml1 > ./data/biogems.yaml

@@ -1,8 +1,10 @@
 #!/usr/bin/env ruby
 #
-# This script fetches information from the gem tool and
-# enriches that with information from the YAML files in
-# ./etc/biogem
+# This is the first step for generating the website.
+#
+# This script fetches the main biogem list using the gem tool and
+# enriches that with information from the YAML files in ./etc/biogem
+
 
 $: << "lib"
 

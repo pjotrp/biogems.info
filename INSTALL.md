@@ -37,6 +37,18 @@ run a quicker test with
 
   ./bin/fetch-gemlist.rb --test
 
+### Expand rubygems info
+
+Use the YAML output from the first step to expand package information
+
+  ./bin/fetch-geminfo.rb < list.yaml
+
+### Fetch github info
+
+to run with the GITHUB TOKEN
+
+  env GITHUB_API_TOKEN="3b3955c1b672d0c4a7b812f995b4d884b438d854" ./scripts/create_website.sh --test
+
 ## Troubleshooting
 
 If you get an error
