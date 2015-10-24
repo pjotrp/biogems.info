@@ -33,6 +33,10 @@ is done with
 
   ./bin/fetch-gemlist.rb
 
+run a quicker test with
+
+  ./bin/fetch-gemlist.rb --test
+
 ## Troubleshooting
 
 If you get an error

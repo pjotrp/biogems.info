@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
 #
-# This script fetches information from the gem
-# tool
+# This script fetches information from the gem tool and
+# enriches that with information from the YAML files in
+# ./etc/biogem
 
 $: << "lib"
 
@@ -41,7 +42,11 @@ end
 raise "gem should not be there" if h['bio-publisci']
 
 if is_testing
-  list = list[0..3]
+  h2 = {}
+  h.keys.first(4).each { | k |
+    h2[k] = h[k]
+  }
+  h = h2
 end
 
 $stderr.print "Output YAML\n"
