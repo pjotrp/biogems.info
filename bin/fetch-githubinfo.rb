@@ -52,7 +52,7 @@ end
 h = YAML.load(ARGF.read)
 
 h.each do | gem, info |
-  print gem,"\n"
+  $stderr.print "Fetching github info for ",gem,"\n"
   for uri in [:source_code_uri, :homepage, :homepage_uri, :project_uri] do
      if info[uri] =~ /^http:\/\/github/
        info[uri].sub!(/^http:\/\/github\.com/,"https://github.com")

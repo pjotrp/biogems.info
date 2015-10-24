@@ -33,7 +33,7 @@ is done with
 
 run a quicker test with
 
-  ./bin/fetch-gemlist.rb --test
+  ./bin/fetch-gemlist.rb --test > data/gemlist_biogems.yaml
 
 ### Expand rubygems info
 
@@ -54,9 +54,10 @@ or
 In the third step fetch github information and run with the GITHUB TOKEN
 
 ```sh
-env GITHUB_API_TOKEN="3b3955c1b672d0c4a7" ./bin/fetch-githubinfo.rg < data/geminfo_biogems.yaml
+env GITHUB_API_TOKEN="3b3955c1b672d0c4a7" ./bin/fetch-githubinfo.rg < data/geminfo_biogems.yaml > data/biogems.yaml
 ```
-  
+
+
 ## Troubleshooting
 
 If you get an error

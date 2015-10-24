@@ -38,7 +38,11 @@ print_github_limits
 echo "RUNNING ./bin/fetch-gemlist.rb $* > data/gemlist_biogems.yaml"
 ./bin/fetch-gemlist.rb $* > data/gemlist_biogems.yaml
 
-exit 1
+echo "RUNNING ./bin/fetch-geminfo.rb < data/gemlist_biogems.yaml >data/geminfo_biogems.yaml"
+./bin/fetch-geminfo.rb < data/gemlist_biogems.yaml >data/geminfo_biogems.yaml
+
+./bin/fetch-githubinfo.rg < data/geminfo_biogems.yaml > data/biogems.yaml
+
 bundle exec ./bin/fetch-geminfo.rb $* > ./data/biogems.yaml1
 [ $? -ne 0 ] && exit 1
 sed -e 's/!!null//g' < ./data/biogems.yaml1 > ./data/biogems.yaml
