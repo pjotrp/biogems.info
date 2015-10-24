@@ -1,3 +1,5 @@
+require 'openssl'
+
 module BioGemInfo
 
   module Http
