@@ -37,13 +37,14 @@ print_github_limits
 # curl http://github.com/api/v2/json/issues/list/pjotrp/bioruby-affy/open
 echo "RUNNING ./bin/fetch-gemlist.rb $* > data/gemlist_biogems.yaml"
 ./bin/fetch-gemlist.rb $* > data/gemlist_biogems.yaml
+[ $? -ne 0 ] && exit 1
 
 echo "RUNNING ./bin/fetch-geminfo.rb < data/gemlist_biogems.yaml >data/geminfo_biogems.yaml"
 ./bin/fetch-geminfo.rb < data/gemlist_biogems.yaml >data/geminfo_biogems.yaml
+[ $? -ne 0 ] && exit 1
 
-./bin/fetch-githubinfo.rg < data/geminfo_biogems.yaml > data/biogems.yaml
-
-bundle exec ./bin/fetch-geminfo.rb $* > ./data/biogems.yaml1
+echo "RUNNING ./bin/fetch-githubinfo.rb < data/geminfo_biogems.yaml > data/biogems.yaml"
+./bin/fetch-githubinfo.rb < data/geminfo_biogems.yaml > data/biogems.yaml
 [ $? -ne 0 ] && exit 1
 
 
@@ -54,13 +55,13 @@ bundle exec ./bin/fetch-geminfo.rb $* > ./data/biogems.yaml1
 # sed -e 's/!!null//g' < ./data/rubygems.yaml1 > ./data/rubygems.yaml
 
 # Create RSS feed for others to use
-echo "Fetching data/rss.xml"
-./bin/rss.rb $* > ./source/rss.xml
-[ $? -ne 0 ] && exit 1
+# echo "Fetching data/rss.xml"
+# ./bin/rss.rb $* > ./source/rss.xml
+# [ $? -ne 0 ] && exit 1
 
 # Generate site 
-bundle exec middleman build --verbose
-[ $? -ne 0 ] && exit 1
+# middleman build --verbose
+# [ $? -ne 0 ] && exit 1
 
 print_github_limits
 
