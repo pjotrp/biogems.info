@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 #
 # This script fetches information of bioruby gems by querying the gem
-# tool and outputs a list of projects:
+# tool and outputs a list of projects as JSON
 #
 #   ./bin/gem_list.rb            > data/gem_list_biogems.json
 #   ./bin/gem_list.rb --rubygems > data/gem_list_rubygems.json
