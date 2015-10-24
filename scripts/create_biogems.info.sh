@@ -45,15 +45,17 @@ echo "RUNNING ./bin/fetch-geminfo.rb < data/gemlist_biogems.yaml >data/geminfo_b
 
 bundle exec ./bin/fetch-geminfo.rb $* > ./data/biogems.yaml1
 [ $? -ne 0 ] && exit 1
-sed -e 's/!!null//g' < ./data/biogems.yaml1 > ./data/biogems.yaml
-[ $? -ne 0 ] && exit 1
-echo "Fetching data/rubygems.yaml"
-bundle exec ./bin/fetch-geminfo.rb $* --rubygems > ./data/rubygems.yaml1
-sed -e 's/!!null//g' < ./data/rubygems.yaml1 > ./data/rubygems.yaml
+
+
+# sed -e 's/!!null//g' < ./data/biogems.yaml1 > ./data/biogems.yaml
+# [ $? -ne 0 ] && exit 1
+# echo "Fetching data/rubygems.yaml"
+# bundle exec ./bin/fetch-geminfo.rb $* --rubygems > ./data/rubygems.yaml1
+# sed -e 's/!!null//g' < ./data/rubygems.yaml1 > ./data/rubygems.yaml
 
 # Create RSS feed for others to use
 echo "Fetching data/rss.xml"
-bundle exec ./bin/rss.rb $* > ./source/rss.xml
+./bin/rss.rb $* > ./source/rss.xml
 [ $? -ne 0 ] && exit 1
 
 # Generate site 
