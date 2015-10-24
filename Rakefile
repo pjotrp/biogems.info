@@ -45,7 +45,7 @@ task :biogems do |t|
 end
 
 task :default => [ :biogems ] do
-  `bundle exec middleman build`
+  `middleman build`
 end
 
 

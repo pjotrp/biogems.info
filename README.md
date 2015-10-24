@@ -1,23 +1,23 @@
-= Biogems.info
+# Biogems.info
+
+http://biogems.info/ tracks interesting Ruby gems for bioinformatics.
 
 The following information describes the steps to getting your biogem
 registered on biogems.info. If you are looking to generate the
 biogems.info website instead: read INSTALL.md!
 
-http://biogems.info tracks interesting Ruby gems for bioinformatics.
-
 To get your gem listed, simply create a gem named 'bio-mygem', i.e.
-start the name with bio dash, and push it onto rubygems.org. You can
+start the *name* with bio dash, and push it onto rubygems.org. You can
 use the biogem tool to create the plumbing, if you like. If you wish
 to name your gem differently, or host the gem elsewhere, it can still
 be listed. Either add a project description to /etc/biogems/name.yaml,
 or add an issue to the github tracker at
 https://github.com/pjotrp/biogems.info/issues
 
-= Gem settings
+# Displayed gem information
 
 The settings displayed, on biogems.info, are the ones you specify
-for a gem. In particular
+in your gem. In particular
 
     gem.name = "bio-gem"
     gem.homepage = "http://github.com/helios/bioruby-gem"
@@ -28,7 +28,7 @@ for a gem. In particular
     gem.email = "ilpuccio.febo@gmail.com"
     gem.authors = ["Raoul J.P. Bonnal"]
 
-This is the information pushed to http://rubygems.org when releasing a
+This is the information pushed to http://rubygems.org/ when releasing a
 gem. biogems.info harvests this information, with the download statistics.
 
 = Additional settings
@@ -50,28 +50,11 @@ It is also possible the overriding gemname.yaml is in your github
 repository(!) Just tell us where it resides through
 https://github.com/pjotrp/biogems.info/issues
 
-= GitHub API access limits
 
-Without using authentication, the GitHub API allows only 60 requests
-per hour from a single IP address. But during the data collection
-phase of generating the biogems.info website, the script currently
-needs to make around 200 requests to this API to fetch the number of
-issues and stargazers for each gem.
-
-To get around this, go to the applications tab on your GitHub
-settings page and generate a new "Personal API access token". Then
-copy that token (but not into the repository!), and before running the ./create_data.sh script,
-set the GITHUB_API_TOKEN environment variable like this:
-
-    export GITHUB_API_TOKEN="copy-here-the-token-string-from-github"
-
-That lets the script make 5000 requests per hour, which should be
-more then enough.
-
-= Website source
+# Website source
 
 This repository on github contains the source code for the
-http://biogems.info website.
+http://biogems.info/ website.
 
 Biogems.info is an initiative by the BioRuby developers
-Copyright (C) 2011,2012,2013,2014 Pjotr Prins <pjotr.prins@thebird.nl> 
+Copyright (C) 2011-2015 Pjotr Prins <pjotr.prins@thebird.nl> 

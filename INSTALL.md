@@ -1,42 +1,60 @@
 # INSTALL
 
-Biogem.info is a middleman generated website.
-It comes with a number of scripts and rake tasks which generate
-the information displayed on the site in YAML format (usually to STDOUT).
+Biogem.info uses haml + sass to generate a website.
+
+The site generation consists of a number of separate steps
+which can easily be tested independently.
 
 ## Installation
 
-You will need libxml support, e.g.
+To avoid rvm+bundler hell, the preferred route is to use GNU Guix and
+set the environment with my
+[ruby-guix-env](https://github.com/pjotrp/guix-notes/blob/master/scripts/ruby-guix-env)
+script. E.g.
 
-  apt-get install libxslt-dev libxml2-dev
-
-Install Ruby with openssl support
-
-  rvm pkg install openssl
-  rvm pkg install iconv
-  rvm remove 1.9.2
-  rvm install 1.9.2 -C --with-openssl-dir=$HOME/.rvm/usr,--with-iconv-dir=$HOME/.rvm/usr
-
-Checkout the source code and run bundler. See also the create_data.sh.
-
-  bundle update
+    guix install ruby rake
+    . ruby-guix-env
+    gem install haml sass
 
 To run the cucumber tests
 
-  bundle exec cucumber features/
+  cucumber features/
 
-To run a 'quick' test run
+A 'quick' test run
 
-  bundle exec rake -- --test
+  rake -- --test
 
-which will generate the site with just a few biogems. Next run 
+## Generating the website
 
-  bundle exec middleman server
+### Fetch gems from rubygems.org
 
-## Trouble shooting
+The first step is to fetch relevant gems from http://rubygems.org/. This
+is done with
+
+  ./bin/fetch-gemlist.rb
+
+## Troubleshooting
 
 If you get an error
 
   ./bin/fetch-geminfo.rb:163:in `block in <main>': undefined method `authors'
 
 run the script with 'bundle exec' prepended.
+
+### GitHub API access limits
+
+Without using authentication, the GitHub API allows only 60 requests
+per hour from a single IP address. But during the data collection
+phase of generating the biogems.info website, the script currently
+needs to make around 200 requests to this API to fetch the number of
+issues and stargazers for each gem.
+
+To get around this, go to the applications tab on your GitHub
+settings page and generate a new "Personal API access token". Then
+copy that token (but not into the repository!), and before running the ./create_data.sh script,
+set the GITHUB_API_TOKEN environment variable like this:
+
+    export GITHUB_API_TOKEN="copy-here-the-token-string-from-github"
+
+That lets the script make 5000 requests per hour, which should be
+more then enough.

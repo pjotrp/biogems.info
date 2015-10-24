@@ -15,7 +15,6 @@ group :development do
   gem "rake"
   gem "yard", "~> 0.7"
   gem "rspec", "~> 2.5"
-  gem "bundler", "~> 1.3"
   gem "nokogiri", "~> 1.5"
   gem "cucumber", "~> 1.2"
   gem "thread", "~> 0.1.3"
