@@ -141,13 +141,6 @@ module ContentHelpers
 
   end
 
-  def count_7day_commits stats
-    stats[-1].to_i
-  end
-
-  def count_90day_commits stats
-    stats.map { |x| x.to_i }[-13..52].inject(:+)
-  end
 
   def calculate_max_heuristics spec
     clean_stats = spec.values.map { |rec| rec[:commit_stats] }.reject { |rec| rec.nil? }

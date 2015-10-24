@@ -54,7 +54,12 @@ h = YAML.load(ARGF.read)
 h.each do | gem, info |
   print gem,"\n"
   for uri in [:source_code_uri, :homepage, :homepage_uri, :project_uri] do
-    if info[uri] =~ /^https:\/\/github\.com/
+     if info[uri] =~ /^http:\/\/github/
+       info[uri].sub!(/^http:\/\/github\.com/,"https://github.com")
+     end
+  end
+  for uri in [:source_code_uri, :homepage, :homepage_uri, :project_uri] do
+    if info[uri] =~ /github\.com/
       project_info = get_github_project_info(info[uri])
       info[:github_issues] = project_info["open_issues"]
       info[:github_stargazers] = project_info["stargazers_count"]
@@ -62,8 +67,12 @@ h.each do | gem, info |
       user,project = get_github_user_project(info[uri])
       info[:github_user] = user
       info[:github_project] = project
-      info[:github_weekly_commit_count] = get_github_commit_stats(info[uri])
-      break
+      weekly = get_github_commit_stats(info[uri])
+      if weekly
+        info[:github_7d_commits] = weekly[-1].to_i
+        info[:github_90d_commits] = weekly[-13..-1].map { |x| x.to_i }.inject(:+)
+      end
+      break # only do one
     end
   end
 end
