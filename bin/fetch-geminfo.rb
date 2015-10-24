@@ -78,7 +78,7 @@ h.each do | gem, info |
     info[:licenses] = spec.licenses.join(' ')
     info[:description] = spec.description
     $stderr.print "Fetching download counts\n"
-    downloads = YAML.load Http.get_https_body("https://rubygems.org/api/v1/downloads/bio-1.5.0.yaml")
+    downloads = YAML.load Http.get_https_body("https://rubygems.org/api/v1/downloads/#{gem}-#{spec.version}.yaml")
     info[:downloads] = downloads[:total_downloads]
     info[:version_downloads] = downloads[:version_downloads]
     versions = get_versions(gem)
