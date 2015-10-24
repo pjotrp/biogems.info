@@ -20,10 +20,13 @@ def get_versions name
   versions
 end
 
+# Return the number of downloads in the last 90 days
+# Also returns whether a gem is new or not
 def get_downloads90 name, versions
   $stderr.print "Get downloads 90 days for #{name}\n"
   version_numbers = versions.map { |ver| ver['number'] }
   total = 0
+  is_new = true
   version_numbers.each_with_index do |version,i|
     url="https://rubygems.org/api/v1/versions/#{name}-#{version}/downloads.yaml"
     text = Http::get_https_body(url)
@@ -34,9 +37,10 @@ def get_downloads90 name, versions
     date = versions[i]["created_at"]
     date.to_s =~ /^(\d\d\d\d)\-(\d\d)\-(\d\d)/
     t = Time.new($1.to_i,$2.to_i,$3.to_i)
+    is_new = false if Time.now - t > 6*7*24*3600 
     break if Time.now - t > 90*24*3600 # skip older
   end
-  total
+  return total,is_new
 end
 
 def update_status(projects)
@@ -82,7 +86,7 @@ h.each do | gem, info |
     info[:downloads] = downloads[:total_downloads]
     info[:version_downloads] = downloads[:version_downloads]
     versions = get_versions(gem)
-    info[:downloads90] = get_downloads90(gem, versions)
+    info[:downloads90],info[:recent_gem] = get_downloads90(gem, versions)
   else
     info[:version] = 'pre'
     info[:status]  = 'pre'
@@ -90,63 +94,4 @@ h.each do | gem, info |
 end
 
 print h.to_yaml
-exit 0
-
-[].each do 
-  info[:docs_uri] = "http://rubydoc.info/gems/#{name}/#{info[:version]}/frames" if not info[:docs_uri]
-    $stderr.print info if $is_debug
-    # if a gem is less than one month old, mark it as new
-    if versions.size <= 5
-      is_new = true
-      versions.each do | ver |
-        date = ver['built_at']
-        date.to_s =~ /^(\d\d\d\d)\-(\d\d)\-(\d\d)/
-        t = Time.new($1.to_i,$2.to_i,$3.to_i)
-        if Time.now - t > IS_NEW_IN_DAYS*24*3600
-          is_new = false
-          break
-        end
-      end
-      info[:status] = 'new' if is_new
-    end
-    # Now parse etc/biogems/name.yaml
-    fn = "./etc/biogems/#{name}.yaml" if is_biogems
-    fn = "./etc/rubygems/#{name}.yaml" if is_rubygems
-    if File.exist?(fn)
-      added = YAML::load(File.new(fn).read)
-      added = {} if not added 
-      info = info.merge(added)
-    end
-    if info[:status].to_s =~ /^(delete|disable|remove)/i 
-      $stderr.print info[:status]," skipping!\n" if $is_debug
-      next 
-    end
-    # Replace http with https
-    for uri in [:source_code_uri, :homepage, :homepage_uri, :project_uri] do
-      if info[uri] =~ /^http:\/\/github/
-        info[uri] = info[uri].sub(/^http:\/\/github\.com/,"https://github.com")
-      end
-    end
-
-    # Check github stuff
-    # print info
-    for uri in [:source_code_uri, :homepage, :homepage_uri, :project_uri] do
-      if info[uri] =~ /^https:\/\/github\.com/
-        project_info = get_github_project_info(info[uri])
-        info[:num_issues] = project_info["open_issues"]
-        info[:num_stargazers] = project_info["stargazers_count"]
-
-        user,project = get_github_user_project(info[uri])
-        info[:github_user] = user
-        info[:github_project] = project
-        info[:commit_stats] = get_github_commit_stats(info[uri])
-        break
-      end
-    end
-
-    $stderr.print info if $is_debug
-    $stderr.print "---> Completed #{name}\n"
-    projects[name] = info
-  # end
-end
 

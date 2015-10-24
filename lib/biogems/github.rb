@@ -33,7 +33,7 @@ module BioGemInfo
     end
 
     def valid_github_url user, project
-      check_url("http//github.com/#{user}/#{project}")
+      check_url("http://github.com/#{user}/#{project}")
     end
 
     def get_github_commit_stats github_uri

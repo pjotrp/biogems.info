@@ -12,14 +12,12 @@ set the environment with my
 [ruby-guix-env](https://github.com/pjotrp/guix-notes/blob/master/scripts/ruby-guix-env)
 script. E.g.
 
+```sh
     guix install ruby rake
     . ruby-guix-env
     gem install haml sass
-
-To run the cucumber tests
-
-  cucumber features/
-
+```
+    
 A 'quick' test run
 
   rake -- --test
@@ -39,16 +37,26 @@ run a quicker test with
 
 ### Expand rubygems info
 
-Use the YAML output from the first step to expand package information
+In the second step use the YAML output from the first step to expand package information
 
-  ./bin/fetch-geminfo.rb < list.yaml
+```sh
+   ./bin/fetch-geminfo.rb < list.yaml
+```
+   
+or
+
+```sh
+   ./bin/fetch-geminfo.rb < data/gemlist_biogems.yaml >data/geminfo_biogems.yaml
+```
 
 ### Fetch github info
 
-to run with the GITHUB TOKEN
+In the third step fetch github information and run with the GITHUB TOKEN
 
-  env GITHUB_API_TOKEN="3b3955c1b672d0c4a7b812f995b4d884b438d854" ./scripts/create_website.sh --test
-
+```sh
+env GITHUB_API_TOKEN="3b3955c1b672d0c4a7" ./bin/fetch-githubinfo.rg < data/geminfo_biogems.yaml
+```
+  
 ## Troubleshooting
 
 If you get an error
