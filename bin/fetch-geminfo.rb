@@ -17,7 +17,7 @@ include BioGemInfo::GitHub
 
 IS_NEW_IN_DAYS = 7*6   # 6 weeks
 
-$stderr.print ENV['GITHUB_API_TOKEN']
+$stderr.print "GITHUB TOKEN = ",ENV['GITHUB_API_TOKEN'],"\n"
 
 $is_debug = ARGV.index('--debug')  
 is_testing = ARGV.index('--test')  
