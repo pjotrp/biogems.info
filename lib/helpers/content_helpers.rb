@@ -102,11 +102,11 @@ module ContentHelpers
         test_info[:image] = "https://secure.travis-ci.org/#{user}/#{project}.png?branch=master"
       end
 
-      if plugin[:commit_stats]
-        c7 = count_7day_commits(plugin[:commit_stats])
-        c90 = count_90day_commits(plugin[:commit_stats])
-      end
-
+      c7 = plugin[:github_7d_commits]
+      c7 = 0 if not c7
+      c90 = plugin[:github_90d_commits]
+      c90 = 0 if not c90
+      
       c7_color = calculate_c7_color c7, c7_max
       c90_color = calculate_c90_color c90, c90_max
 
@@ -143,20 +143,13 @@ module ContentHelpers
 
   end
 
-  def count_7day_commits stats
-    stats[-1].to_i
-  end
-
-  def count_90day_commits stats
-    stats.map { |x| x.to_i }[-13..52].inject(:+)
-  end
- 
-
   def calculate_max_heuristics spec
     clean_stats = spec.values.map { |rec| rec[:commit_stats] }.reject { |rec| rec.nil? }
 
-    c7_max = clean_stats.map { |rec| count_7day_commits(rec) }.max
-    c90_max = clean_stats.map { |rec| count_90day_commits(rec) }.max
+    c7_max = clean_stats.map { |rec| rec[:github_7d_commits] }.max
+    c7_max = 1 if not c7_max
+    c90_max = clean_stats.map { |rec| rec[:github_90d_commits] }.max
+    c90_max = 1 if not c90_max
 
     return c7_max, c90_max
   end

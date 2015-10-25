@@ -68,7 +68,16 @@ env GITHUB_API_TOKEN="3b3955c1b672d0c4a7" ./bin/fetch-githubinfo.rg < data/gemin
 ```sh
     ./scripts/create_biolinux_tab.sh > data/biolinux.yaml
 ```
-    
+
+## Test the website
+
+Simple run middleman to build and view the website
+
+```sh
+bundle exec middleman build
+bundle exec middleman
+```
+
 ## Troubleshooting
 
 If you get an error
