@@ -47,6 +47,17 @@ echo "RUNNING ./bin/fetch-githubinfo.rb < data/geminfo_biogems.yaml > data/bioge
 ./bin/fetch-githubinfo.rb < data/geminfo_biogems.yaml > data/biogems.yaml
 [ $? -ne 0 ] && exit 1
 
+echo "RUNNING ./bin/fetch-gemlist.rb $* --rubygems > data/gemlist_rubygems.yaml"
+./bin/fetch-gemlist.rb $* --rubygems > data/gemlist_rubygems.yaml
+[ $? -ne 0 ] && exit 1
+
+echo "RUNNING ./bin/fetch-geminfo.rb < data/gemlist_rubygems.yaml >data/geminfo_rubygems.yaml"
+./bin/fetch-geminfo.rb < data/gemlist_rubygems.yaml >data/geminfo_rubygems.yaml
+[ $? -ne 0 ] && exit 1
+
+echo "RUNNING ./bin/fetch-githubinfo.rb < data/geminfo_rubygems.yaml > data/rubygems.yaml"
+./bin/fetch-githubinfo.rb < data/geminfo_rubygems.yaml > data/rubygems.yaml
+[ $? -ne 0 ] && exit 1
 
 # sed -e 's/!!null//g' < ./data/biogems.yaml1 > ./data/biogems.yaml
 # [ $? -ne 0 ] && exit 1
@@ -55,13 +66,13 @@ echo "RUNNING ./bin/fetch-githubinfo.rb < data/geminfo_biogems.yaml > data/bioge
 # sed -e 's/!!null//g' < ./data/rubygems.yaml1 > ./data/rubygems.yaml
 
 # Create RSS feed for others to use
-# echo "Fetching data/rss.xml"
-# ./bin/rss.rb $* > ./source/rss.xml
-# [ $? -ne 0 ] && exit 1
+echo "Fetching data/rss.xml"
+./bin/rss.rb $* > ./source/rss.xml
+[ $? -ne 0 ] && exit 1
 
 # Generate site 
-# middleman build --verbose
-# [ $? -ne 0 ] && exit 1
+bundle exec middleman build --verbose
+[ $? -ne 0 ] && exit 1
 
 print_github_limits
 

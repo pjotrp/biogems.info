@@ -35,11 +35,21 @@ A 'quick' test run
 The first step is to fetch relevant gems from http://rubygems.org/. This
 is done with
 
-  ./bin/fetch-gemlist.rb
-
+```sh
+./bin/fetch-gemlist.rb
+```
+  
 run a quicker test with
 
-  ./bin/fetch-gemlist.rb --test > data/gemlist_biogems.yaml
+```sh
+./bin/fetch-gemlist.rb --test > data/gemlist_biogems.yaml
+```
+
+To fetch rubygems (non-bio)
+
+```sh
+./bin/fetch-gemlist.rb --rubygems > data/gemlist_rubygems.yaml
+```
 
 ### Expand rubygems info
 

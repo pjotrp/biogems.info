@@ -37,9 +37,11 @@ list.each { |n| h[n] = nil }
 $stderr.print "Get information from YAML files in ./etc/#{dirname}/\n"
 list2 = Dir.glob("./etc/#{dirname}/*.yaml")
 list2.each do | yamlfn |
+  $stderr.print "Fetching #{yamlfn}\n"
   gem = File.basename(yamlfn,".yaml")
   # p gem
   info = YAML.load(File.read(yamlfn))
+  info = {} if not info
   if info[:status] == 'disabled'
     h.delete(gem)
   else
