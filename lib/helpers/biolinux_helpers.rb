@@ -10,7 +10,7 @@ module BiolinuxHelpers
   end
 
   def biolinux_by_popularity(type = nil)
-    packages = data.biolinux
+    packages = data.biolinux # this is the yaml file data/biolinux.yaml
     packages = {} if not packages
     # packages.each do |name,pkg|   
     #   $stderr.print name,"\n"

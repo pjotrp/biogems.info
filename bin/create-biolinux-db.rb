@@ -1,4 +1,5 @@
 #! /usr/bin/env ruby
+# encoding: utf-8
 #
 # Create a database (YAML) of (Cloud)BioLinux packages
 #
@@ -7,27 +8,30 @@ $: << "lib"
 require 'biogems/biolinux/biolinux'
 require 'biogems/debian/debian'
 
+Encoding.default_external = Encoding::UTF_8
+
 is_testing = ARGV[0] == '--test'
 
 BIOLINUX_DEBIAN_MANIFEST = 
   if is_testing
     File.read('test/data/biolinux/debian-packages.yaml')
   else
-    `curl -s https://raw.github.com/chapmanb/cloudbiolinux/master/manifest/debian-packages.yaml` 
+    `curl -s https://raw.githubusercontent.com/chapmanb/cloudbiolinux/master/manifest/debian-packages.yaml` 
 end
 
 biolinux = BiolinuxManifest.new(BIOLINUX_DEBIAN_MANIFEST)
 
-# Debian Tasks
-tasknames = 'bio bio-dev bio-ngs bio-phylogeny cloud data epi his oncology'
+# Debian Tasks listed on https://anonscm.debian.org/cgit/blends/projects/med.git/tree/tasks
+tasknames = 'bio bio-dev bio-ngs bio-phylogeny cloud data epi his oncology research'
 biomed = []
 
 if is_testing
   biomed << Debian::BlendTask.new(File.read('test/data/debian/bio-task.txt'))
 else
   tasknames.split.each do |taskname|
-    $stderr.print "Fetching ", taskname,"\n"
-    biomed << Debian::BlendTask.new(`curl -s http://anonscm.debian.org/viewvc/blends/projects/med/trunk/debian-med/tasks/#{taskname}?view=co`)
+    url = "https://anonscm.debian.org/cgit/blends/projects/med.git/plain/tasks/"+taskname
+    $stderr.print "Fetching ", taskname," from #{url}\n"
+    biomed << Debian::BlendTask.new(`curl -s #{url}`)
   end
 end
 pkgs = {}
@@ -54,7 +58,7 @@ BIOLINUX_CUSTOM_MANIFEST =
   if is_testing
     File.read('test/data/biolinux/custom-packages.yaml')
   else
-    `curl -s https://raw.github.com/chapmanb/cloudbiolinux/master/manifest/custom-packages.yaml` 
+    `curl -s https://raw.githubusercontent.com/chapmanb/cloudbiolinux/master/manifest/custom-packages.yaml` 
 end
 
 custom = BiolinuxManifest.new(BIOLINUX_CUSTOM_MANIFEST)

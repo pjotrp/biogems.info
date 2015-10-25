@@ -7,6 +7,10 @@ which can easily be tested independently.
 
 ## Installation
 
+The static website is generated with middleman. It takes SASS, HAML
+and YAML files as inputs. I may take out the middleman at some point,
+but now it is convenient enough.
+
 To avoid rvm+bundler hell, the preferred route is to use GNU Guix and
 set the environment with my
 [ruby-guix-env](https://github.com/pjotrp/guix-notes/blob/master/scripts/ruby-guix-env)
@@ -17,7 +21,9 @@ script. E.g.
     . ruby-guix-env
     gem install haml sass
 ```
-    
+
+You may want to install bundler which is needed for middleman.
+
 A 'quick' test run
 
   rake -- --test
@@ -57,7 +63,12 @@ In the third step fetch github information and run with the GITHUB TOKEN
 env GITHUB_API_TOKEN="3b3955c1b672d0c4a7" ./bin/fetch-githubinfo.rg < data/geminfo_biogems.yaml > data/biogems.yaml
 ```
 
+## Fetch biolinux and Debian bio-med info
 
+```sh
+    ./scripts/create_biolinux_tab.sh > data/biolinux.yaml
+```
+    
 ## Troubleshooting
 
 If you get an error

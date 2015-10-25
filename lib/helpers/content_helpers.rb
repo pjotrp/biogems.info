@@ -4,6 +4,7 @@ MAX_WORDS = 7
 NUM_AUTHORS = 3
 
 module ContentHelpers
+  
   def news_items
     data.news.each do | item |
       item[:date].to_s =~ /(\d+-\d+-\d+)/
@@ -13,6 +14,7 @@ module ContentHelpers
   end
 
   def by_popularity(type = nil)
+    # refers to data/rubygems.yaml and data/biogems.yaml
     spec = (type == :rubygems ? data.rubygems : data.biogems)
 
     spec = {} if not spec
@@ -141,6 +143,14 @@ module ContentHelpers
 
   end
 
+  def count_7day_commits stats
+    stats[-1].to_i
+  end
+
+  def count_90day_commits stats
+    stats.map { |x| x.to_i }[-13..52].inject(:+)
+  end
+ 
 
   def calculate_max_heuristics spec
     clean_stats = spec.values.map { |rec| rec[:commit_stats] }.reject { |rec| rec.nil? }
