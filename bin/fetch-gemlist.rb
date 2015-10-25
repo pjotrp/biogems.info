@@ -17,19 +17,25 @@ require 'biogems'
 $is_debug = ARGV.index('--debug')  
 is_testing = ARGV.index('--test')  
 
-$stderr.print "Get all rubygems starting with bio- (bio dash)\n"
-if is_testing
-  list = ['bio','bio-blastxmlparser','bio-publisci']
+dirname = 'biogems'
+if ARGV.index '--rubygems'
+  dirname = 'rubygems'
+  list = []
 else
-  list = `gem search bio-`.split(/\n/)
-  list = list.map { |item| item.split(" ")[0] }
+  $stderr.print "Get all rubygems starting with bio- (bio dash)\n"
+  if is_testing
+    list = ['bio','bio-blastxmlparser','bio-publisci']
+  else
+    list = `gem search bio-`.split(/\n/)
+    list = list.map { |item| item.split(" ")[0] }
+  end
 end
 
 h = {}
 list.each { |n| h[n] = nil }
                              
-$stderr.print "Get information from YAML files in ./etc/biogems/\n"
-list2 = Dir.glob("./etc/biogems/*.yaml")
+$stderr.print "Get information from YAML files in ./etc/#{dirname}/\n"
+list2 = Dir.glob("./etc/#{dirname}/*.yaml")
 list2.each do | yamlfn |
   gem = File.basename(yamlfn,".yaml")
   # p gem

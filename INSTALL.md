@@ -30,7 +30,7 @@ A 'quick' test run
 
 ## Generating the website
 
-### Fetch gems from rubygems.org
+### Fetch biogems from rubygems.org
 
 The first step is to fetch relevant gems from http://rubygems.org/. This
 is done with
@@ -60,7 +60,7 @@ or
 In the third step fetch github information and run with the GITHUB TOKEN
 
 ```sh
-env GITHUB_API_TOKEN="3b3955c1b672d0c4a7" ./bin/fetch-githubinfo.rg < data/geminfo_biogems.yaml > data/biogems.yaml
+env GITHUB_API_TOKEN="3b3955c1b672d0c4a7" ./bin/fetch-githubinfo.rb < data/geminfo_biogems.yaml > data/biogems.yaml
 ```
 
 ## Fetch biolinux and Debian bio-med info

@@ -69,9 +69,14 @@ end
 
 h = YAML.load(ARGF.read)
 
+nlist = {}
+
 h.each do | gem, info |
+  info = {} if not info 
   $stderr.print "Fetching rubygem.org gem info for ",gem,"\n"
-  fetch = `gem specification -r #{gem.strip}`
+  command = "gem specification -r #{gem.strip}"
+  $stderr.print "RUNNING "+command+"\n"
+  fetch = `#{command}`
   if fetch != ''
     spec = YAML::load(fetch)
     info[:authors] = spec.authors
@@ -88,10 +93,13 @@ h.each do | gem, info |
     versions = get_versions(gem)
     info[:downloads90],info[:recent_gem] = get_downloads90(gem, versions)
   else
-    info[:version] = 'pre'
-    info[:status]  = 'pre'
+    info[:version]     = 'pre'
+    info[:status]      = 'pre'
+    info[:downloads]   = 0
+    info[:downloads90] = 0
   end
+  nlist[gem] = info
 end
 
-print h.to_yaml
+print nlist.to_yaml
 

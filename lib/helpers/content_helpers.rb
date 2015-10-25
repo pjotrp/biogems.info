@@ -56,19 +56,19 @@ module ContentHelpers
       if cite
         cite = 'http://dx.doi.org/'+plugin[:doi] if cite !~ /^http:/
       end
-      stargazers = plugin[:stargazers]
+      stargazers = plugin[:github_stargazers_uri]
       if not stargazers
         stargazers = src
         stargazers += '/stargazers' if stargazers =~ /github/
       end
-      num_stargazers = plugin[:num_stargazers]
+      num_stargazers = plugin[:github_stargazers]
       num_stargazers = 0 if num_stargazers == nil
-      issues = plugin[:issues]
+      issues = plugin[:github_issues_uri]
       if not issues 
         issues = src
         issues += '/issues' if issues =~ /github/
       end
-      num_issues = plugin[:num_issues]
+      num_issues = plugin[:github_issues]
       num_issues = '' if num_issues == nil
       num_issues = '...' if num_issues == 0
       commit = plugin[:commit]
