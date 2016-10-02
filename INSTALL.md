@@ -17,14 +17,14 @@ set the environment with my
 script. E.g.
 
 ```sh
-    guix install ruby rake ruby-nokogiri bundler
+    guix install ruby rake ruby-nokogiri 
     . ruby-guix-env
     gem install bundler
     cd biogems.info # source dir
     bundle
 ```
 
-You may want to install bundler which is needed for middleman.
+You need to install bundler which is needed for middleman.
 
 A 'quick' test run
 
